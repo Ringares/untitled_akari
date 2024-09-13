@@ -1,0 +1,23 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://jwa02vr4iyxi"]
+
+[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="1_feuql"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ku624"]
+texture = ExtResource("1_feuql")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+0:2/0 = 0
+
+[resource]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_ku624")

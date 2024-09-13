@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnyat2kx0ulu"]
+
+[ext_resource type="Script" path="res://scenes/components/cursor.gd" id="1_10yug"]
+[ext_resource type="Texture2D" uid="uid://cs0ml8lpyejhk" path="res://assets/marker.png" id="2_rkl2p"]
+
+[sub_resource type="Curve" id="Curve_tud0s"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.156098, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hxq50"]
+curve = SubResource("Curve_tud0s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ybsup"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 10)
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 20.0
+gravity = Vector3(0, -98, 0)
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_hxq50")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1e0j"]
+atlas = ExtResource("2_rkl2p")
+region = Rect2(64, 0, 32, 32)
+
+[node name="Cursor" type="Node2D"]
+script = ExtResource("1_10yug")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_ybsup")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_j1e0j")

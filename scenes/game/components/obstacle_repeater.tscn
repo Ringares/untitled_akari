@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://g6i1wrpm2bxr"]
+
+[ext_resource type="Script" path="res://scenes/game/components/obstacle_repeater.gd" id="1_a28ci"]
+[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="2_bpwjg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri1be"]
+atlas = ExtResource("2_bpwjg")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pl60v"]
+radius = 16.0
+
+[node name="ObstacleRepeater" type="Node2D"]
+script = ExtResource("1_a28ci")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_ri1be")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pl60v")
+debug_color = Color(0.974968, 0.0549332, 0.380017, 0.42)

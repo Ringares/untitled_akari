@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3lq8m8xad5it"]
+
+[ext_resource type="PackedScene" uid="uid://d15v1m0f60r81" path="res://scenes/game/components/ground.tscn" id="1_3d6fq"]
+
+[node name="LevelRoot" type="Node2D"]
+unique_name_in_owner = true
+
+[node name="Ground" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(64, 64)
+
+[node name="@Node2D@26" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(64, 192)
+
+[node name="@Node2D@27" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(64, 320)
+
+[node name="@Node2D@28" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(64, 448)
+
+[node name="@Node2D@29" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(192, 448)
+
+[node name="@Node2D@30" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(192, 320)
+
+[node name="@Node2D@31" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(192, 192)
+
+[node name="@Node2D@32" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(192, 64)
+
+[node name="@Node2D@33" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(320, 64)
+
+[node name="@Node2D@34" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(320, 192)
+
+[node name="@Node2D@35" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(320, 320)
+
+[node name="@Node2D@36" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(448, 320)
+
+[node name="@Node2D@37" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(448, 192)
+
+[node name="@Node2D@38" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(448, 64)
+
+[node name="@Node2D@39" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(448, 448)
+
+[node name="@Node2D@40" parent="." instance=ExtResource("1_3d6fq")]
+position = Vector2(320, 448)

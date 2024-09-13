@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://gqeighmb6twx"]
+
+[ext_resource type="Script" path="res://scenes/game/components/marker.gd" id="1_6rwm8"]
+[ext_resource type="Texture2D" uid="uid://cs0ml8lpyejhk" path="res://assets/marker.png" id="2_q0dde"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ysiv"]
+atlas = ExtResource("2_q0dde")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1h5lk"]
+atlas = ExtResource("2_q0dde")
+region = Rect2(40, 8, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqfa8"]
+atlas = ExtResource("2_q0dde")
+region = Rect2(0, 0, 32, 32)
+
+[node name="Marker" type="Node2D"]
+script = ExtResource("1_6rwm8")
+
+[node name="NoSureMarker" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_8ysiv")
+
+[node name="EmptyMarker" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_1h5lk")
+
+[node name="LightedMarker" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_nqfa8")

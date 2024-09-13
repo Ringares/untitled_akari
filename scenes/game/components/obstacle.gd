@@ -1,0 +1,2 @@
+extends GridComponent
+class_name Obstacle
