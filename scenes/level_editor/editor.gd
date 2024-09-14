@@ -2,11 +2,25 @@ extends Node2D
 class_name Editor
 
 
+const GROUND = preload("res://scenes/game/components/ground.tscn")
+
 @onready var level_root: Node2D = %LevelRoot
 @onready var insert_cursor: Sprite2D = %InsertCursor
 @onready var selected_indicator: Sprite2D = %SelectedIndicator
+@onready var marker_2d: Marker2D = $Marker2D
 
-const GRID_SIZE = 128
+
+var zoom = 1.0:
+	set(value):
+		zoom = value
+		%LabelZoomScale.text = str(value)
+		level_root.scale = Vector2.ONE * zoom
+		insert_cursor.scale = Vector2.ONE * zoom
+		selected_indicator.scale = Vector2.ONE * zoom
+		GRID_SIZE = 128 * zoom
+		
+		
+var GRID_SIZE = 128
 var curr_selected_tool:PackedScene:
 	set(value):
 		curr_selected_tool = value
@@ -25,7 +39,8 @@ enum EDIT_MODE {
 	IDEL,
 	INSERT,
 	ERASE,
-	MODIFY
+	MODIFY,
+	PLAY
 }
 
 var curr_edit_mode:EDIT_MODE = EDIT_MODE.IDEL:
@@ -36,21 +51,30 @@ var curr_edit_mode:EDIT_MODE = EDIT_MODE.IDEL:
 		match value:
 			EDIT_MODE.IDEL: 
 				%LabelEditMode.text = "EDIT_MODE.IDEL"
-				pass
+				for i in placed_data.keys():
+					placed_data[i].set("interactable", false)
+					%PlayButton.text = "Play"
+					
 			EDIT_MODE.INSERT:
 				%LabelEditMode.text = "EDIT_MODE.INSERT"
 				insert_cursor.show()
+				
 			EDIT_MODE.ERASE:
 				%LabelEditMode.text = "EDIT_MODE.ERASE"
-				pass
+				
 			EDIT_MODE.MODIFY:
 				%LabelEditMode.text = "EDIT_MODE.MODIFY"
 				selected_indicator.show()
-			
+				
+			EDIT_MODE.PLAY:
+				for i in placed_data.keys():
+					placed_data[i].set("interactable", true)
+					%PlayButton.text = "Edit"
 
 
 func _ready() -> void:
 	EditorEvents.signal_element_selected.connect(_on_signal_element_selected)
+	GameEvents.signal_check_win_condition.connect(check_win_condition)
 
 
 func _process(delta: float) -> void:
@@ -60,11 +84,14 @@ func _process(delta: float) -> void:
 	%LabelMousePos.text = "%v" % (get_global_mouse_position() - level_root.global_position)
 	%LabelCell.text = "%v" % local_to_grid(mouse_rela_pos)
 	
-	if curr_selected_tool != null:
-		insert_cursor.show()
+	if curr_edit_mode == EDIT_MODE.INSERT and curr_selected_tool != null:
 		insert_cursor.global_position = get_global_mouse_position() 
-	else:
-		insert_cursor.hide()
+		
+	if Input.is_action_just_pressed("zoom_in"):
+		zoom *= 1.2
+	
+	if Input.is_action_just_pressed("zoom_out"):
+		zoom /= 1.2
 
 
 func _input(event: InputEvent) -> void:
@@ -80,15 +107,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if curr_edit_mode == EDIT_MODE.INSERT and curr_selected_tool != null:
 			# insert mode
 			var new_scene = curr_selected_tool.instantiate() as GridComponent
-			if mouse_cell_id in placed_data:
+			if mouse_cell_id in placed_data and placed_data[mouse_cell_id] != null:
 				placed_data[mouse_cell_id].queue_free()
 			
-			placed_data[mouse_cell_id] = new_scene
-			level_root.add_child(new_scene)
-			new_scene.set_owner(level_root)
-			
-			new_scene.position = grid_to_local(mouse_cell_id)
-		
+			place_at_cell(new_scene, mouse_cell_id)
+
 		elif curr_edit_mode == EDIT_MODE.ERASE:
 			if mouse_cell_id in placed_data:
 				placed_data[mouse_cell_id].queue_free()
@@ -128,11 +151,29 @@ func set_reflect_obstacle_rotate():
 		var cell_id = local_to_grid(selected_indicator.global_position - level_root.global_position)
 		if cell_id in placed_data and placed_data[cell_id] is ObstacleReflecter:
 			placed_data[cell_id].rotate90()
+			
 
+func init_board(init_grids: Vector2i):
+	for cell_id in placed_data.keys():
+		placed_data[cell_id].queue_free()
+		placed_data.erase(cell_id)
 	
+	for i in init_grids.x:
+		for j in init_grids.y:
+			var new_scene = GROUND.instantiate() as Ground
+			place_at_cell(new_scene, Vector2i(i, j))
 
-func _on_signal_element_selected(selected:PackedScene):
-	curr_selected_tool = selected
+
+func place_at_cell(new_scene:GridComponent, place_cell_id:Vector2i):
+	placed_data[place_cell_id] = new_scene
+	level_root.add_child(new_scene)
+	new_scene.cell_id = place_cell_id
+	new_scene.set_owner(level_root)
+	new_scene.global_position = grid_to_local(place_cell_id) + level_root.global_position
+	new_scene.set("interactable", false)
+	if new_scene is Ground and (new_scene.cell_id.x + new_scene.cell_id.y) % 2 ==0:
+		new_scene.modulate = Color("#eeeeee")
+	
 
 
 func local_to_grid(pos:Vector2):
@@ -142,8 +183,13 @@ func local_to_grid(pos:Vector2):
 func snap(pos:Vector2): 
 	return (pos - Vector2(GRID_SIZE/2, GRID_SIZE/2)).snapped(Vector2(GRID_SIZE, GRID_SIZE))
 
+
 func grid_to_local(pos:Vector2i):
 	return Vector2(pos * GRID_SIZE) + Vector2(GRID_SIZE/2, GRID_SIZE/2)
+
+
+func _on_signal_element_selected(selected:PackedScene):
+	curr_selected_tool = selected
 
 
 func _on_save_button_pressed() -> void:
@@ -161,4 +207,33 @@ func _on_load_button_pressed() -> void:
 
 
 func _on_play_button_pressed() -> void:
-	pass # Replace with function body.
+	if curr_edit_mode != EDIT_MODE.PLAY:
+		curr_edit_mode = EDIT_MODE.PLAY
+	else:
+		curr_edit_mode = EDIT_MODE.IDEL
+
+
+func _on_init_grid_button_pressed() -> void:
+	init_board(Vector2i(int(%RowSizeEdit.text), int(%ColSizeEdit.text)))
+
+
+func check_win_condition():
+	var is_win = true
+	for i in get_tree().get_nodes_in_group("ground"):
+		if not (i as Ground).is_lighted:
+			is_win = false
+			break
+
+	for i in get_tree().get_nodes_in_group("obstacle"):
+		if not (i as Obstacle).is_satisfied:
+			is_win = false
+			break
+	
+	for i in get_tree().get_nodes_in_group("akari"):
+		if not (i as Akari).is_satisfied:
+			is_win = false
+			break
+	if is_win:
+		%LabelWinCheck.text = "Win"
+	else:
+		%LabelWinCheck.text = "Not Win"

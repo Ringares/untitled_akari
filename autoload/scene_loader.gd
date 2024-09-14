@@ -99,4 +99,3 @@ func _process(_delta):
 			set_process(false)
 			if not _background_loading:
 				change_scene_to_resource()
-

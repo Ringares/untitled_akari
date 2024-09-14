@@ -35,3 +35,30 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_pl60v")
 debug_color = Color(0.974968, 0.0549332, 0.380017, 0.42)
+
+[node name="AkariCheckArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AkariCheckArea"]
+position = Vector2(128, 0)
+shape = SubResource("CircleShape2D_pl60v")
+debug_color = Color(0.976471, 0.611765, 0.380392, 0.419608)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AkariCheckArea"]
+position = Vector2(0, -128)
+shape = SubResource("CircleShape2D_pl60v")
+debug_color = Color(0.976471, 0.611765, 0.380392, 0.419608)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="AkariCheckArea"]
+position = Vector2(0, 128)
+shape = SubResource("CircleShape2D_pl60v")
+debug_color = Color(0.976471, 0.611765, 0.380392, 0.419608)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="AkariCheckArea"]
+position = Vector2(-128, 0)
+shape = SubResource("CircleShape2D_pl60v")
+debug_color = Color(0.976471, 0.611765, 0.380392, 0.419608)
+
+[connection signal="area_entered" from="AkariCheckArea" to="." method="_on_akari_check_area_area_entered"]
+[connection signal="area_exited" from="AkariCheckArea" to="." method="_on_akari_check_area_area_exited"]

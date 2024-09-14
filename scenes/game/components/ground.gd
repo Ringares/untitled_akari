@@ -6,11 +6,19 @@ const MARKER = preload("res://scenes/game/components/marker.tscn")
 
 @onready var lighted_ground: Sprite2D = $LightedGround
 @onready var normal_ground: Sprite2D = $NormalGround
+@onready var ground_click_rect: ColorRect = %GroundClickRect
 
 var marker: Marker
 var akari: Akari
 var is_lighted = false
 var passed_lights = []
+var interactable = true:
+	set(value):
+		interactable = value
+		if value:
+			ground_click_rect.mouse_filter = Control.MOUSE_FILTER_STOP
+		else:
+			ground_click_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
 func left_clk():
@@ -49,6 +57,18 @@ func light_off():
 	is_lighted = false
 	lighted_ground.hide()
 	normal_ground.show()
+
+
+func _on_clk_rect_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_clk"):
+		left_clk()
+		self.get_parent().move_child(self, self.get_parent().get_child_count()-1)
+		get_tree().create_timer(0.2).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
+	
+	if event.is_action_pressed("right_clk"):
+		right_clk()
+		get_tree().create_timer(0.2).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
+
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

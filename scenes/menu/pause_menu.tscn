@@ -8,7 +8,7 @@
 [node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_ip65o")
 options_packed_scene = ExtResource("2_4ply4")
-main_menu_scene = "res://scene/menu/main_menu.tscn"
+main_menu_scene = "res://scenes/menu/main_menu.tscn"
 
 [node name="UISound" type="Node" parent="."]
 script = ExtResource("3_yxqtb")

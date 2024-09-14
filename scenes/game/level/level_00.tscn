@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://btlrxhdt8jx3l"]
+
+[ext_resource type="PackedScene" uid="uid://blavwvk1shsb4" path="res://scenes/game/level/level_base_scene.tscn" id="1_lxkr5"]
+[ext_resource type="PackedScene" uid="uid://cckgu617q4avk" path="res://scenes/game/level/test_level_by_tilemap.tscn" id="2_oe3do"]
+
+[node name="Level00" instance=ExtResource("1_lxkr5")]
+
+[node name="LevelContainer" parent="." index="1"]
+position = Vector2(0, 0)
+
+[node name="TileMapLayer" parent="." index="2" node_paths=PackedStringArray("level_container") instance=ExtResource("2_oe3do")]
+position = Vector2(0, 0)
+level_container = NodePath("../LevelContainer")

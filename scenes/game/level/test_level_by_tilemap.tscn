@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=4 uid="uid://cckgu617q4avk"]
+
+[ext_resource type="TileSet" uid="uid://jwa02vr4iyxi" path="res://scenes/game/level/tileset.tres" id="1_5nbn8"]
+[ext_resource type="Script" path="res://scenes/game/level/tile_map_layer_generator.gd" id="2_6tuo2"]
+
+[node name="TileMapLayer" type="TileMapLayer"]
+position = Vector2(1024, 256)
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAIAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAABAAIAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAACAAEAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAABAAEAAAADAAAAAAACAAEAAAACAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAA=")
+tile_set = ExtResource("1_5nbn8")
+script = ExtResource("2_6tuo2")
