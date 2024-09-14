@@ -62,8 +62,8 @@ func init_level():
 			if cell_scene is ObstacleNum:
 				(cell_scene as ObstacleNum).hint_num = atlas_coord.x
 			
-			if cell_scene is Ground and (cell_scene.cell_id.x + cell_scene.cell_id.y) % 2 ==0:
-				cell_scene.modulate = Color("#eeeeee")
+			#if cell_scene is Ground and (cell_scene.cell_id.x + cell_scene.cell_id.y) % 2 ==0:
+				#cell_scene.modulate = Color("#eeeeee")
 				
 			if cell_scene is ObstacleReflecter:
 				var alternate_id = self.get_cell_alternative_tile(cell_id)

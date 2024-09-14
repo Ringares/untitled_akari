@@ -1,16 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8swika0h6no0"]
+[gd_scene load_steps=6 format=3 uid="uid://c8swika0h6no0"]
 
 [ext_resource type="Script" path="res://scenes/game/components/akari.gd" id="1_bgssk"]
-[ext_resource type="Texture2D" uid="uid://d2xiirj0lnrq0" path="res://assets/akari.png" id="2_f6dt6"]
+[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="2_auxtn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yijyo"]
+atlas = ExtResource("2_auxtn")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6t7r"]
+atlas = ExtResource("2_auxtn")
+region = Rect2(128, 384, 128, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a1h6i"]
 radius = 24.0
 
-[node name="Akari" type="Node2D"]
+[node name="Akari" type="Node2D" groups=["akari"]]
 script = ExtResource("1_bgssk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_f6dt6")
+texture = SubResource("AtlasTexture_yijyo")
+
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+show_behind_parent = true
+position = Vector2(-8, 4)
+texture = SubResource("AtlasTexture_w6t7r")
 
 [node name="SelfArea" type="Area2D" parent="."]
 collision_mask = 2

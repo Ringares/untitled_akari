@@ -17,8 +17,8 @@ func _ready() -> void:
 		for child in level_root.get_children():
 			child.set("interactable", true)
 			
-			if child is Ground and (child.cell_id.x + child.cell_id.y) % 2 ==0:
-				child.modulate = Color("#eeeeee")
+			#if child is Ground and (child.cell_id.x + child.cell_id.y) % 2 ==0:
+				#child.modulate = Color("#eeeeee")
 
 
 func _process(delta: float) -> void:
@@ -31,16 +31,19 @@ func check_win_condition():
 	for i in get_tree().get_nodes_in_group("ground"):
 		if not (i as Ground).is_lighted:
 			is_win = false
+			print("check_win_condition", i, is_win)
 			break
 
-	for i in get_tree().get_nodes_in_group("obstacle"):
-		if not (i as Obstacle).is_satisfied:
+	for i in get_tree().get_nodes_in_group("obstacle_num"):
+		if not (i as ObstacleNum).is_satisfied:
 			is_win = false
+			print("check_win_condition", i, is_win)
 			break
 	
 	for i in get_tree().get_nodes_in_group("akari"):
 		if not (i as Akari).is_satisfied:
 			is_win = false
+			print("check_win_condition", i, is_win)
 			break
 	
 	print("Level Win: ", is_win)

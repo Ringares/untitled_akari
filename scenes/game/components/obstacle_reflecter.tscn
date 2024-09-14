@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvxgo3ut6glwa"]
+[gd_scene load_steps=6 format=3 uid="uid://dvxgo3ut6glwa"]
 
 [ext_resource type="Script" path="res://scenes/game/components/obstacle_reflecter.gd" id="1_qhy21"]
 [ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="2_htihy"]
@@ -6,6 +6,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_ri1be"]
 atlas = ExtResource("2_htihy")
 region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rmrq"]
+atlas = ExtResource("2_htihy")
+region = Rect2(0, 384, 128, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pl60v"]
 radius = 16.0
@@ -15,6 +19,11 @@ script = ExtResource("1_qhy21")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_ri1be")
+
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+show_behind_parent = true
+position = Vector2(-8, 4)
+texture = SubResource("AtlasTexture_6rmrq")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

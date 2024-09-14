@@ -5,6 +5,9 @@
 
 [node name="Level00" instance=ExtResource("1_lxkr5")]
 
+[node name="ColorRect" parent="UILayer" index="0"]
+color = Color(0.921569, 0.929412, 0.913725, 1)
+
 [node name="LevelContainer" parent="." index="1"]
 position = Vector2(0, 0)
 

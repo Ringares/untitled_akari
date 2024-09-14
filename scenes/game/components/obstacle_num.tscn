@@ -1,16 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://da3mon2viisk0"]
+[gd_scene load_steps=6 format=3 uid="uid://da3mon2viisk0"]
 
 [ext_resource type="Script" path="res://scenes/game/components/obstacle_num.gd" id="1_j5f15"]
-[ext_resource type="Texture2D" uid="uid://yc33ajf5pxhf" path="res://assets/block_obstacle.png" id="2_rttle"]
+[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="2_qgdxo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vawe"]
+atlas = ExtResource("2_qgdxo")
+region = Rect2(640, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cil0l"]
+atlas = ExtResource("2_qgdxo")
+region = Rect2(0, 384, 128, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pl60v"]
 radius = 16.0
 
-[node name="ObstacleNum" type="Node2D"]
+[node name="ObstacleNum" type="Node2D" groups=["obstacle_num"]]
 script = ExtResource("1_j5f15")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_rttle")
+texture = SubResource("AtlasTexture_0vawe")
+
+[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+show_behind_parent = true
+position = Vector2(-8, 4)
+texture = SubResource("AtlasTexture_cil0l")
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
@@ -24,6 +37,7 @@ offset_right = 32.0
 offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
 theme_override_font_sizes/font_size = 96
 horizontal_alignment = 1
 vertical_alignment = 1
