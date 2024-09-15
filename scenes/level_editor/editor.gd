@@ -32,7 +32,7 @@ var curr_selected_tool:PackedScene:
 
 var mouse_rela_pos
 var mouse_cell_id:Vector2i
-
+var just_placed_obstacle = null
 var placed_data = {}
 
 enum EDIT_MODE {
@@ -51,6 +51,7 @@ var curr_edit_mode:EDIT_MODE = EDIT_MODE.IDEL:
 		match value:
 			EDIT_MODE.IDEL: 
 				%LabelEditMode.text = "EDIT_MODE.IDEL"
+				just_placed_obstacle = null
 				for i in placed_data.keys():
 					placed_data[i].set("interactable", false)
 					%PlayButton.text = "Play"
@@ -60,13 +61,16 @@ var curr_edit_mode:EDIT_MODE = EDIT_MODE.IDEL:
 				insert_cursor.show()
 				
 			EDIT_MODE.ERASE:
+				just_placed_obstacle = null
 				%LabelEditMode.text = "EDIT_MODE.ERASE"
 				
 			EDIT_MODE.MODIFY:
+				just_placed_obstacle = null
 				%LabelEditMode.text = "EDIT_MODE.MODIFY"
 				selected_indicator.show()
 				
 			EDIT_MODE.PLAY:
+				just_placed_obstacle = null
 				for i in placed_data.keys():
 					placed_data[i].set("interactable", true)
 					%PlayButton.text = "Edit"
@@ -140,6 +144,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func set_number_obstacle_num(num:int):
+	if just_placed_obstacle != null and just_placed_obstacle is ObstacleNum:
+		just_placed_obstacle.hint_num = num
+		
 	if curr_edit_mode == EDIT_MODE.MODIFY:
 		var cell_id = local_to_grid(selected_indicator.global_position - level_root.global_position)
 		if cell_id in placed_data and placed_data[cell_id] is ObstacleNum:
@@ -147,6 +154,9 @@ func set_number_obstacle_num(num:int):
 
 
 func set_reflect_obstacle_rotate():
+	if just_placed_obstacle != null and just_placed_obstacle is ObstacleReflecter:
+		just_placed_obstacle.rotate90()
+		
 	if curr_edit_mode == EDIT_MODE.MODIFY:
 		var cell_id = local_to_grid(selected_indicator.global_position - level_root.global_position)
 		if cell_id in placed_data and placed_data[cell_id] is ObstacleReflecter:
@@ -171,8 +181,16 @@ func place_at_cell(new_scene:GridComponent, place_cell_id:Vector2i):
 	new_scene.set_owner(level_root)
 	new_scene.global_position = grid_to_local(place_cell_id) + level_root.global_position
 	new_scene.set("interactable", false)
-	if new_scene is Ground and (new_scene.cell_id.x + new_scene.cell_id.y) % 2 ==0:
-		new_scene.modulate = Color("#eeeeee")
+	new_scene.name = "%s_%d_%d" % [new_scene.get_class_name(), new_scene.cell_id.x, new_scene.cell_id.y]
+	new_scene.show()
+	
+	
+	if new_scene is ObstacleNum or new_scene is ObstacleReflecter:
+		just_placed_obstacle = new_scene
+	else:
+		just_placed_obstacle = null
+	#if new_scene is Ground and (new_scene.cell_id.x + new_scene.cell_id.y) % 2 ==0:
+		#new_scene.modulate = Color("#eeeeee")
 	
 
 
@@ -196,10 +214,13 @@ func _on_save_button_pressed() -> void:
 	
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(%LevelRoot)
-	var error = ResourceSaver.save(packed_scene, "res://scenes/level_editor/levels/test.tscn")
+	var error = ResourceSaver.save(
+		packed_scene, 
+		"res://scenes/level_editor/levels/level_data_%s.tscn" % UUID.v4())
 	if error != OK:
 		push_error("An error occurred while saving the scene to disk.")
 		push_error(error)
+	
 
 
 func _on_load_button_pressed() -> void:

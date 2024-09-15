@@ -1,8 +1,6 @@
 extends TileMapLayer
 class_name TileMapLayerGenerator
 
-
-const CURSOR = preload("res://scenes/game/components/cursor.tscn")
 const GROUND = preload("res://scenes/game/components/ground.tscn")
 
 const OBSTACLE_NUM = preload("res://scenes/game/components/obstacle_num.tscn")
@@ -39,11 +37,12 @@ func _ready() -> void:
 		return 
 		
 		
-	level_container.global_position = get_viewport_rect().size / 2 - Vector2(tile_rect.size * tile_size / 2)
+	#level_container.global_position = get_viewport_rect().size / 2 - Vector2(tile_rect.size * tile_size / 2)
 	init_level()
 	
 
 func init_level():
+	self.hide()
 	for i in range(tile_rect.size.x):
 		var l = []
 		for j in range(tile_rect.size.y):
@@ -76,3 +75,4 @@ func init_level():
 				if not is_equal_approx(fmod(direction_info[0], PI), 0.0):
 					cell_scene.rotate90()
 	self.queue_free()
+	level_container.adjust_position_scale()

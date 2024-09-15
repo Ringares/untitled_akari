@@ -1,29 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://da3mon2viisk0"]
+[gd_scene load_steps=9 format=3 uid="uid://c0kdm60qi266j"]
 
 [ext_resource type="Script" path="res://scenes/game/components/obstacle_num.gd" id="1_j5f15"]
 [ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="2_qgdxo"]
+[ext_resource type="PackedScene" uid="uid://bbohw1tlxow7b" path="res://scenes/game/components/square_shadow.tscn" id="3_msuic"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0vawe"]
 atlas = ExtResource("2_qgdxo")
 region = Rect2(640, 128, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cil0l"]
-atlas = ExtResource("2_qgdxo")
-region = Rect2(0, 384, 128, 128)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_pl60v"]
 radius = 16.0
 
+[sub_resource type="Animation" id="Animation_be6p3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6t3rv"]
+resource_name = "notify"
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d68c1"]
+_data = {
+"RESET": SubResource("Animation_be6p3"),
+"notify": SubResource("Animation_6t3rv")
+}
+
 [node name="ObstacleNum" type="Node2D" groups=["obstacle_num"]]
+visible = false
 script = ExtResource("1_j5f15")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_0vawe")
 
-[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
-show_behind_parent = true
-position = Vector2(-8, 4)
-texture = SubResource("AtlasTexture_cil0l")
+[node name="SquareShadow" parent="Sprite2D" instance=ExtResource("3_msuic")]
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
@@ -73,6 +106,11 @@ debug_color = Color(0.976471, 0.611765, 0.380392, 0.419608)
 position = Vector2(-128, 0)
 shape = SubResource("CircleShape2D_pl60v")
 debug_color = Color(0.976471, 0.611765, 0.380392, 0.419608)
+
+[node name="NotifyAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_d68c1")
+}
 
 [connection signal="area_entered" from="AkariCheckArea" to="." method="_on_akari_check_area_area_entered"]
 [connection signal="area_exited" from="AkariCheckArea" to="." method="_on_akari_check_area_area_exited"]

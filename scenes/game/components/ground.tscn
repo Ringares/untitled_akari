@@ -1,41 +1,97 @@
-[gd_scene load_steps=7 format=3 uid="uid://d15v1m0f60r81"]
+[gd_scene load_steps=10 format=3 uid="uid://d15v1m0f60r81"]
 
 [ext_resource type="Script" path="res://scenes/game/components/ground.gd" id="1_xka7d"]
 [ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="2_vyplm"]
+[ext_resource type="PackedScene" uid="uid://bbohw1tlxow7b" path="res://scenes/game/components/square_shadow.tscn" id="3_kg7qh"]
 [ext_resource type="Script" path="res://scenes/game/components/click_rect.gd" id="4_xqgbn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_70avv"]
 atlas = ExtResource("2_vyplm")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x11bp"]
-atlas = ExtResource("2_vyplm")
-region = Rect2(0, 384, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fg1s"]
 atlas = ExtResource("2_vyplm")
 region = Rect2(0, 0, 128, 128)
 
+[sub_resource type="Animation" id="Animation_c3rby"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_042qc"]
+resource_name = "show"
+length = 0.25
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16, 0.25),
+"transitions": PackedFloat32Array(2, 2, 2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5cpfa"]
+_data = {
+"RESET": SubResource("Animation_c3rby"),
+"show": SubResource("Animation_042qc")
+}
+
 [node name="Ground" type="Node2D" groups=["ground"]]
 script = ExtResource("1_xka7d")
 
-[node name="LightedGround" type="Sprite2D" parent="."]
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="LightedGround" type="Sprite2D" parent="Visual"]
+unique_name_in_owner = true
 texture = SubResource("AtlasTexture_70avv")
 
-[node name="Shadow" type="Sprite2D" parent="LightedGround"]
-show_behind_parent = true
-position = Vector2(-8, 4)
-texture = SubResource("AtlasTexture_x11bp")
-
-[node name="NormalGround" type="Sprite2D" parent="."]
+[node name="NormalGround" type="Sprite2D" parent="Visual"]
+unique_name_in_owner = true
 texture = SubResource("AtlasTexture_4fg1s")
 
-[node name="Shadow" type="Sprite2D" parent="NormalGround"]
-show_behind_parent = true
-position = Vector2(-8, 4)
-texture = SubResource("AtlasTexture_x11bp")
+[node name="SquareShadow" parent="Visual" instance=ExtResource("3_kg7qh")]
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 2
 
@@ -50,6 +106,11 @@ offset_right = 64.0
 offset_bottom = 64.0
 color = Color(1, 1, 1, 0)
 script = ExtResource("4_xqgbn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5cpfa")
+}
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

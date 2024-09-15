@@ -2,14 +2,11 @@
 
 [ext_resource type="Script" path="res://scenes/game/components/obstacle_repeater.gd" id="1_a28ci"]
 [ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="2_bpwjg"]
+[ext_resource type="PackedScene" uid="uid://bbohw1tlxow7b" path="res://scenes/game/components/square_shadow.tscn" id="3_h136i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q84bj"]
 atlas = ExtResource("2_bpwjg")
 region = Rect2(128, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_moc10"]
-atlas = ExtResource("2_bpwjg")
-region = Rect2(0, 384, 128, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pl60v"]
 radius = 16.0
@@ -20,10 +17,7 @@ script = ExtResource("1_a28ci")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_q84bj")
 
-[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
-show_behind_parent = true
-position = Vector2(-8, 4)
-texture = SubResource("AtlasTexture_moc10")
+[node name="SquareShadow" parent="Sprite2D" instance=ExtResource("3_h136i")]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

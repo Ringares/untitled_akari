@@ -43,3 +43,11 @@ func _process(delta):
 func reset():
 	for i in available:
 		(i as AudioStreamPlayer).stop()
+
+
+func play_akari_drop():
+	#_play("res://assets/audio/game_sfx/akari_drop.wav")
+	_play("res://assets/audio/game_sfx/FUI Button Beep Clean.wav")
+	
+func play_light_up():
+	_play("res://assets/audio/game_sfx/lightup_tiny.wav")

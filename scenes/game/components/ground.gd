@@ -1,11 +1,14 @@
 extends GridComponent
 class_name Ground
 
+func get_class_name(): return "Ground"
+
 const AKARI = preload("res://scenes/game/components/akari.tscn")
 const MARKER = preload("res://scenes/game/components/marker.tscn")
 
-@onready var lighted_ground: Sprite2D = $LightedGround
-@onready var normal_ground: Sprite2D = $NormalGround
+@onready var lighted_ground: Sprite2D = %LightedGround
+@onready var normal_ground: Sprite2D = %NormalGround
+
 @onready var ground_click_rect: ColorRect = %GroundClickRect
 
 var marker: Marker
@@ -48,9 +51,11 @@ func right_clk():
 
 
 func light_up():
-	is_lighted = true
-	lighted_ground.show()
-	normal_ground.hide()
+	if not is_lighted:
+		is_lighted = true
+		lighted_ground.show()
+		normal_ground.hide()
+		SfxManager.play_light_up()
 
 
 func light_off():
@@ -63,12 +68,11 @@ func _on_clk_rect_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_clk"):
 		left_clk()
 		self.get_parent().move_child(self, self.get_parent().get_child_count()-1)
-		get_tree().create_timer(0.2).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
+		get_tree().create_timer(0.4).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
 	
 	if event.is_action_pressed("right_clk"):
 		right_clk()
-		get_tree().create_timer(0.2).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
-
+		get_tree().create_timer(0.4).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

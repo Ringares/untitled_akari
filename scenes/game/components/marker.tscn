@@ -7,11 +7,11 @@
 atlas = ExtResource("2_q0dde")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1h5lk"]
-atlas = ExtResource("2_q0dde")
-region = Rect2(40, 8, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_nqfa8"]
+atlas = ExtResource("2_q0dde")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1h5lk"]
 atlas = ExtResource("2_q0dde")
 region = Rect2(0, 0, 32, 32)
 
@@ -19,10 +19,12 @@ region = Rect2(0, 0, 32, 32)
 script = ExtResource("1_6rwm8")
 
 [node name="NoSureMarker" type="Sprite2D" parent="."]
+visible = false
 texture = SubResource("AtlasTexture_8ysiv")
+
+[node name="LightedMarker" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("AtlasTexture_nqfa8")
 
 [node name="EmptyMarker" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_1h5lk")
-
-[node name="LightedMarker" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_nqfa8")

@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scenes/level_editor/level_root.gd" id="3_tmkc7"]
 [ext_resource type="Texture2D" uid="uid://b5ckaujr1o6y0" path="res://assets/editor_selected.png" id="4_f3dli"]
 [ext_resource type="PackedScene" uid="uid://d15v1m0f60r81" path="res://scenes/game/components/ground.tscn" id="4_w4hul"]
-[ext_resource type="PackedScene" uid="uid://da3mon2viisk0" path="res://scenes/game/components/obstacle_num.tscn" id="5_3km2i"]
+[ext_resource type="PackedScene" uid="uid://c0kdm60qi266j" path="res://scenes/game/components/obstacle_num.tscn" id="5_3km2i"]
 [ext_resource type="PackedScene" uid="uid://g6i1wrpm2bxr" path="res://scenes/game/components/obstacle_repeater.tscn" id="6_e1mn5"]
 [ext_resource type="PackedScene" uid="uid://dvxgo3ut6glwa" path="res://scenes/game/components/obstacle_reflecter.tscn" id="7_m3oh8"]
 

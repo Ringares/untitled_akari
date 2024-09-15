@@ -1,6 +1,7 @@
 extends Obstacle
 class_name ObstacleReflecter
 
+func get_class_name(): return "ObstacleReflecter"
 
 var reflect_map = {
 			Vector2.LEFT:Vector2.UP,
