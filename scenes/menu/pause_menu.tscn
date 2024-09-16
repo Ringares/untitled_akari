@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cew1lc4b8f86w"]
+[gd_scene load_steps=4 format=3 uid="uid://cew1lc4b8f86w"]
 
 [ext_resource type="Script" path="res://scenes/menu/pause_menu.gd" id="1_ip65o"]
 [ext_resource type="PackedScene" uid="uid://beaj3udobexnc" path="res://scenes/menu/option_menu/simple_option_menu.tscn" id="2_4ply4"]
 [ext_resource type="Script" path="res://script/ui_sound.gd" id="3_yxqtb"]
-[ext_resource type="StyleBox" path="res://scenes/menu/button_normal_light.tres" id="4_ed06v"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_ip65o")
@@ -20,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0941176, 0.101961, 0.152941, 0.784314)
+color = Color(0.921569, 0.929412, 0.913725, 0.933333)
 
 [node name="BGTextureRect" type="TextureRect" parent="."]
 visible = false
@@ -37,13 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(240, 360)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MenuContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+[node name="MenuContainer" type="MarginContainer" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 64
@@ -51,66 +44,71 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MenuContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MenuContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MenuContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer"]
+[node name="TitleLabel" type="Label" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer"]
+modulate = Color(0.243137, 0.243137, 0.243137, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 128
 text = "Pause"
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/PanelContainer/MenuContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MenuContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
-theme_override_constants/separation = 8
 
-[node name="ResumeButton" type="Button" parent="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(156, 48)
+custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
+theme_override_font_sizes/font_size = 48
 text = "Continue"
 
-[node name="RestartButton" type="Button" parent="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(156, 48)
+custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/normal = ExtResource("4_ed06v")
-text = "Reset Level"
+theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
+theme_override_font_sizes/font_size = 48
+text = "Reset"
 
-[node name="OptionButton" type="Button" parent="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="OptionButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(156, 48)
+custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/normal = ExtResource("4_ed06v")
-text = "Option"
+theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
+theme_override_font_sizes/font_size = 48
+text = "Options"
 
-[node name="MainMenuButton" type="Button" parent="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(156, 48)
+custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/normal = ExtResource("4_ed06v")
+theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
+theme_override_font_sizes/font_size = 48
 text = "Main Menu"
 
-[node name="OptionContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+[node name="OptionContainer" type="MarginContainer" parent="MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 64
@@ -118,41 +116,43 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="OptionVBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/OptionContainer"]
+[node name="OptionVBox" type="VBoxContainer" parent="MarginContainer/OptionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/OptionContainer/OptionVBox"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/OptionContainer/OptionVBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/OptionContainer/OptionVBox/MarginContainer"]
+[node name="TitleLabel" type="Label" parent="MarginContainer/OptionContainer/OptionVBox/MarginContainer"]
+modulate = Color(0.243137, 0.243137, 0.243137, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 128
-text = "Option"
+text = "Options"
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/PanelContainer/OptionContainer/OptionVBox"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/OptionContainer/OptionVBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="BackButton" type="Button" parent="MarginContainer/PanelContainer/OptionContainer/OptionVBox/MarginContainer2"]
-custom_minimum_size = Vector2(156, 48)
+[node name="BackButton" type="Button" parent="MarginContainer/OptionContainer/OptionVBox/MarginContainer2"]
+custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/normal = ExtResource("4_ed06v")
+theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
+theme_override_font_sizes/font_size = 48
 text = "Back"
 
-[connection signal="pressed" from="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
-[connection signal="pressed" from="MarginContainer/PanelContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="MarginContainer/PanelContainer/OptionContainer/OptionVBox/MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/OptionContainer/OptionVBox/MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]

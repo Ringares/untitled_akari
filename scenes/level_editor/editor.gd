@@ -119,6 +119,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif curr_edit_mode == EDIT_MODE.ERASE:
 			if mouse_cell_id in placed_data:
 				placed_data[mouse_cell_id].queue_free()
+				placed_data.erase(mouse_cell_id)
 				
 		elif curr_edit_mode in [EDIT_MODE.IDEL, EDIT_MODE.MODIFY]:
 			# select mode

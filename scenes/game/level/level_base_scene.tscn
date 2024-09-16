@@ -1,7 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://blavwvk1shsb4"]
+[gd_scene load_steps=10 format=3 uid="uid://blavwvk1shsb4"]
 
 [ext_resource type="Script" path="res://scenes/game/level/level_control.gd" id="1_0oed0"]
 [ext_resource type="Script" path="res://scenes/level_editor/level_root.gd" id="2_xvg54"]
+
+[sub_resource type="Gradient" id="Gradient_xiq42"]
+offsets = PackedFloat32Array(0, 0.366025, 1)
+colors = PackedColorArray(0.937255, 0.937255, 0.937255, 0, 0, 0, 0, 0.0784314, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5vsci"]
+gradient = SubResource("Gradient_xiq42")
+
+[sub_resource type="Curve" id="Curve_n8356"]
+_data = [Vector2(0, 0.293104), 0.0, 0.0, 0, 0, Vector2(0.370079, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.496552), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6ssmv"]
+curve = SubResource("Curve_n8356")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6jc1v"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1080, 560, 1)
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_6ssmv")
+color_ramp = SubResource("GradientTexture1D_5vsci")
+
+[sub_resource type="Gradient" id="Gradient_mafc5"]
+offsets = PackedFloat32Array(0.809449, 0.812598)
+colors = PackedColorArray(1, 1, 1, 0, 0.243137, 0.243137, 0.243137, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c4wtf"]
+gradient = SubResource("Gradient_mafc5")
+width = 128
+height = 128
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
 
 [node name="LevelBaseScene" type="Node2D"]
 script = ExtResource("1_0oed0")
@@ -15,7 +55,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.243137, 0.243137, 0.243137, 1)
+color = Color(0.921569, 0.929412, 0.913725, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="UILayer"]
+modulate = Color(1, 1, 1, 0.533333)
+position = Vector2(960, 540)
+process_material = SubResource("ParticleProcessMaterial_6jc1v")
+texture = SubResource("GradientTexture2D_c4wtf")
+lifetime = 16.0
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer"]
 anchors_preset = 15
@@ -52,6 +99,7 @@ grow_vertical = 2
 border_width = 2.0
 
 [node name="ReferenceRect2" type="ColorRect" parent="UILayer"]
+visible = false
 custom_minimum_size = Vector2(720, 720)
 anchors_preset = 8
 anchor_left = 0.5

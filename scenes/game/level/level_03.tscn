@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxtpmjfnfbjky"]
+
+[ext_resource type="PackedScene" uid="uid://blavwvk1shsb4" path="res://scenes/game/level/level_base_scene.tscn" id="1_7tlq1"]
+[ext_resource type="PackedScene" uid="uid://bq3gh03isemg6" path="res://scenes/level_editor/levels/level_data_8dcd11d9-2c99-496e-9436-3548a07d889c.tscn" id="2_743mi"]
+
+[node name="Level" instance=ExtResource("1_7tlq1")]
+packed_level = ExtResource("2_743mi")
+
+[node name="LevelContainer" parent="." index="1"]
+script = null

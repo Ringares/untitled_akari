@@ -84,3 +84,11 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	passed_lights.erase(area)
 	if passed_lights.size() == 0:
 		light_off()
+
+
+func _on_ground_click_rect_mouse_entered() -> void:
+	self.modulate = Color(1.1,1.1,1.1)
+
+
+func _on_ground_click_rect_mouse_exited() -> void:
+	self.modulate = Color.WHITE

@@ -7,7 +7,8 @@ class_name GridComponent
 func get_class_name(): return "GridComponent"
 
 func _ready() -> void:
-	self.hide()
+	if not Engine.is_editor_hint():
+		self.hide()
 
 func show_up(delay:float):
 	await get_tree().create_timer(delay * 0.1).timeout

@@ -27,7 +27,7 @@ pause_menu_packed = ExtResource("3_er801")
 [node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_container")]
 script = ExtResource("5_v2d4l")
 level_container = NodePath("../ViewportContainer/SubViewport")
-files = Array[String](["res://scenes/game/level/levels.tscn"])
+files = Array[String](["res://scenes/game/level/level_00.tscn", "res://scenes/game/level/level_01.tscn", "res://scenes/game/level/level_02.tscn"])
 directory = "res://scenes/game/level"
 
 [node name="UILayer" type="CanvasLayer" parent="."]

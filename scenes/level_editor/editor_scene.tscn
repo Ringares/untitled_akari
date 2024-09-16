@@ -111,9 +111,9 @@ scene = ExtResource("7_m3oh8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorUI"]
 offset_left = 1728.0
-offset_top = 768.0
-offset_right = 1900.0
-offset_bottom = 935.0
+offset_top = 672.0
+offset_right = 1903.0
+offset_bottom = 947.0
 
 [node name="PlayButton" type="Button" parent="EditorUI/VBoxContainer"]
 unique_name_in_owner = true
@@ -218,10 +218,10 @@ custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="EditorUI"]
-offset_left = 1440.0
-offset_top = 896.0
-offset_right = 1712.0
-offset_bottom = 936.0
+offset_left = 1408.0
+offset_top = 864.0
+offset_right = 1700.0
+offset_bottom = 929.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/VBoxContainer2"]
 layout_mode = 2
@@ -232,7 +232,7 @@ text = "GridSize: "
 
 [node name="RowSizeEdit" type="TextEdit" parent="EditorUI/VBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 36)
+custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 text = "3"
 
@@ -242,7 +242,7 @@ text = "x"
 
 [node name="ColSizeEdit" type="TextEdit" parent="EditorUI/VBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 36)
+custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
 text = "3"
 

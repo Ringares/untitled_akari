@@ -28,12 +28,12 @@ position = Vector2(320, 320)
 cell_id = Vector2i(2, 2)
 
 [node name="ObstacleNum_0_2" parent="." instance=ExtResource("4_5hwkl")]
-visible = false
+visible = true
 position = Vector2(64, 320)
 cell_id = Vector2i(0, 2)
 
 [node name="ObstacleNum_2_0" parent="." instance=ExtResource("4_5hwkl")]
-visible = false
+visible = true
 position = Vector2(320, 64)
 hint_num = 2
 cell_id = Vector2i(2, 0)
