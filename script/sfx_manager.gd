@@ -8,6 +8,7 @@ var bus = "SFX"
 
 var available = []  # The available players.
 var queue = []  # The queue of sounds to play.
+var last_sfx_played = {}
 
 var min_sfx_pitch
 
@@ -32,10 +33,19 @@ func _play(sound_path):
 	queue.append(sound_path)
 
 
-func _process(delta):
+func _physics_process(delta: float) -> void:
 	# Play a queued sound if any players are available.
 	if not queue.is_empty() and not available.is_empty():
-		available[0].stream = load(queue.pop_front())
+		#print(Time.get_ticks_msec())
+		var sfx_path = queue.pop_front()
+		if sfx_path in last_sfx_played:
+			if Time.get_ticks_msec() - last_sfx_played[sfx_path] < 35:
+				#print("skip sfx")
+				return
+		
+		
+		last_sfx_played[sfx_path] = Time.get_ticks_msec()
+		available[0].stream = load(sfx_path)
 		available[0].play()
 		available.pop_front()
 		

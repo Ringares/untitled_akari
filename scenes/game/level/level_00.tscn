@@ -5,6 +5,14 @@
 
 [node name="Level" instance=ExtResource("1_lxkr5")]
 
+[node name="ReferenceRect2" parent="UILayer" index="4"]
+offset_left = -352.0
+offset_top = -348.0
+offset_right = 368.0
+offset_bottom = 372.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
 [node name="TileMapLayer" parent="." index="2" node_paths=PackedStringArray("level_container") instance=ExtResource("2_oe3do")]
 position = Vector2(0, 0)
 tile_map_data = PackedByteArray("AAACAAIAAAABAAEAAAACAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAEAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAABAAEAAAACAAEAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAABAAEAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAAAAAAAAAAAAAA=")

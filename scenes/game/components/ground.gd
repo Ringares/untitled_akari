@@ -24,6 +24,9 @@ var interactable = true:
 			ground_click_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
+func set_last_in_parent():
+	get_parent().move_child(self, get_parent().get_child_count()-1)
+
 func left_clk():
 	if marker:
 		marker.queue_free()
@@ -87,8 +90,10 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 
 func _on_ground_click_rect_mouse_entered() -> void:
-	self.modulate = Color(1.1,1.1,1.1)
-
+	#self.modulate = Color(1.1,1.1,1.1)
+	$AnimationPlayer.play("hover")
 
 func _on_ground_click_rect_mouse_exited() -> void:
-	self.modulate = Color.WHITE
+	#self.modulate = Color.WHITE
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("RESET")

@@ -61,7 +61,7 @@ func _on_light_area_entered(area: Area2D, light_area:AkariLight) -> void:
 	print(obstacle)
 	if obstacle is Obstacle:
 		var distance = to_local(obstacle.global_position).distance_to(to_local((light_area.global_position)))
-		print("light_area.scale", distance, " ", round(distance / 128) -1)
+		#print("light_area.scale", distance, " ", round(distance / 128) -1)
 		#light_area.scale.x = int(distance / 128) - 1
 		light_area.stop_spread(max(round(distance / 128) - 1, 0))
 		#if int(distance / 128) - 1 < 0:
@@ -72,7 +72,8 @@ func _on_light_area_entered(area: Area2D, light_area:AkariLight) -> void:
 		print("_on_light_area_entered", light_area)
 		for repeater_rotation in [0, -PI/2, PI/2]:
 			var new_light_area = light_area.duplicate() as AkariLight
-			print("new_light_area", new_light_area)
+			new_light_area.scale.x = 1.0
+			#print("new_light_area", new_light_area)
 			
 			new_light_area.position = new_light_area.position + to_local(obstacle.global_position) - to_local(light_area.global_position)
 			new_light_area.rotate(repeater_rotation)
@@ -87,8 +88,9 @@ func _on_light_area_entered(area: Area2D, light_area:AkariLight) -> void:
 		var obstacle_in_direction = - light_direction
 		
 		var new_light_area = light_area.duplicate() as AkariLight
+		new_light_area.scale.x = 1.0
 		new_light_area.position = new_light_area.position + to_local(obstacle.global_position) - to_local(light_area.global_position)
-		print(light_direction, obstacle.reflect_map[obstacle_in_direction], light_direction.angle_to(obstacle.reflect_map[light_direction]))
+		#print(light_direction, obstacle.reflect_map[obstacle_in_direction], light_direction.angle_to(obstacle.reflect_map[light_direction]))
 		new_light_area.rotate(light_direction.angle_to(obstacle.reflect_map[obstacle_in_direction]))
 		new_light_area.area_entered.connect(_on_light_area_entered.bind(new_light_area))
 		call_deferred("add_child", new_light_area)

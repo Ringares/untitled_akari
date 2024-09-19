@@ -34,6 +34,7 @@ var mouse_rela_pos
 var mouse_cell_id:Vector2i
 var just_placed_obstacle = null
 var placed_data = {}
+var init_grids:Vector2i
 
 enum EDIT_MODE {
 	IDEL,
@@ -85,8 +86,8 @@ func _process(delta: float) -> void:
 	mouse_rela_pos = get_global_mouse_position() - level_root.global_position
 	mouse_cell_id = local_to_grid(mouse_rela_pos)
 	
-	%LabelMousePos.text = "%v" % (get_global_mouse_position() - level_root.global_position)
-	%LabelCell.text = "%v" % local_to_grid(mouse_rela_pos)
+	%LabelMousePos.text = "%v" % (mouse_rela_pos)
+	%LabelCell.text = "%v" % mouse_cell_id
 	
 	if curr_edit_mode == EDIT_MODE.INSERT and curr_selected_tool != null:
 		insert_cursor.global_position = get_global_mouse_position() 
@@ -101,6 +102,12 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		curr_selected_tool = null
+	
+	if event.is_action_pressed("play_edit_switch"):
+		if curr_edit_mode != EDIT_MODE.PLAY:
+			curr_edit_mode = EDIT_MODE.PLAY
+		else:
+			curr_edit_mode = EDIT_MODE.IDEL
 	
 	if event.is_action_pressed("editor_erase"):
 		curr_edit_mode = EDIT_MODE.ERASE
@@ -196,7 +203,7 @@ func place_at_cell(new_scene:GridComponent, place_cell_id:Vector2i):
 
 
 func local_to_grid(pos:Vector2):
-	return Vector2i(snap(pos) / GRID_SIZE)
+	return Vector2i(round(snap(pos).x / GRID_SIZE), round(snap(pos).y / GRID_SIZE))
 
 
 func snap(pos:Vector2): 
@@ -217,7 +224,7 @@ func _on_save_button_pressed() -> void:
 	packed_scene.pack(%LevelRoot)
 	var error = ResourceSaver.save(
 		packed_scene, 
-		"res://scenes/level_editor/levels/level_data_%s.tscn" % UUID.v4())
+		"res://scenes/level_editor/levels/level_data_%s_%s.tscn" % [str(init_grids.x) + "_" +str(init_grids.y), UUID.v4()])
 	if error != OK:
 		push_error("An error occurred while saving the scene to disk.")
 		push_error(error)
@@ -235,8 +242,16 @@ func _on_play_button_pressed() -> void:
 		curr_edit_mode = EDIT_MODE.IDEL
 
 
+
+func _on_reset_button_pressed() -> void:
+	get_tree().reload_current_scene()
+	curr_edit_mode = EDIT_MODE.IDEL
+	
+	
 func _on_init_grid_button_pressed() -> void:
-	init_board(Vector2i(int(%RowSizeEdit.text), int(%ColSizeEdit.text)))
+	init_grids = Vector2i(int(%RowSizeEdit.text), int(%ColSizeEdit.text)) 
+	init_board(init_grids)
+	curr_edit_mode = EDIT_MODE.IDEL
 
 
 func check_win_condition():

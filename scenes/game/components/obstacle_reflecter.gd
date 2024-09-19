@@ -3,7 +3,7 @@ class_name ObstacleReflecter
 
 func get_class_name(): return "ObstacleReflecter"
 
-var reflect_map = {
+@export var reflect_map = {
 			Vector2.LEFT:Vector2.UP,
 			Vector2.UP:Vector2.LEFT,
 			Vector2.RIGHT:Vector2.DOWN,

@@ -1,0 +1,119 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8yp20m77vidt"]
+
+[ext_resource type="Script" path="res://scenes/level_editor/level_root.gd" id="1_gtkvs"]
+[ext_resource type="PackedScene" uid="uid://d15v1m0f60r81" path="res://scenes/game/components/ground.tscn" id="2_cw0s3"]
+[ext_resource type="PackedScene" uid="uid://c0kdm60qi266j" path="res://scenes/game/components/obstacle_num.tscn" id="4_30q4g"]
+[ext_resource type="PackedScene" uid="uid://dvxgo3ut6glwa" path="res://scenes/game/components/obstacle_reflecter.tscn" id="6_1nmtd"]
+
+[node name="LevelRoot" type="Node2D"]
+unique_name_in_owner = true
+script = ExtResource("1_gtkvs")
+
+[node name="Ground_0_2" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(64, 320)
+cell_id = Vector2i(0, 2)
+
+[node name="Ground_0_3" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(64, 448)
+cell_id = Vector2i(0, 3)
+
+[node name="Ground_1_0" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(192, 64)
+cell_id = Vector2i(1, 0)
+
+[node name="Ground_1_1" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(192, 192)
+cell_id = Vector2i(1, 1)
+
+[node name="Ground_1_2" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(192, 320)
+cell_id = Vector2i(1, 2)
+
+[node name="Ground_1_4" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(192, 576)
+cell_id = Vector2i(1, 4)
+
+[node name="Ground_2_0" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(320, 64)
+cell_id = Vector2i(2, 0)
+
+[node name="Ground_2_1" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(320, 192)
+cell_id = Vector2i(2, 1)
+
+[node name="Ground_2_2" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(320, 320)
+cell_id = Vector2i(2, 2)
+
+[node name="Ground_2_3" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(320, 448)
+cell_id = Vector2i(2, 3)
+
+[node name="Ground_2_4" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(320, 576)
+cell_id = Vector2i(2, 4)
+
+[node name="Ground_3_0" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(448, 64)
+cell_id = Vector2i(3, 0)
+
+[node name="Ground_3_2" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(448, 320)
+cell_id = Vector2i(3, 2)
+
+[node name="Ground_3_3" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(448, 448)
+cell_id = Vector2i(3, 3)
+
+[node name="Ground_3_4" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(448, 576)
+cell_id = Vector2i(3, 4)
+
+[node name="Ground_4_1" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(576, 192)
+cell_id = Vector2i(4, 1)
+
+[node name="Ground_4_2" parent="." instance=ExtResource("2_cw0s3")]
+position = Vector2(576, 320)
+cell_id = Vector2i(4, 2)
+
+[node name="ObstacleNum_0_0" parent="." instance=ExtResource("4_30q4g")]
+position = Vector2(64, 64)
+
+[node name="ObstacleNum_4_4" parent="." instance=ExtResource("4_30q4g")]
+position = Vector2(576, 576)
+cell_id = Vector2i(4, 4)
+
+[node name="ObstacleNum_4_0" parent="." instance=ExtResource("4_30q4g")]
+position = Vector2(576, 64)
+cell_id = Vector2i(4, 0)
+
+[node name="ObstacleNum_0_4" parent="." instance=ExtResource("4_30q4g")]
+position = Vector2(64, 576)
+hint_num = 0
+cell_id = Vector2i(0, 4)
+
+[node name="ObstacleNum_0_1" parent="." instance=ExtResource("4_30q4g")]
+position = Vector2(64, 192)
+hint_num = 1
+cell_id = Vector2i(0, 1)
+
+[node name="ObstacleNum_4_3" parent="." instance=ExtResource("4_30q4g")]
+position = Vector2(576, 448)
+hint_num = 1
+cell_id = Vector2i(4, 3)
+
+[node name="ObstacleReflecter_3_1" parent="." instance=ExtResource("6_1nmtd")]
+position = Vector2(448, 192)
+cell_id = Vector2i(3, 1)
+
+[node name="ObstacleReflecter_1_3" parent="." instance=ExtResource("6_1nmtd")]
+position = Vector2(192, 448)
+rotation = 1.5708
+reflect_map = {
+Vector2(-1, 0): Vector2(0, 1),
+Vector2(0, -1): Vector2(1, 0),
+Vector2(0, 1): Vector2(-1, 0),
+Vector2(1, 0): Vector2(0, -1)
+}
+cell_id = Vector2i(1, 3)

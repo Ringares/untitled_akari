@@ -50,7 +50,6 @@ _data = {
 }
 
 [node name="ObstacleNum" type="Node2D" groups=["obstacle_num"]]
-visible = false
 script = ExtResource("1_j5f15")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

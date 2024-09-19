@@ -11,9 +11,14 @@ func _ready() -> void:
 	if packed_level !=null:
 		var level_root = packed_level.instantiate() as LevelRoot
 		level_container.add_child(level_root)
-		level_root.scale = Vector2.ONE
-		level_root.adjust_position_scale()
-		
+		#level_root.scale = Vector2.ONE
+		var size = await level_root.adjust_position_scale()
+		print("PlaceholdRect.custom_minimum_size", size)
+		#%PlaceholdRect.custom_minimum_size = size
+		#%PlaceholdRect.queue_redraw()
+		%PlaceholdRect.custom_minimum_size = size
+		%ProgressBar.show()
+		#%PlaceholdRect.set_size(Vector2.ZERO)
 		for child in level_root.get_children():
 			child.set("interactable", true)
 			
@@ -28,7 +33,6 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("reset"):
 		get_tree().reload_current_scene()
-		
 
 
 func check_win_condition():

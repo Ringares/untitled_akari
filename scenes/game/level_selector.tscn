@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://i6igkf5whup"]
+
+[ext_resource type="Script" path="res://scenes/game/level_selector.gd" id="1_dky57"]
+[ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="1_j6vg6"]
+
+[node name="LevelSelector" type="Node2D"]
+script = ExtResource("1_dky57")
+
+[node name="BGCanvasLayer" parent="." instance=ExtResource("1_j6vg6")]
+
+[node name="ReferenceRect" type="ReferenceRect" parent="BGCanvasLayer"]
+custom_minimum_size = Vector2(384, 384)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -192.0
+offset_right = 192.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+border_width = 2.0
+
+[node name="Page1" type="Node2D" parent="."]

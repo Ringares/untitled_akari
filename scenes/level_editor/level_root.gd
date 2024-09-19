@@ -3,7 +3,14 @@ class_name LevelRoot
 
 @export var GRID_SIZE = 128
 
-func adjust_position_scale():
+func _ready() -> void:
+	#var a = get_parent() is Window
+	#print(get_parent())
+	if get_parent() is Window:
+		adjust_position_scale()
+
+func adjust_position_scale() -> Vector2:
+	self.scale = Vector2.ONE
 	var furthest_x_pos = 0.
 	var furthest_y_pos = 0.
 	var furthest_x_cell = 0
@@ -25,6 +32,7 @@ func adjust_position_scale():
 	var scale_y = (get_viewport_rect().size.y * 2 / 3) / board_rect.y
 	
 	var final_scale = clamp(min(scale_x, scale_y), 0.1, 1.0)
+	print(final_scale)
 	self.scale = Vector2(final_scale, final_scale)
 	self.global_position = Vector2(
 		get_viewport_rect().size.x / 2. - board_rect.x * final_scale / 2.,
@@ -40,5 +48,7 @@ func adjust_position_scale():
 	for delay in max_dist:
 		await get_tree().create_timer(0.08).timeout
 		SfxManager.play_light_up()
-		
+	
+	return Vector2((furthest_x_cell + 1) * GRID_SIZE, (furthest_y_cell + 1) * GRID_SIZE)
+	
 	

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://elh3yh2hcw1i"]
 
 [ext_resource type="PackedScene" uid="uid://blavwvk1shsb4" path="res://scenes/game/level/level_base_scene.tscn" id="1_i3eid"]
-[ext_resource type="PackedScene" uid="uid://baveh72k6gx1x" path="res://scenes/level_editor/levels/level_data_85c64f78-cc5b-4aa8-be4b-4d6d9788a1af.tscn" id="2_q5jde"]
+[ext_resource type="PackedScene" uid="uid://baveh72k6gx1x" path="res://scenes/level_editor/levels/easy/level_data_3_3_85c64f78-cc5b-4aa8-be4b-4d6d9788a1af.tscn" id="2_q5jde"]
 
 [node name="Level" instance=ExtResource("1_i3eid")]
 packed_level = ExtResource("2_q5jde")
