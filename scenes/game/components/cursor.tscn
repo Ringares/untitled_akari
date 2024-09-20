@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bnyat2kx0ulu"]
 
 [ext_resource type="Script" path="res://scenes/components/cursor.gd" id="1_10yug"]
-[ext_resource type="Texture2D" uid="uid://cs0ml8lpyejhk" path="res://assets/marker.png" id="2_rkl2p"]
+[ext_resource type="Texture2D" uid="uid://cs0ml8lpyejhk" path="res://assets/img/marker.png" id="2_rkl2p"]
 
 [sub_resource type="Curve" id="Curve_tud0s"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.156098, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

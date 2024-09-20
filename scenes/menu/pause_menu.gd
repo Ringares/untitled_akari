@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @export var options_packed_scene : PackedScene
 @export_file("*.tscn") var main_menu_scene : String
-
+const LEVEL_SELECTOR = preload("res://scenes/game/level_selector.tscn")
 
 var curr_container
 
@@ -58,3 +58,9 @@ func _on_back_button_pressed():
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		InGameMenuController.close_menu()
+
+
+func _on_level_selector_pressed() -> void:
+	get_parent().add_child(LEVEL_SELECTOR.instantiate())
+	InGameMenuController.close_menu()
+	

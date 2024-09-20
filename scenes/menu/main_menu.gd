@@ -18,6 +18,10 @@ var curr_container
 @onready var exit_button = %ExitButton
 @onready var version_label = %VersionLabel
 
+@onready var slot_1_finished_label: Label = %Slot1FinishedLabel
+@onready var slot_2_finished_label: Label = %Slot2FinishedLabel
+@onready var slot_3_finished_label: Label = %Slot3FinishedLabel
+
 func _ready():
 	# set availabel buttons
 	if OS.has_feature("web"): exit_button.hide()
@@ -31,12 +35,20 @@ func _ready():
 		
 	curr_container = %MenuContainer
 	%OptionContainer.hide()
-	if GameLevelLog.get_current_level() > 0:
-		continue_button.show()
-	else:
-		continue_button.hide()
-		
 	
+	match GameLevelLog.get_curr_save():
+		"Save1": %Slot1Button.grab_focus()
+		"Save2": %Slot2Button.grab_focus()
+		"Save3": %Slot3Button.grab_focus()
+		_: %Slot1Button.grab_focus()
+		
+	GameLevelLog.set_curr_save("Save1")
+	slot_1_finished_label.text = str(int(GameLevelLog.get_passed_levels().size() * 100 / LevelRes.levels.size())) + " %"
+	GameLevelLog.set_curr_save("Save2")
+	slot_2_finished_label.text = str(int(GameLevelLog.get_passed_levels().size() * 100 / LevelRes.levels.size())) + " %"
+	GameLevelLog.set_curr_save("Save3")
+	slot_3_finished_label.text = str(int(GameLevelLog.get_passed_levels().size() * 100 / LevelRes.levels.size())) + " %"
+		
 
 	# set version name
 	var version_name : String = ProjectSettings.get_setting("application/config/version", NO_VERSION_NAME)
@@ -58,6 +70,11 @@ func _close_sub_menu():
 	
 
 
+func _on_new_game_button_pressed():
+	GameLevelLog.set_current_level(0)
+	SceneLoader.load_scene(game_scene_path)
+	
+
 func _on_continue_button_pressed():
 	SceneLoader.load_scene(game_scene_path)
 
@@ -75,5 +92,25 @@ func _on_back_button_pressed():
 	_close_sub_menu()
 
 
-func _on_new_game_button_pressed():
+func _on_light_mode_button_pressed() -> void:
+	var new_mode = DisplayMode.switch_mode()
+	
+	if new_mode == DisplayMode.DaynightMode.DAY:
+		%LightModeButton.icon = load("res://assets/img/icon/icons8-sun-96.png")
+	else:
+		%LightModeButton.icon = load("res://assets/img/icon/icons8-moon-96.png")
+
+
+func _on_slot_1_button_pressed() -> void:
+	GameLevelLog.set_curr_save("Save1")
+	SceneLoader.load_scene(game_scene_path)
+
+
+func _on_slot_2_button_pressed() -> void:
+	GameLevelLog.set_curr_save("Save2")
+	SceneLoader.load_scene(game_scene_path)
+
+
+func _on_slot_3_button_pressed() -> void:
+	GameLevelLog.set_curr_save("Save3")
 	SceneLoader.load_scene(game_scene_path)

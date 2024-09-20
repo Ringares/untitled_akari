@@ -1,26 +1,262 @@
-[gd_scene load_steps=3 format=3 uid="uid://i6igkf5whup"]
+[gd_scene load_steps=10 format=3 uid="uid://i6igkf5whup"]
 
 [ext_resource type="Script" path="res://scenes/game/level_selector.gd" id="1_dky57"]
 [ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="1_j6vg6"]
+[ext_resource type="Script" path="res://script/ui_sound.gd" id="2_k7qki"]
+[ext_resource type="Texture2D" uid="uid://dpf1eiitr0qh7" path="res://assets/img/icon/icons8-left-96.png" id="4_uuubw"]
+[ext_resource type="Script" path="res://script/theme_button.gd" id="5_alce4"]
+[ext_resource type="Texture2D" uid="uid://dhfxd12fj37ic" path="res://assets/img/icon/icons8-right-96.png" id="6_iy5b6"]
+[ext_resource type="Texture2D" uid="uid://i2dphu7ocm48" path="res://assets/img/icon/icons8-hint-96.png" id="7_23vtg"]
+[ext_resource type="Script" path="res://script/theme_texture_rect.gd" id="8_taaw5"]
+[ext_resource type="Script" path="res://script/theme_label.gd" id="9_vtm0f"]
 
-[node name="LevelSelector" type="Node2D"]
+[node name="LevelSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_dky57")
 
-[node name="BGCanvasLayer" parent="." instance=ExtResource("1_j6vg6")]
+[node name="UISound" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_k7qki")
+root_path = NodePath("..")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="BGCanvasLayer"]
-custom_minimum_size = Vector2(384, 384)
+[node name="BGCanvasLayer" parent="." instance=ExtResource("1_j6vg6")]
+layer = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PageContainer" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_right = 5768.0
+offset_bottom = 1080.0
+
+[node name="Page1" type="Control" parent="CanvasLayer/PageContainer"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/Page1"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = -192.0
-offset_right = 192.0
-offset_bottom = 192.0
+offset_left = -328.0
+offset_top = -128.0
+offset_right = 328.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
-border_width = 2.0
 
-[node name="Page1" type="Node2D" parent="."]
+[node name="ReferenceRect" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="ReferenceRect3" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="Page1GridContainer" type="GridContainer" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 6
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="NextButton" type="Button" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+icon = ExtResource("6_iy5b6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="Page2" type="Control" parent="CanvasLayer/PageContainer"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/Page2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -128.0
+offset_right = 328.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/Page2/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+icon = ExtResource("4_uuubw")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page2/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="Page2GridContainer" type="GridContainer" parent="CanvasLayer/PageContainer/Page2/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 6
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page2/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="NextButton" type="Button" parent="CanvasLayer/PageContainer/Page2/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+icon = ExtResource("6_iy5b6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="Page3" type="Control" parent="CanvasLayer/PageContainer"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/Page3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -128.0
+offset_right = 328.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/Page3/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+icon = ExtResource("4_uuubw")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page3/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="Page3GridContainer" type="GridContainer" parent="CanvasLayer/PageContainer/Page3/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 6
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page3/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="ReferenceRect3" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page3/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -177.0
+offset_right = 192.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 96
+
+[node name="BackButton" type="Button" parent="CanvasLayer/MarginContainer"]
+custom_minimum_size = Vector2(384, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 48
+text = "Back"
+script = ExtResource("5_alce4")
+
+[node name="CollectionContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -204.0
+offset_bottom = 137.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CollectionContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CollectionContainer/HBoxContainer"]
+custom_minimum_size = Vector2(72, 64)
+layout_mode = 2
+texture = ExtResource("7_23vtg")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("8_taaw5")
+
+[node name="CollectionLabel" type="Label" parent="CanvasLayer/CollectionContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 42
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_vtm0f")
+
+[connection signal="pressed" from="CanvasLayer/PageContainer/Page1/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/Page2/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/Page2/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/Page3/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

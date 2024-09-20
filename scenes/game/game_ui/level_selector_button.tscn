@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjkuapn33emqh"]
+
+[ext_resource type="Script" path="res://scenes/game/game_ui/level_selector_button.gd" id="2_31a0v"]
+[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/img/sprite_sheet.png" id="2_tfmyi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10dlr"]
+atlas = ExtResource("2_tfmyi")
+region = Rect2(640, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mh6xe"]
+atlas = ExtResource("2_tfmyi")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkfv7"]
+atlas = ExtResource("2_tfmyi")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="Animation" id="Animation_mdxg8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8afjg"]
+resource_name = "hover"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.15, 0.22, 0.26, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 0.9), Vector2(0.95, 1.05), Vector2(1.02, 0.98), Vector2(0.99, 1.01), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rcp55"]
+_data = {
+"RESET": SubResource("Animation_mdxg8"),
+"hover": SubResource("Animation_8afjg")
+}
+
+[node name="LevelSelector" type="Control"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+script = ExtResource("2_31a0v")
+
+[node name="Locked" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_10dlr")
+
+[node name="Unlocked" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_mh6xe")
+
+[node name="Passed" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_qkfv7")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.921569, 0.929412, 0.913725, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "0-999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rcp55")
+}
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

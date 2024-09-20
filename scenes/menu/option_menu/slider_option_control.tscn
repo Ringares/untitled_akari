@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba30xhnse6vcf"]
+[gd_scene load_steps=3 format=3 uid="uid://ba30xhnse6vcf"]
 
 [ext_resource type="PackedScene" uid="uid://ds4lhiuv5dkni" path="res://scenes/menu/option_menu/option_control.tscn" id="1_an6i2"]
+[ext_resource type="Script" path="res://script/theme_label.gd" id="2_ubrqg"]
 
 [node name="OptionControl" instance=ExtResource("1_an6i2")]
-label_suffix = " :"
+
+[node name="OptionLabel" parent="." index="0"]
+text = " :"
+script = ExtResource("2_ubrqg")
 
 [node name="HSlider" type="HSlider" parent="." index="1"]
 custom_minimum_size = Vector2(256, 2.08165e-12)

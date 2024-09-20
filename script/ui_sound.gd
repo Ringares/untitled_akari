@@ -27,7 +27,6 @@ func install_sounds(node:Node):
 			i.mouse_entered.connect(func(): ui_sfx_play(&"ui_hover"))
 			i.pressed.connect(func(): ui_sfx_play(&"ui_click"))
 		
-		
 		install_sounds(i)
 
 func ui_sfx_play(sfxs_name:StringName):

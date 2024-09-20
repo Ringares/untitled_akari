@@ -1,33 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://cew1lc4b8f86w"]
+[gd_scene load_steps=7 format=3 uid="uid://cew1lc4b8f86w"]
 
 [ext_resource type="Script" path="res://scenes/menu/pause_menu.gd" id="1_ip65o"]
 [ext_resource type="PackedScene" uid="uid://beaj3udobexnc" path="res://scenes/menu/option_menu/simple_option_menu.tscn" id="2_4ply4"]
+[ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="3_3xtad"]
 [ext_resource type="Script" path="res://script/ui_sound.gd" id="3_yxqtb"]
+[ext_resource type="Script" path="res://script/theme_label.gd" id="5_tis0t"]
+[ext_resource type="Script" path="res://script/theme_button.gd" id="6_7euhi"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_ip65o")
 options_packed_scene = ExtResource("2_4ply4")
 main_menu_scene = "res://scenes/menu/main_menu.tscn"
 
+[node name="BGCanvasLayer" parent="." instance=ExtResource("3_3xtad")]
+layer = 0
+
 [node name="UISound" type="Node" parent="."]
 script = ExtResource("3_yxqtb")
 root_path = NodePath("..")
-
-[node name="BGColorRect" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.921569, 0.929412, 0.913725, 0.933333)
-
-[node name="BGTextureRect" type="TextureRect" parent="."]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -56,11 +46,11 @@ theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer"]
-modulate = Color(0.243137, 0.243137, 0.243137, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 128
 text = "Pause"
+script = ExtResource("5_tis0t")
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MenuContainer/VBoxContainer"]
 layout_mode = 2
@@ -74,19 +64,30 @@ custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
 theme_override_font_sizes/font_size = 48
 text = "Continue"
+script = ExtResource("6_7euhi")
 
 [node name="RestartButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(384, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 48
+text = "Reset"
+script = ExtResource("6_7euhi")
+
+[node name="LevelSelector" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
 theme_override_font_sizes/font_size = 48
-text = "Reset"
+text = "Levels"
+script = ExtResource("6_7euhi")
 
 [node name="OptionButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
@@ -94,9 +95,9 @@ custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
 theme_override_font_sizes/font_size = 48
 text = "Options"
+script = ExtResource("6_7euhi")
 
 [node name="MainMenuButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
@@ -104,9 +105,9 @@ custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
 theme_override_font_sizes/font_size = 48
 text = "Main Menu"
+script = ExtResource("6_7euhi")
 
 [node name="OptionContainer" type="MarginContainer" parent="MarginContainer"]
 unique_name_in_owner = true
@@ -129,11 +130,11 @@ theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/OptionContainer/OptionVBox/MarginContainer"]
-modulate = Color(0.243137, 0.243137, 0.243137, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 128
 text = "Options"
+script = ExtResource("5_tis0t")
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/OptionContainer/OptionVBox"]
 layout_mode = 2
@@ -147,12 +148,13 @@ custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.243137, 0.243137, 0.243137, 1)
 theme_override_font_sizes/font_size = 48
 text = "Back"
+script = ExtResource("6_7euhi")
 
 [connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/LevelSelector" to="." method="_on_level_selector_pressed"]
 [connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="MarginContainer/OptionContainer/OptionVBox/MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]

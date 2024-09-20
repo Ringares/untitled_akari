@@ -9,11 +9,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameLog.game_started()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	GameEvents.signal_level_jump_to.connect(_signal_level_jump_to)
 
 
 func _on_level_loader_level_load_started():
@@ -21,13 +17,7 @@ func _on_level_loader_level_load_started():
 
 
 func _on_level_loader_level_loaded():
-	await level_loader.current_level.ready
-	#if level_loader.current_level.has_signal("level_won"):
-		#level_loader.current_level.level_won.connect(_on_level_won)
-	#if level_loader.current_level.has_signal("level_lost"):
-		#level_loader.current_level.level_lost.connect(_on_level_lost)
-	#if level_loader.current_level.has_signal("level_reset"):
-		#level_loader.current_level.level_reset.connect(_on_level_reset)
+	#await level_loader.current_level.ready
 		
 	if not GameEvents.signal_level_won.is_connected(_on_level_won):
 		GameEvents.signal_level_won.connect(_on_level_won, CONNECT_ONE_SHOT)
@@ -36,6 +26,9 @@ func _on_level_loader_level_loaded():
 	if not GameEvents.signal_level_reset.is_connected(_on_level_reset):
 		GameEvents.signal_level_reset.connect(_on_level_reset, CONNECT_ONE_SHOT)
 
+
+func _signal_level_jump_to(id:int):
+	level_loader.jump_level(id)
 
 func _on_level_loader_levels_finished():
 	await get_tree().create_timer(0.5).timeout

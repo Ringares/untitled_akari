@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cv1jmy5vty2xe"]
+[gd_scene load_steps=9 format=3 uid="uid://cv1jmy5vty2xe"]
+
+[ext_resource type="Script" path="res://scenes/bg_canvas_layer.gd" id="1_lcw5u"]
 
 [sub_resource type="Gradient" id="Gradient_xiq42"]
 offsets = PackedFloat32Array(0, 0.366025, 1)
-colors = PackedColorArray(0.937255, 0.937255, 0.937255, 0, 0, 0, 0, 0.0784314, 1, 1, 1, 0)
+colors = PackedColorArray(0.937255, 0.937255, 0.937255, 0, 0, 0, 0, 0.117647, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_5vsci"]
 gradient = SubResource("Gradient_xiq42")
@@ -42,14 +44,24 @@ metadata/_snap_enabled = true
 
 [node name="BGCanvasLayer" type="CanvasLayer"]
 layer = -2
+script = ExtResource("1_lcw5u")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="LightColorRect" type="ColorRect" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.921569, 0.929412, 0.913725, 1)
+color = Color(0.898039, 0.898039, 0.898039, 1)
+
+[node name="DarkColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.243137, 0.243137, 0.243137, 1)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.533333)
@@ -57,3 +69,4 @@ position = Vector2(960, 540)
 process_material = SubResource("ParticleProcessMaterial_6jc1v")
 texture = SubResource("GradientTexture2D_c4wtf")
 lifetime = 16.0
+preprocess = 8.0

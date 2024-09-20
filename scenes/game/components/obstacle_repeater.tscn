@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://g6i1wrpm2bxr"]
 
 [ext_resource type="Script" path="res://scenes/game/components/obstacle_repeater.gd" id="1_a28ci"]
-[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="2_bpwjg"]
+[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/img/sprite_sheet.png" id="2_bpwjg"]
 [ext_resource type="PackedScene" uid="uid://bbohw1tlxow7b" path="res://scenes/game/components/square_shadow.tscn" id="3_h136i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q84bj"]

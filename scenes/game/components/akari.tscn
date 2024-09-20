@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://c8swika0h6no0"]
 
 [ext_resource type="Script" path="res://scenes/game/components/akari.gd" id="1_bgssk"]
-[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/sprite_sheet.png" id="2_auxtn"]
+[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/img/sprite_sheet.png" id="2_auxtn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yijyo"]
 atlas = ExtResource("2_auxtn")

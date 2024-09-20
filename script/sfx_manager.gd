@@ -61,3 +61,6 @@ func play_akari_drop():
 	
 func play_light_up():
 	_play("res://assets/audio/game_sfx/lightup_tiny.wav")
+
+func play_hover():
+	_play("res://assets/audio/ui_audio/ui_hover.ogg")

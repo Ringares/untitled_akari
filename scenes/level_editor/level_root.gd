@@ -49,6 +49,6 @@ func adjust_position_scale() -> Vector2:
 		await get_tree().create_timer(0.08).timeout
 		SfxManager.play_light_up()
 	
-	return Vector2((furthest_x_cell + 1) * GRID_SIZE, (furthest_y_cell + 1) * GRID_SIZE)
+	return Vector2((furthest_x_cell + 1) * GRID_SIZE * final_scale, (furthest_y_cell + 1) * GRID_SIZE * final_scale)
 	
 	

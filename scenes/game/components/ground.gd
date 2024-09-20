@@ -35,9 +35,11 @@ func left_clk():
 	if akari == null:
 		akari = AKARI.instantiate()
 		add_child(akari)
+		get_tree().create_timer(0.8).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
 	else:
 		akari.queue_free()
 		akari = null
+		get_tree().create_timer(0.1).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
 
 
 func right_clk():
@@ -48,9 +50,11 @@ func right_clk():
 	if marker == null:
 		marker = MARKER.instantiate()
 		add_child(marker)
+		get_tree().create_timer(0.8).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
 	else:
 		marker.queue_free()
 		marker = null
+		get_tree().create_timer(0.1).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
 
 
 func light_up():
@@ -71,11 +75,10 @@ func _on_clk_rect_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_clk"):
 		left_clk()
 		self.get_parent().move_child(self, self.get_parent().get_child_count()-1)
-		get_tree().create_timer(0.4).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
+		
 	
 	if event.is_action_pressed("right_clk"):
 		right_clk()
-		get_tree().create_timer(0.4).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -90,10 +93,12 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 
 func _on_ground_click_rect_mouse_entered() -> void:
-	#self.modulate = Color(1.1,1.1,1.1)
+	#self.modulate = Color(0.85,0.85,0.85)
+	self.modulate = Color(1.15,1.15, 1.15)
 	$AnimationPlayer.play("hover")
+	SfxManager.play_hover()
 
 func _on_ground_click_rect_mouse_exited() -> void:
-	#self.modulate = Color.WHITE
+	self.modulate = Color.WHITE
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("RESET")

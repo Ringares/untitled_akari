@@ -8,8 +8,7 @@
 [sub_resource type="Environment" id="Environment_11cwd"]
 background_mode = 3
 glow_enabled = true
-glow_strength = 1.15
-glow_blend_mode = 1
+glow_strength = 1.1
 
 [node name="GameUI" type="Control" groups=["game_ui"]]
 layout_mode = 3
@@ -24,20 +23,18 @@ main_menu_scene = "res://scenes/menu/main_menu.tscn"
 [node name="PauseController" parent="." instance=ExtResource("1_fcv4u")]
 pause_menu_packed = ExtResource("3_er801")
 
-[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_container")]
-script = ExtResource("5_v2d4l")
-level_container = NodePath("../ViewportContainer/SubViewport")
-files = Array[String](["res://scenes/game/level/level_00.tscn", "res://scenes/game/level/level_01.tscn", "res://scenes/game/level/level_02.tscn"])
-directory = "res://scenes/game/level"
-
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="ViewportContainer" type="SubViewportContainer" parent="."]
+[node name="LevelLoader" type="Node" parent="." node_paths=PackedStringArray("level_container")]
+script = ExtResource("5_v2d4l")
+level_container = NodePath("../SubViewportContainer/SubViewport")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SubViewport" type="SubViewport" parent="ViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
@@ -45,6 +42,4 @@ render_target_update_mode = 4
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_11cwd")
 
-[connection signal="level_load_started" from="LevelLoader" to="." method="_on_level_loader_level_load_started"]
 [connection signal="level_loaded" from="LevelLoader" to="." method="_on_level_loader_level_loaded"]
-[connection signal="levels_finished" from="LevelLoader" to="." method="_on_level_loader_levels_finished"]
