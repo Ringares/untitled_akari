@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://bne51qffos63i"]
+
+[ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="1_86njv"]
+[ext_resource type="PackedScene" uid="uid://drrtjspoy4dbo" path="res://scenes/game/game_ui/save_slot.tscn" id="1_7584m"]
+[ext_resource type="Script" path="res://script/ui_sound.gd" id="1_ls0lu"]
+[ext_resource type="Script" path="res://scenes/game/game_ui/play_save_slots.gd" id="1_yb8uc"]
+[ext_resource type="Texture2D" uid="uid://vj5d0sljoqhx" path="res://assets/img/icon/icons8-home-96.png" id="2_8hxv8"]
+[ext_resource type="Script" path="res://script/theme_button.gd" id="3_ybryn"]
+[ext_resource type="Texture2D" uid="uid://bcq0hgbdpgdfb" path="res://assets/img/icon/icons8-sun-96.png" id="4_qn0io"]
+
+[node name="PlaySaveSlots" type="CanvasLayer"]
+script = ExtResource("1_yb8uc")
+
+[node name="UISound" type="Node" parent="."]
+script = ExtResource("1_ls0lu")
+root_path = NodePath("..")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BGCanvasLayer" parent="UILayer" instance=ExtResource("1_86njv")]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -98.0
+offset_right = 96.0
+offset_bottom = 98.0
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="MainButton" type="Button" parent="UILayer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_mode = 0
+icon = ExtResource("2_8hxv8")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("3_ybryn")
+
+[node name="LightModeButton" type="Button" parent="UILayer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_mode = 0
+icon = ExtResource("4_qn0io")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("3_ybryn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -84.5
+offset_right = 196.0
+offset_bottom = 84.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 128
+
+[node name="SaveSlot" parent="HBoxContainer" instance=ExtResource("1_7584m")]
+layout_mode = 2
+save_name = "Save1"
+show_name = "1"
+
+[node name="SaveSlot2" parent="HBoxContainer" instance=ExtResource("1_7584m")]
+layout_mode = 2
+save_name = "Save2"
+show_name = "2"
+
+[node name="SaveSlot3" parent="HBoxContainer" instance=ExtResource("1_7584m")]
+layout_mode = 2
+save_name = "Save3"
+show_name = "3"
+
+[connection signal="pressed" from="UILayer/VBoxContainer/MainButton" to="." method="_on_main_button_pressed"]
+[connection signal="pressed" from="UILayer/VBoxContainer/LightModeButton" to="." method="_on_light_mode_button_pressed"]

@@ -15,6 +15,7 @@ var passed_level_ids = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	%CollectionLabel.text = str(GameLevelLog.get_passed_levels().size())
+	GameEvents.signal_level_jump_to.connect(func(_id):queue_free())
 
 	var pages = [
 		page_1_grid_container,

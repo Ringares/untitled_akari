@@ -148,10 +148,10 @@ text = "Reset"
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 1632.0
+offset_left = 1568.0
 offset_top = -508.0
-offset_right = 1885.0
-offset_bottom = -377.0
+offset_right = 1894.0
+offset_bottom = -247.0
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/InfoContainer"]

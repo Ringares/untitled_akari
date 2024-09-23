@@ -65,7 +65,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 48
-text = "Continue"
+text = "resume"
 script = ExtResource("6_7euhi")
 
 [node name="RestartButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
@@ -86,7 +86,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 48
-text = "Levels"
+text = "level select"
 script = ExtResource("6_7euhi")
 
 [node name="OptionButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
@@ -96,7 +96,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 48
-text = "Options"
+text = "options"
 script = ExtResource("6_7euhi")
 
 [node name="MainMenuButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
@@ -106,7 +106,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 48
-text = "Main Menu"
+text = "main menu"
 script = ExtResource("6_7euhi")
 
 [node name="OptionContainer" type="MarginContainer" parent="MarginContainer"]

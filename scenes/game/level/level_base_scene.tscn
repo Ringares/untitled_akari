@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://blavwvk1shsb4"]
+[gd_scene load_steps=21 format=3 uid="uid://blavwvk1shsb4"]
 
 [ext_resource type="Script" path="res://scenes/game/level/level_control.gd" id="1_0oed0"]
 [ext_resource type="Script" path="res://script/ui_sound.gd" id="2_73tug"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://brpwkn7ewwbud" path="res://assets/img/icon/icons8-reset-96.png" id="3_vrepm"]
 [ext_resource type="Texture2D" uid="uid://dqs0quaqbe2le" path="res://assets/img/icon/icons8-question-96.png" id="4_6121w"]
 [ext_resource type="Script" path="res://script/theme_button.gd" id="4_ttych"]
+[ext_resource type="Texture2D" uid="uid://vj5d0sljoqhx" path="res://assets/img/icon/icons8-home-96.png" id="4_w53l7"]
 [ext_resource type="Texture2D" uid="uid://bcq0hgbdpgdfb" path="res://assets/img/icon/icons8-sun-96.png" id="5_g2yfr"]
 [ext_resource type="Texture2D" uid="uid://dvo0syth5khae" path="res://assets/img/icon/icons8-menu-96.png" id="6_3i3qa"]
 [ext_resource type="Texture2D" uid="uid://cpfdxjfpx6oen" path="res://assets/img/icon/collection-96.png" id="7_bxm1p"]
@@ -52,26 +53,27 @@ offset_right = 96.0
 offset_bottom = 198.0
 grow_vertical = 2
 
+[node name="MainButton" type="Button" parent="UILayer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_mode = 0
+icon = ExtResource("4_w53l7")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_ttych")
+
 [node name="MenuButton" type="Button" parent="UILayer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
 focus_mode = 0
 icon = ExtResource("6_3i3qa")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("4_ttych")
-
-[node name="LightModeButton" type="Button" parent="UILayer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 5
-focus_mode = 0
-icon = ExtResource("5_g2yfr")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("4_ttych")
@@ -84,6 +86,18 @@ size_flags_horizontal = 5
 size_flags_vertical = 5
 focus_mode = 0
 icon = ExtResource("7_bxm1p")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_ttych")
+
+[node name="LightModeButton" type="Button" parent="UILayer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_mode = 0
+icon = ExtResource("5_g2yfr")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("4_ttych")
@@ -296,8 +310,9 @@ script = ExtResource("8_d3v6p")
 unique_name_in_owner = true
 script = ExtResource("2_xvg54")
 
+[connection signal="pressed" from="UILayer/VBoxContainer/MainButton" to="." method="_on_main_button_pressed"]
 [connection signal="pressed" from="UILayer/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
-[connection signal="pressed" from="UILayer/VBoxContainer/LightModeButton" to="." method="_on_light_mode_button_pressed"]
 [connection signal="pressed" from="UILayer/VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="UILayer/VBoxContainer/LightModeButton" to="." method="_on_light_mode_button_pressed"]
 [connection signal="pressed" from="UILayer/CenterContainer/VBoxContainer/HBoxContainer3/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="UILayer/CenterContainer/VBoxContainer/HBoxContainer3/NextButton" to="." method="_on_next_button_pressed"]

@@ -139,3 +139,7 @@ func _on_menu_button_pressed() -> void:
 
 func _on_level_select_button_pressed() -> void:
 	add_child(LEVEL_SELECTOR.instantiate())
+
+
+func _on_main_button_pressed() -> void:
+	SceneLoader.load_scene("res://scenes/menu/main_menu.tscn")

@@ -1,12 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://ly0qfj2ewghx"]
+[gd_scene load_steps=5 format=3 uid="uid://ly0qfj2ewghx"]
 
 [ext_resource type="PackedScene" uid="uid://ds4lhiuv5dkni" path="res://scenes/menu/option_menu/option_control.tscn" id="1_q0cto"]
 [ext_resource type="Script" path="res://script/theme_label.gd" id="2_uarq2"]
+[ext_resource type="Script" path="res://script/theme_check_button.gd" id="3_dal76"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mcahv"]
 
 [node name="ToggleOptionControl" instance=ExtResource("1_q0cto")]
+offset_bottom = 49.0
 
 [node name="OptionLabel" parent="." index="0"]
 script = ExtResource("2_uarq2")
 
 [node name="CheckButton" type="CheckButton" parent="." index="1"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mcahv")
+script = ExtResource("3_dal76")

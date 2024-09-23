@@ -27,6 +27,7 @@ var interactable = true:
 func set_last_in_parent():
 	get_parent().move_child(self, get_parent().get_child_count()-1)
 
+
 func left_clk():
 	if marker:
 		marker.queue_free()
@@ -74,7 +75,7 @@ func light_off():
 func _on_clk_rect_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_clk"):
 		left_clk()
-		self.get_parent().move_child(self, self.get_parent().get_child_count()-1)
+		#self.get_parent().move_child(self, self.get_parent().get_child_count()-1)
 		
 	
 	if event.is_action_pressed("right_clk"):

@@ -33,12 +33,19 @@ static func set_current_level(level_number : int) -> void:
 const LEVEL_PASSED = "LevelPassed"
 
 static func append_passed_level(level_id):
-	var passed_level = get_passed_levels()
+	var save_name =  get_curr_save()
+	var passed_level = get_passed_levels(save_name)
 	if level_id not in passed_level:
 		passed_level.append(level_id)
-		Config.set_config(GAME_LOG_SECTION, LEVEL_PASSED + "_" + get_curr_save(), passed_level)
+		Config.set_config(GAME_LOG_SECTION, LEVEL_PASSED + "_" + save_name, passed_level)
 	
 
-static func get_passed_levels() -> Array:
-	return Config.get_config(GAME_LOG_SECTION, LEVEL_PASSED + "_" + get_curr_save(), [])
+static func get_passed_levels(save_name=null) -> Array:
+	if save_name == null:
+		save_name = get_curr_save()
+	return Config.get_config(GAME_LOG_SECTION, LEVEL_PASSED + "_" + save_name, [])
 	
+static func reset_save_slot(save_name):
+	Config.set_config(GAME_LOG_SECTION, LEVEL_PASSED + "_" + save_name, [])
+	Config.set_config(GAME_LOG_SECTION, CURRENT_LEVEL + "_" + save_name, 0)
+	Config.get_config(GAME_LOG_SECTION, MAX_LEVEL_REACHED + "_" + save_name, 0)

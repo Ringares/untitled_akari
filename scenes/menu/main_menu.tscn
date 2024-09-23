@@ -65,30 +65,6 @@ texture = ExtResource("5_tjsu4")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Title" type="Label" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.694118, 0.168627, 1)
-theme_override_colors/font_outline_color = Color(0.996078, 0.631373, 0.0117647, 1)
-theme_override_constants/outline_size = 32
-theme_override_font_sizes/font_size = 192
-text = "Light"
-horizontal_alignment = 1
-uppercase = true
-
-[node name="Title2" type="Label" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.0235294, 0.643137, 0.921569, 1)
-theme_override_colors/font_outline_color = Color(0.0196078, 0.529412, 0.745098, 1)
-theme_override_constants/outline_size = 32
-theme_override_font_sizes/font_size = 192
-text = " Cells"
-horizontal_alignment = 1
-uppercase = true
-
 [node name="Subtitle" type="Label" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
@@ -96,7 +72,7 @@ theme_override_font_sizes/font_size = 96
 horizontal_alignment = 1
 
 [node name="Control2" type="Control" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
 [node name="MenuMargin" type="MarginContainer" parent="MenuContainer/VBoxContainer"]
@@ -108,106 +84,18 @@ layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 128
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Slot1Button" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-focus_neighbor_left = NodePath("../../VBoxContainer3/Slot3Button")
-focus_neighbor_top = NodePath("../../../../../../../LightModeButton")
-focus_neighbor_right = NodePath("../../VBoxContainer2/Slot2Button")
-focus_neighbor_bottom = NodePath("../../../OptionButton")
-theme_override_font_sizes/font_size = 56
-text = "1
-"
-icon_alignment = 1
-script = ExtResource("6_tsq01")
-
-[node name="Slot1FinishedLabel" type="Label" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "0 %"
-horizontal_alignment = 1
-script = ExtResource("5_cxdd7")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Slot2Button" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-focus_neighbor_left = NodePath("../../VBoxContainer/Slot1Button")
-focus_neighbor_top = NodePath("../../../../../../../LightModeButton")
-focus_neighbor_right = NodePath("../../VBoxContainer3/Slot3Button")
-focus_neighbor_bottom = NodePath("../../../OptionButton")
-theme_override_font_sizes/font_size = 56
-text = "2"
-icon_alignment = 1
-script = ExtResource("6_tsq01")
-
-[node name="Slot2FinishedLabel" type="Label" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "0%"
-horizontal_alignment = 1
-script = ExtResource("5_cxdd7")
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Slot3Button" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer/VBoxContainer3"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-focus_neighbor_left = NodePath("../../VBoxContainer2/Slot2Button")
-focus_neighbor_top = NodePath("../../../../../../../LightModeButton")
-focus_neighbor_right = NodePath("../../VBoxContainer/Slot1Button")
-focus_neighbor_bottom = NodePath("../../../OptionButton")
-theme_override_font_sizes/font_size = 56
-text = "3"
-icon_alignment = 1
-script = ExtResource("6_tsq01")
-
-[node name="Slot3FinishedLabel" type="Label" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer/VBoxContainer3"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "0%"
-horizontal_alignment = 1
-script = ExtResource("5_cxdd7")
-
-[node name="ContinueButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(384, 96)
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
-text = "Continue"
-script = ExtResource("6_tsq01")
-
-[node name="NewGameButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(384, 96)
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
-text = "New Game"
-script = ExtResource("6_tsq01")
-
 [node name="Control3" type="Control" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(384, 96)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
+text = "Play"
+script = ExtResource("6_tsq01")
 
 [node name="OptionButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
 unique_name_in_owner = true
@@ -266,7 +154,19 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="BackButton" type="Button" parent="OptionContainer/OptionVbox/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionContainer/OptionVbox/MarginContainer2"]
+layout_mode = 2
+
+[node name="CreditsButton" type="Button" parent="OptionContainer/OptionVbox/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(384, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 48
+text = "Credits"
+script = ExtResource("6_tsq01")
+
+[node name="BackButton" type="Button" parent="OptionContainer/OptionVbox/MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -313,12 +213,9 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("6_tsq01")
 
-[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer/VBoxContainer/Slot1Button" to="." method="_on_slot_1_button_pressed"]
-[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer/VBoxContainer2/Slot2Button" to="." method="_on_slot_2_button_pressed"]
-[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/HBoxContainer/VBoxContainer3/Slot3Button" to="." method="_on_slot_3_button_pressed"]
-[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="OptionContainer/OptionVbox/MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="OptionContainer/OptionVbox/MarginContainer2/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="OptionContainer/OptionVbox/MarginContainer2/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="LightModeButton" to="." method="_on_light_mode_button_pressed"]
