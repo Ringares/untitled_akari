@@ -89,6 +89,7 @@ func check_win_condition():
 			print("check_win_condition", i, is_win)
 	
 	print("is_all_lighted: ", is_all_lighted)
+	%RuleLabel4.add_theme_color_override("font_color", Color("808080"))
 	for i in get_tree().get_nodes_in_group("obstacle_num"):
 		(i as ObstacleNum).stop_notify()
 		if not (i as ObstacleNum).is_satisfied:
@@ -96,8 +97,10 @@ func check_win_condition():
 			if is_all_lighted:
 				i.get_parent().move_child(i, i.get_parent().get_child_count(-1))
 				(i as ObstacleNum).notify()
+				%RuleLabel4.add_theme_color_override("font_color", Color("06a4eb"))
 			print("check_win_condition", i, is_win)
 	
+	%RuleLabel3.add_theme_color_override("font_color", Color("808080"))
 	for i in get_tree().get_nodes_in_group("akari"):
 		(i as Akari).stop_notify()
 		if not (i as Akari).is_satisfied:
@@ -105,6 +108,7 @@ func check_win_condition():
 			if is_all_lighted:
 				i.get_parent().move_child(i, i.get_parent().get_child_count(-1))
 				(i as Akari).notify()
+				%RuleLabel3.add_theme_color_override("font_color", Color("06a4eb"))
 				
 			print("check_win_condition", i, is_win)
 	

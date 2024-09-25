@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvvbeso36s0o4"]
+[gd_scene load_steps=11 format=3 uid="uid://dvvbeso36s0o4"]
 
 [ext_resource type="Script" path="res://scenes/menu/main_menu.gd" id="1_du782"]
 [ext_resource type="PackedScene" uid="uid://beaj3udobexnc" path="res://scenes/menu/option_menu/simple_option_menu.tscn" id="2_wyugc"]
 [ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="3_6qppe"]
 [ext_resource type="Script" path="res://script/ui_sound.gd" id="3_8hidd"]
+[ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://scenes/credits/credits.tscn" id="3_k8a0f"]
 [ext_resource type="Script" path="res://script/theme_label.gd" id="5_cxdd7"]
 [ext_resource type="Texture2D" uid="uid://xs7qrvvf27b8" path="res://assets/img/title3.png" id="5_tjsu4"]
 [ext_resource type="Script" path="res://script/theme_button.gd" id="6_tsq01"]
@@ -20,7 +21,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_du782")
 game_scene_path = "res://scenes/game/game_ui.tscn"
-option_packed_scene = ExtResource("2_wyugc")
+options_packed_scene = ExtResource("2_wyugc")
+credits_packed_scene = ExtResource("3_k8a0f")
 
 [node name="BGCanvasLayer" parent="." instance=ExtResource("3_6qppe")]
 
@@ -55,7 +57,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Control" type="Control" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
 [node name="TitleTextureRect" type="TextureRect" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer"]
@@ -72,6 +74,7 @@ theme_override_font_sizes/font_size = 96
 horizontal_alignment = 1
 
 [node name="Control2" type="Control" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
@@ -93,12 +96,12 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 focus_mode = 0
+theme_override_colors/font_color = Color(0.996078, 0.631373, 0.0117647, 1)
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
 text = "Play"
-script = ExtResource("6_tsq01")
 
-[node name="OptionButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
@@ -108,6 +111,16 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
 text = "Options"
+script = ExtResource("6_tsq01")
+
+[node name="CreditsButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
+custom_minimum_size = Vector2(384, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Credits"
 script = ExtResource("6_tsq01")
 
 [node name="ExitButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
@@ -122,7 +135,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
 text = "Exit"
 script = ExtResource("6_tsq01")
 
-[node name="OptionContainer" type="MarginContainer" parent="."]
+[node name="OptionsContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -130,55 +143,37 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="OptionVbox" type="VBoxContainer" parent="OptionContainer"]
+[node name="OptionVbox" type="VBoxContainer" parent="OptionsContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="OptionContainer/OptionVbox"]
+[node name="MarginContainer" type="MarginContainer" parent="OptionsContainer/OptionVbox"]
 layout_mode = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="TitleLabel" type="Label" parent="OptionContainer/OptionVbox/MarginContainer"]
+[node name="TitleLabel" type="Label" parent="OptionsContainer/OptionVbox/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 128
 text = "Options"
 script = ExtResource("5_cxdd7")
 
-[node name="MarginContainer2" type="MarginContainer" parent="OptionContainer/OptionVbox"]
-layout_mode = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 64
-theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 64
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OptionContainer/OptionVbox/MarginContainer2"]
-layout_mode = 2
-
-[node name="CreditsButton" type="Button" parent="OptionContainer/OptionVbox/MarginContainer2/VBoxContainer"]
-custom_minimum_size = Vector2(384, 96)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-focus_mode = 0
-theme_override_font_sizes/font_size = 48
-text = "Credits"
-script = ExtResource("6_tsq01")
-
-[node name="BackButton" type="Button" parent="OptionContainer/OptionVbox/MarginContainer2/VBoxContainer"]
-custom_minimum_size = Vector2(384, 96)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-focus_mode = 0
-theme_override_font_sizes/font_size = 48
-text = "Back"
-script = ExtResource("6_tsq01")
+[node name="CreditsContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="VersionLabelContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -219,9 +214,34 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("6_tsq01")
 
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="BackButton" type="Button" parent="MarginContainer2"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(384, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Back"
+script = ExtResource("6_tsq01")
+
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/OptionsButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="OptionContainer/OptionVbox/MarginContainer2/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="OptionContainer/OptionVbox/MarginContainer2/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="LightModeButton" to="." method="_on_light_mode_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]
