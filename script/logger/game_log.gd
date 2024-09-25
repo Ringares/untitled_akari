@@ -18,3 +18,14 @@ static func set_daynight_mode(value) -> void:
 
 static func get_daynight_mode():
 	return Config.get_config(GAME_LOG_SECTION, DAYNIGHT_MODE, 0)
+
+
+const LOCALE = "Locale"
+static func set_locale(locale):
+	Config.set_config(GAME_LOG_SECTION, LOCALE, locale)
+	
+	
+static func get_locale():
+	return Config.get_config(GAME_LOG_SECTION, LOCALE, "")
+
+	

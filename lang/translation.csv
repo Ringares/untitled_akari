@@ -1,0 +1,23 @@
+key,en,fr,de,jp,cn
+Play,Play,Jouer,Spiel,プレイ,开始
+Options,Options,Options,Optionen,オプション,选项
+Exit,Exit,Quitter,Beenden,退出,退出
+Master,Master,Maître,Meister,マスター,整体音量
+Music,Music,Musique,Musik,音楽,音乐音量
+SFX,SFX,SFX,Soundeffekte,効果音,音效音量
+Mute,Mute,Muet,Stumm,ミュート,静音设置
+Fullscreen,Fullscreen,Plein écran,Vollbild,全画面,全屏设置
+Credits,Credits,Crédits,Credits,クレジット,制作人员
+Back,Back,Retour,Zurück,戻る,返回
+Reset,Reset,Réinitialiser,Zurücksetzen,リセット,重置
+Pause,Pause,Pause,Pause,一時停止,暂停
+Resume,Resume,Reprendre,Fortsetzen,再開,继续
+Level Select,Level Select,Sélectionner le niveau,Levelauswahl,レベル選択,关卡选择
+Main Menu,Main Menu,Menu principal,Hauptmenü,メインメニュー,主菜单
+Solved,Solved,Victoire,Sieg,勝利,完成
+LeftMouseHint,Place a light / Undo,Placer une lumière / Annuler,Licht platzieren / Rückgängig machen,ライトを置く / 元に戻す,放置光源 / 撤销
+RightMouseHint,Place a mark to help,Placez un marqueur pour aider,"Setzen Sie ein Zeichen, um zu helfen",助けるためにマークを置く,放置标记以帮助
+Rule1,1. Place lights in empty cells to illuminate all non-black cells. ,1. Placez des lumières dans les cellules vides pour éclairer toutes les cellules non noires.,"1. Platziere Lichter in leere Zellen, um alle nicht-schwarzen Zellen zu beleuchten.",1. 空のセルにライトを置いて、すべての非黒セルを照らします。,1. 在空白格子中放置光源，以照亮所有非黑色格子。
+Rule2,2. Lights illuminate their own cell and adjacent cells in straight lines until black cells.,2. Les lumières éclairent leur propre cellule et les cellules adjacentes en lignes droites jusqu'aux cellules noires.,2. Lichter beleuchten ihre eigene Zelle und angrenzende Zellen in geraden Linien bis zu schwarzen Zellen.,2. ライトは自分のセルと隣接するセルを直線で照らし、黒いセルに到達します。,2. 光源照亮它所在的和直线上的格子，直到黑色格子为止。
+Rule3,3. Lights cannot shine on each other. ,3. Les lumières ne peuvent pas s'éclairer mutuellement.,3. Lichter können sich gegenseitig nicht beleuchten.,3. ライトは互いに照らし合うことができません。,3. 光源无法互相照亮。
+Rule4,4. Number Clues indicate the number of surrounding lights.,4. Les indices numériques indiquent le nombre de lumières environnantes.,4. Zahlenhinweise geben die Anzahl der umliegenden Lichter an.,4. 数字のヒントは周囲のライトの数を示しています。,4. 数字提示表示周围光源的数量。

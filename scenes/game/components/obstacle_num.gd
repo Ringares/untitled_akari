@@ -17,7 +17,7 @@ var around_akari = []
 				label.text = str(value)
 		
 		
-@onready var label: Label = $Label
+@onready var label: Label = %Label
 
 var is_satisfied:bool:
 	get():

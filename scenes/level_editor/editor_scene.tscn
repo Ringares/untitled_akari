@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3dasc7vgjghk"]
+[gd_scene load_steps=19 format=3 uid="uid://c3dasc7vgjghk"]
 
 [ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/img/sprite_sheet.png" id="1_dguww"]
 [ext_resource type="Script" path="res://scenes/level_editor/editor.gd" id="1_gfdv1"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c0kdm60qi266j" path="res://scenes/game/components/obstacle_num.tscn" id="5_3km2i"]
 [ext_resource type="PackedScene" uid="uid://g6i1wrpm2bxr" path="res://scenes/game/components/obstacle_repeater.tscn" id="6_e1mn5"]
 [ext_resource type="PackedScene" uid="uid://dvxgo3ut6glwa" path="res://scenes/game/components/obstacle_reflecter.tscn" id="7_m3oh8"]
+[ext_resource type="PackedScene" uid="uid://dby3kfawhg1iy" path="res://scenes/game/components/obstacle_edge.tscn" id="10_opgny"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r3cln"]
 atlas = ExtResource("1_dguww")
@@ -19,6 +20,10 @@ region = Rect2(0, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_iepcc"]
 atlas = ExtResource("1_dguww")
 region = Rect2(640, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtbnh"]
+atlas = ExtResource("1_dguww")
+region = Rect2(384, 256, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qq354"]
 atlas = ExtResource("1_dguww")
@@ -91,6 +96,12 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_iepcc")
 script = ExtResource("3_40fib")
 scene = ExtResource("5_3km2i")
+
+[node name="ObstacleInvisiable" type="TextureRect" parent="EditorUI/PanelContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_rtbnh")
+script = ExtResource("3_40fib")
+scene = ExtResource("10_opgny")
 
 [node name="ObstaclePortal" type="TextureRect" parent="EditorUI/PanelContainer/MarginContainer/GridContainer"]
 layout_mode = 2

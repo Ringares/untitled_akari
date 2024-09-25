@@ -60,7 +60,7 @@ func _attach_level(level_resource, level_id):
 	assert(level_container != null, "level_container is null")
 	
 	var instance = LEVEL_BASE_SCENE.instantiate()
-	instance.current_level_id_str = LevelRes.levels[level_resource]
+	instance.current_level_id_str = LevelRes.get_levels()[level_resource]
 	instance.packed_level = load(level_resource)
 	level_container.call_deferred("add_child", instance)
 	return instance
@@ -77,25 +77,25 @@ func get_current_level_id() -> int:
 
 
 func get_level_file(level_id : int = get_current_level_id()):
-	if LevelRes.levels.is_empty():
+	if LevelRes.get_levels().is_empty():
 		push_error("files is empty")
 		return
-	if level_id >= LevelRes.levels.size():
+	if level_id >= LevelRes.get_levels().size():
 		push_error("level_id is greater than files size")
 		return
-	return LevelRes.levels.keys()[level_id]
+	return LevelRes.get_levels().keys()[level_id]
 
 
 func advance_level() -> bool:
 	var level_id : int = get_current_level_id()
-	var level_path = LevelRes.levels.keys()[level_id]
-	var level_id_str = LevelRes.levels[level_path]
+	var level_path = LevelRes.get_levels().keys()[level_id]
+	var level_id_str = LevelRes.get_levels()[level_path]
 	GameLevelLog.append_passed_level(level_id_str)
 	
 	level_id += 1
-	if level_id >= LevelRes.levels.size():
+	if level_id >= LevelRes.get_levels().size():
 		emit_signal("levels_finished")
-		level_id = LevelRes.levels.size() - 1
+		level_id = LevelRes.get_levels().size() - 1
 		return false
 	GameLevelLog.level_reached(level_id)
 	return true

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://dl6winqiew4rc"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://dl6winqiew4rc"]
 
 [ext_resource type="StyleBox" uid="uid://bhlrwula2kbno" path="res://themes/blue_style_box_texture.tres" id="1_pbygn"]
 [ext_resource type="FontFile" uid="uid://7m5x0p23vigy" path="res://assets/font/Anton-Regular.ttf" id="1_vlbn0"]
@@ -8,8 +8,6 @@
 [ext_resource type="StyleBox" uid="uid://cmpm5odyryg8e" path="res://themes/yellow_style_box_texture.tres" id="3_vxue1"]
 [ext_resource type="Texture2D" uid="uid://dyk8ns4p321jh" path="res://assets/img/icon/icons8-blue-checkmark-48.png" id="7_w5uet"]
 [ext_resource type="Texture2D" uid="uid://bad4hcpvuir88" path="res://assets/img/icon/icons8-tick-48.png" id="8_em2gg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2u8jf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ot5xu"]
 texture = ExtResource("2_qxvcj")
@@ -30,8 +28,6 @@ region_rect = Rect2(0, 0, 32, 32)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hxvq0"]
 
 [resource]
-AcceptDialog/constants/buttons_min_width = 128
-AcceptDialog/styles/panel = SubResource("StyleBoxFlat_2u8jf")
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_disabled_color = Color(0.921569, 0.929412, 0.913725, 0.72549)
 Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)

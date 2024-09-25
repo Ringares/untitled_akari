@@ -35,6 +35,12 @@ func _ready() -> void:
 	else:
 		%LightModeButton.icon = load("res://assets/img/icon/icons8-moon-96.png")
 	
+	if int(current_level_id_str.split("-")[1]) <= 5:
+		%HintContainer.show()
+	else:
+		%HintContainer.hide()
+		%HintContainer.reparent(self)
+	
 	init_level()
 
 
@@ -143,3 +149,20 @@ func _on_level_select_button_pressed() -> void:
 
 func _on_main_button_pressed() -> void:
 	SceneLoader.load_scene("res://scenes/menu/main_menu.tscn")
+
+
+func _on_help_button_pressed() -> void:
+	#%HintContainer.visible = not %HintContainer.visible
+	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	
+	if %HintContainer.visible:
+		var from_y = get_viewport_rect().size.y - %HintContainer.size.y
+		var to_y = get_viewport_rect().size.y
+		tween.tween_property(%HintContainer, "position:y", to_y, 0.2).from(from_y)
+		tween.tween_callback(func():%HintContainer.visible = false)
+	else:
+		var from_y = get_viewport_rect().size.y
+		var to_y = get_viewport_rect().size.y - %HintContainer.size.y
+		tween.tween_callback(func():%HintContainer.visible = true)
+		tween.tween_property(%HintContainer, "position:y", to_y, 0.2).from(from_y)
+		

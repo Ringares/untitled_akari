@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://beaj3udobexnc"]
+[gd_scene load_steps=10 format=3 uid="uid://beaj3udobexnc"]
 
 [ext_resource type="Script" path="res://scenes/menu/option_menu/simple_option_menu.gd" id="1_glyp7"]
 [ext_resource type="PackedScene" uid="uid://ba30xhnse6vcf" path="res://scenes/menu/option_menu/slider_option_control.tscn" id="2_kveum"]
 [ext_resource type="PackedScene" uid="uid://ly0qfj2ewghx" path="res://scenes/menu/option_menu/toggle_option_control.tscn" id="4_empim"]
+[ext_resource type="Texture2D" uid="uid://c40uinsn4lpfq" path="res://assets/img/lang/icons8-uk-96.png" id="4_vr1h8"]
+[ext_resource type="Texture2D" uid="uid://b6owah3hj8rr7" path="res://assets/img/lang/icons8-china-96.png" id="5_10ydv"]
+[ext_resource type="Script" path="res://scenes/menu/option_menu/lang_selector.gd" id="5_qwnu1"]
+[ext_resource type="Texture2D" uid="uid://cp4fmgyy5ioex" path="res://assets/img/lang/icons8-japan-96.png" id="6_g7ni3"]
+[ext_resource type="Texture2D" uid="uid://bhlh1std5gdip" path="res://assets/img/lang/icons8-germany-96.png" id="7_jaid1"]
+[ext_resource type="Texture2D" uid="uid://cr6281ovgno5t" path="res://assets/img/lang/icons8-france-96.png" id="8_4idr6"]
 
 [node name="SimpleOptionMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -37,6 +43,54 @@ option_name = "Fullscreen"
 option_section = 3
 key = "Fullscreen"
 section = "VideoSettings"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ControlContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("4_vr1h8")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = null
+
+[node name="TextureRect2" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("5_10ydv")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = "cn"
+
+[node name="TextureRect3" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("6_g7ni3")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = "jp"
+
+[node name="TextureRect4" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("7_jaid1")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = "de"
+
+[node name="TextureRect5" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("8_4idr6")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = "fr"
 
 [connection signal="setting_changed" from="ControlContainer/MuteControl" to="." method="_on_mute_control_setting_changed"]
 [connection signal="setting_changed" from="ControlContainer/FullScreenControl" to="." method="_on_full_screen_control_setting_changed"]

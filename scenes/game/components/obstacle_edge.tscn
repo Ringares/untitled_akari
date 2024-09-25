@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dby3kfawhg1iy"]
+
+[ext_resource type="Script" path="res://scenes/game/components/obstacle_edge.gd" id="1_j2a8w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pl60v"]
+radius = 16.0
+
+[node name="ObstacleEdge" type="Node2D" groups=["obstacle_num"]]
+scale = Vector2(1.16671, 1.16671)
+script = ExtResource("1_j2a8w")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pl60v")
+debug_color = Color(0.974968, 0.0549332, 0.380017, 0.42)

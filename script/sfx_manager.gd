@@ -1,7 +1,7 @@
 extends Node
 
 # Audio signals
-signal signal_example
+#signal signal_example
 
 var num_players = 8
 var bus = "SFX"
@@ -33,7 +33,7 @@ func _play(sound_path):
 	queue.append(sound_path)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Play a queued sound if any players are available.
 	if not queue.is_empty() and not available.is_empty():
 		#print(Time.get_ticks_msec())
@@ -54,6 +54,12 @@ func reset():
 	for i in available:
 		(i as AudioStreamPlayer).stop()
 
+
+func play_ui_hover():
+	_play("res://assets/audio/ui_audio/ui_hover.ogg")
+	
+func play_ui_click():
+	_play("res://assets/audio/ui_audio/ui_click.ogg")
 
 func play_akari_drop():
 	#_play("res://assets/audio/game_sfx/akari_drop.wav")

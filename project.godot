@@ -126,6 +126,10 @@ next_level={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://lang/translation.cn.translation", "res://lang/translation.de.translation", "res://lang/translation.en.translation", "res://lang/translation.fr.translation", "res://lang/translation.jp.translation")
+
 [layer_names]
 
 2d_physics/layer_1="akali"

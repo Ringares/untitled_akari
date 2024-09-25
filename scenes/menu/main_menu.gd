@@ -11,8 +11,8 @@ var option_scene
 var sub_menu
 var curr_container
 
-@onready var continue_button = %ContinueButton
-@onready var new_game_button = %NewGameButton
+#@onready var continue_button = %ContinueButton
+#@onready var new_game_button = %NewGameButton
 
 @onready var option_button = %OptionButton
 @onready var exit_button = %ExitButton
@@ -22,13 +22,17 @@ var curr_container
 func _ready():
 	# set availabel buttons
 	if OS.has_feature("web"): exit_button.hide()
-	if not game_scene_path: new_game_button.hide()
+	#if not game_scene_path: new_game_button.hide()
 	if not option_packed_scene:
 		option_button.hide()
 	else:
 		option_scene = option_packed_scene.instantiate()
 		%OptionVbox.call_deferred("add_child", option_scene)
 		%OptionVbox.call_deferred("move_child", option_scene, 1)
+		
+	var saved_locale = GameLog.get_locale()
+	if saved_locale != "":
+		TranslationServer.set_locale(saved_locale)
 		
 	curr_container = %MenuContainer
 	%OptionContainer.hide()
@@ -54,13 +58,13 @@ func _close_sub_menu():
 	
 
 
-func _on_new_game_button_pressed():
-	GameLevelLog.set_current_level(0)
-	SceneLoader.load_scene(game_scene_path)
+#func _on_new_game_button_pressed():
+	#GameLevelLog.set_current_level(0)
+	#SceneLoader.load_scene(game_scene_path)
 	
 
-func _on_continue_button_pressed():
-	SceneLoader.load_scene(game_scene_path)
+#func _on_continue_button_pressed():
+	#SceneLoader.load_scene(game_scene_path)
 
 
 func _on_option_button_pressed():

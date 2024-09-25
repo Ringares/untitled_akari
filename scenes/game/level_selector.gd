@@ -26,11 +26,11 @@ func _ready() -> void:
 		passed_level_ids.append(int(level_id_str.split("-")[1]))
 	
 
-	for i in LevelRes.levels.keys():
+	for i in LevelRes.get_levels().keys():
 		var inst = LEVEL_SELECTOR_BUTTON.instantiate() as LevelSelector
 		#inst.disabled = true
 		
-		var level_id_str = LevelRes.levels[i] as String
+		var level_id_str = LevelRes.get_levels()[i] as String
 		var world_id = int(level_id_str.split("-")[0])
 		var level_id = int(level_id_str.split("-")[1])
 		level_instants[level_id] = inst
@@ -38,7 +38,7 @@ func _ready() -> void:
 		
 		var vol_num = (pages[world_id] as GridContainer).columns
 		pages[world_id].add_child(inst)
-		inst.text = LevelRes.levels[i]
+		inst.text = LevelRes.get_levels()[i]
 		inst.status = LevelSelector.STATUS.LOCKED
 		
 		var row = int(level_id / vol_num)

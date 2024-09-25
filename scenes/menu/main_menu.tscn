@@ -59,7 +59,7 @@ custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
 [node name="TitleTextureRect" type="TextureRect" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1440, 300)
+custom_minimum_size = Vector2(1440, 340)
 layout_mode = 2
 texture = ExtResource("5_tjsu4")
 expand_mode = 1
@@ -72,7 +72,7 @@ theme_override_font_sizes/font_size = 96
 horizontal_alignment = 1
 
 [node name="Control2" type="Control" parent="MenuContainer/VBoxContainer/TitleMarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="MenuMargin" type="MarginContainer" parent="MenuContainer/VBoxContainer"]
@@ -92,6 +92,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
 text = "Play"
@@ -103,6 +104,7 @@ custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_mode = 0
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
 text = "Options"
@@ -114,6 +116,7 @@ custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_mode = 0
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
 text = "Exit"
@@ -162,6 +165,7 @@ custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_mode = 0
 theme_override_font_sizes/font_size = 48
 text = "Credits"
 script = ExtResource("6_tsq01")
@@ -171,6 +175,7 @@ custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_mode = 0
 theme_override_font_sizes/font_size = 48
 text = "Back"
 script = ExtResource("6_tsq01")
@@ -208,6 +213,7 @@ offset_right = 1888.0
 offset_bottom = 128.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
+focus_mode = 0
 icon = ExtResource("9_evyek")
 icon_alignment = 1
 expand_icon = true

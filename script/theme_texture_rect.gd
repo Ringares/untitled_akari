@@ -1,5 +1,7 @@
 extends TextureRect
 
+@export var dark_color:Color = Color("3e3e3e")
+@export var light_color:Color = Color("ebede9")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,10 +13,10 @@ func _ready() -> void:
 	
 	
 func set_light_theme():
-	self.modulate = Color("3e3e3e")
+	self.self_modulate = dark_color
 	
 func set_dark_theme():
-	self.modulate = Color("ebede9")
+	self.self_modulate = light_color
 
 
 func _on_signal_daynight_mode_changed():

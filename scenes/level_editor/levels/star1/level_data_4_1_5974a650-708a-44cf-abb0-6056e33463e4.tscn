@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbo3ox276c0gl"]
+
+[ext_resource type="Script" path="res://scenes/level_editor/level_root.gd" id="1_64fuc"]
+[ext_resource type="PackedScene" uid="uid://c0kdm60qi266j" path="res://scenes/game/components/obstacle_num.tscn" id="2_4pi6m"]
+[ext_resource type="PackedScene" uid="uid://d15v1m0f60r81" path="res://scenes/game/components/ground.tscn" id="3_excjs"]
+
+[node name="LevelRoot" type="Node2D"]
+unique_name_in_owner = true
+script = ExtResource("1_64fuc")
+
+[node name="ObstacleNum_3_0" parent="." instance=ExtResource("2_4pi6m")]
+position = Vector2(448, 64)
+hint_num = 1
+cell_id = Vector2i(3, 0)
+
+[node name="Ground_0_0" parent="." instance=ExtResource("3_excjs")]
+position = Vector2(64, 64)
+
+[node name="Ground_1_0" parent="." instance=ExtResource("3_excjs")]
+position = Vector2(192, 64)
+cell_id = Vector2i(1, 0)
+
+[node name="Ground_2_0" parent="." instance=ExtResource("3_excjs")]
+position = Vector2(320, 64)
+cell_id = Vector2i(2, 0)

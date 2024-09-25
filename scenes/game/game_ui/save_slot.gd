@@ -27,8 +27,8 @@ func _process(delta: float) -> void:
 func init_save_slot():
 	assert(save_name)
 	var level_passed_size = GameLevelLog.get_passed_levels(save_name).size()
-	print(level_passed_size, LevelRes.levels.size(), int(level_passed_size * 100 / LevelRes.levels.size()))
-	%SlotFinishedLabel.text = str(int(level_passed_size * 100 / LevelRes.levels.size() )) + " %"
+	print(level_passed_size, LevelRes.get_level_size(), int(level_passed_size * 100 / LevelRes.get_level_size()))
+	%SlotFinishedLabel.text = str(int(level_passed_size * 100 / LevelRes.get_levels().size() )) + " %"
 	
 	#%RestButton.hide()
 	%ProgressBar.value = 0

@@ -178,42 +178,35 @@ cell_id = Vector2i(6, 6)
 
 [node name="ObstacleNum_1_1" parent="." instance=ExtResource("3_kaiia")]
 position = Vector2(192, 192)
-scale = Vector2(1.16671, 1.16671)
 hint_num = 2
 cell_id = Vector2i(1, 1)
 
 [node name="ObstacleNum_3_1" parent="." instance=ExtResource("3_kaiia")]
 position = Vector2(448, 192)
-scale = Vector2(1.16671, 1.16671)
 hint_num = 2
 cell_id = Vector2i(3, 1)
 
 [node name="ObstacleNum_5_2" parent="." instance=ExtResource("3_kaiia")]
 position = Vector2(704, 320)
-scale = Vector2(1.16671, 1.16671)
 hint_num = 0
 cell_id = Vector2i(5, 2)
 
 [node name="ObstacleNum_3_3" parent="." instance=ExtResource("3_kaiia")]
 position = Vector2(448, 448)
-scale = Vector2(1.16671, 1.16671)
 hint_num = 1
 cell_id = Vector2i(3, 3)
 
 [node name="ObstacleNum_5_4" parent="." instance=ExtResource("3_kaiia")]
 position = Vector2(704, 576)
-scale = Vector2(1.16671, 1.16671)
 hint_num = 1
 cell_id = Vector2i(5, 4)
 
 [node name="ObstacleNum_4_6" parent="." instance=ExtResource("3_kaiia")]
 position = Vector2(576, 832)
-scale = Vector2(1.16671, 1.16671)
 hint_num = 0
 cell_id = Vector2i(4, 6)
 
 [node name="ObstacleNum_1_4" parent="." instance=ExtResource("3_kaiia")]
 position = Vector2(192, 576)
-scale = Vector2(1.16671, 1.16671)
 hint_num = 2
 cell_id = Vector2i(1, 4)
