@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cs5h123706csx"
+path="res://.godot/imported/Peppers Theme.mp3-64ce6a49fdfa180a30ed2e66f1cd1580.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Peppers Theme.mp3"
+dest_files=["res://.godot/imported/Peppers Theme.mp3-64ce6a49fdfa180a30ed2e66f1cd1580.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

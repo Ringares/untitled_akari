@@ -29,7 +29,7 @@ const OptionSectionNames : Dictionary = {
 		var _update_config : bool = option_name.to_pascal_case() == key
 		option_name = value
 		if is_inside_tree():
-			%OptionLabel.text = "%s%s" % [option_name, label_suffix]
+			%OptionLabel.text = "%s%s" % [tr(option_name), label_suffix]
 		if _update_config:
 			key = option_name.to_pascal_case()
 
@@ -107,6 +107,9 @@ func _ready():
 	for child in get_children():
 		_connect_option_inputs(child)
 	child_entered_tree.connect(_connect_option_inputs)
+	GameEvents.signal_translation_locale_changed.connect(
+		func(): %OptionLabel.text = "%s%s" % [tr(option_name), label_suffix]
+	)
 
 func _set(property : StringName, value : Variant) -> bool:
 	if property == "value":

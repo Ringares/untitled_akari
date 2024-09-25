@@ -36,10 +36,13 @@ func left_clk():
 	if akari == null:
 		akari = AKARI.instantiate()
 		add_child(akari)
+		light_up()
 		get_tree().create_timer(0.8).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
 	else:
 		akari.queue_free()
 		akari = null
+		if passed_lights.size() == 0:
+			light_off()
 		get_tree().create_timer(0.1).timeout.connect(func(): GameEvents.signal_check_win_condition.emit())
 
 
@@ -89,7 +92,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	passed_lights.erase(area)
-	if passed_lights.size() == 0:
+	if akari == null and passed_lights.size() == 0:
 		light_off()
 
 

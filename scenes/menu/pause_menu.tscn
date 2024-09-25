@@ -130,6 +130,7 @@ theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/OptionContainer/OptionVBox/MarginContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 128

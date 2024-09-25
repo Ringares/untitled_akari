@@ -2,9 +2,9 @@ key,en,fr,de,jp,cn
 Play,Play,Jouer,Spiel,プレイ,开始
 Options,Options,Options,Optionen,オプション,选项
 Exit,Exit,Quitter,Beenden,退出,退出
-Master,Master,Maître,Meister,マスター,整体音量
+Master,Overall,Global,Gesamt,全体,整体音量
 Music,Music,Musique,Musik,音楽,音乐音量
-SFX,SFX,SFX,Soundeffekte,効果音,音效音量
+SFX,SFX,Effets sonores,Soundeffekte,効果音,音效音量
 Mute,Mute,Muet,Stumm,ミュート,静音设置
 Fullscreen,Fullscreen,Plein écran,Vollbild,全画面,全屏设置
 Credits,Credits,Crédits,Credits,クレジット,制作人员

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://beaj3udobexnc"]
+[gd_scene load_steps=11 format=3 uid="uid://beaj3udobexnc"]
 
 [ext_resource type="Script" path="res://scenes/menu/option_menu/simple_option_menu.gd" id="1_glyp7"]
 [ext_resource type="PackedScene" uid="uid://ba30xhnse6vcf" path="res://scenes/menu/option_menu/slider_option_control.tscn" id="2_kveum"]
+[ext_resource type="Script" path="res://script/theme_label.gd" id="3_tyngx"]
 [ext_resource type="PackedScene" uid="uid://ly0qfj2ewghx" path="res://scenes/menu/option_menu/toggle_option_control.tscn" id="4_empim"]
 [ext_resource type="Texture2D" uid="uid://c40uinsn4lpfq" path="res://assets/img/lang/icons8-uk-96.png" id="4_vr1h8"]
 [ext_resource type="Texture2D" uid="uid://b6owah3hj8rr7" path="res://assets/img/lang/icons8-china-96.png" id="5_10ydv"]
@@ -19,16 +20,32 @@ grow_vertical = 2
 script = ExtResource("1_glyp7")
 audio_control_scene = ExtResource("2_kveum")
 
-[node name="ControlContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="AudioControlContainer" type="VBoxContainer" parent="ControlContainer"]
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 128
+text = "Options"
+script = ExtResource("3_tyngx")
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="ControlContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AudioControlContainer" type="VBoxContainer" parent="VBoxContainer/ControlContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MuteControl" parent="ControlContainer" instance=ExtResource("4_empim")]
+[node name="MuteControl" parent="VBoxContainer/ControlContainer" instance=ExtResource("4_empim")]
 unique_name_in_owner = true
 layout_mode = 2
 option_name = "Mute"
@@ -36,7 +53,7 @@ option_section = 2
 key = "Mute"
 section = "AudioSettings"
 
-[node name="FullScreenControl" parent="ControlContainer" instance=ExtResource("4_empim")]
+[node name="FullScreenControl" parent="VBoxContainer/ControlContainer" instance=ExtResource("4_empim")]
 unique_name_in_owner = true
 layout_mode = 2
 option_name = "Fullscreen"
@@ -44,19 +61,22 @@ option_section = 3
 key = "Fullscreen"
 section = "VideoSettings"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ControlContainer"]
+[node name="Control2" type="Control" parent="VBoxContainer/ControlContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ControlContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("4_vr1h8")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("5_qwnu1")
-local = null
 
-[node name="TextureRect2" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("5_10ydv")
@@ -65,7 +85,7 @@ stretch_mode = 5
 script = ExtResource("5_qwnu1")
 local = "cn"
 
-[node name="TextureRect3" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("6_g7ni3")
@@ -74,7 +94,7 @@ stretch_mode = 5
 script = ExtResource("5_qwnu1")
 local = "jp"
 
-[node name="TextureRect4" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("7_jaid1")
@@ -83,7 +103,7 @@ stretch_mode = 5
 script = ExtResource("5_qwnu1")
 local = "de"
 
-[node name="TextureRect5" type="TextureRect" parent="ControlContainer/HBoxContainer"]
+[node name="TextureRect5" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("8_4idr6")
@@ -92,5 +112,9 @@ stretch_mode = 5
 script = ExtResource("5_qwnu1")
 local = "fr"
 
-[connection signal="setting_changed" from="ControlContainer/MuteControl" to="." method="_on_mute_control_setting_changed"]
-[connection signal="setting_changed" from="ControlContainer/FullScreenControl" to="." method="_on_full_screen_control_setting_changed"]
+[node name="Control" type="Control" parent="VBoxContainer/ControlContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[connection signal="setting_changed" from="VBoxContainer/ControlContainer/MuteControl" to="." method="_on_mute_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/ControlContainer/FullScreenControl" to="." method="_on_full_screen_control_setting_changed"]

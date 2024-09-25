@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c63s70r4pc0e8"
+path="res://.godot/imported/A Very Brady Special.mp3-36625eaaf94fa8e2e291bc6c8572fe03.mp3str"
+
+[deps]
+
+source_file="res://assets/music/A Very Brady Special.mp3"
+dest_files=["res://.godot/imported/A Very Brady Special.mp3-36625eaaf94fa8e2e291bc6c8572fe03.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

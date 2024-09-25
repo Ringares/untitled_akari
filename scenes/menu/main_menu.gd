@@ -22,6 +22,8 @@ var sub_menu
 
 
 func _ready():
+	BgMusic.set("parameters/switch_to_clip", "MainUI")
+	
 	# set availabel buttons
 	if OS.has_feature("web"): exit_button.hide()
 	#if not game_scene_path: new_game_button.hide()
@@ -31,10 +33,6 @@ func _ready():
 		options_scene = options_packed_scene.instantiate()
 		%OptionVbox.call_deferred("add_child", options_scene)
 		%OptionVbox.call_deferred("move_child", options_scene, 1)
-		
-	var saved_locale = GameLog.get_locale()
-	if saved_locale != "":
-		TranslationServer.set_locale(saved_locale)
 	
 	_setup_options()
 	_setup_credits()

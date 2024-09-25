@@ -225,9 +225,12 @@ func _on_save_button_pressed() -> void:
 	var error = ResourceSaver.save(
 		packed_scene, 
 		"res://scenes/level_editor/levels/level_data_%s_%s.tscn" % [str(init_grids.x) + "_" +str(init_grids.y), UUID.v4()])
+	
 	if error != OK:
 		push_error("An error occurred while saving the scene to disk.")
 		push_error(error)
+	else:
+		init_board(init_grids)
 	
 
 

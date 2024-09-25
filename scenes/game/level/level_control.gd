@@ -22,6 +22,8 @@ var PROGRESS_SPEED = 10.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	BgMusic.set("parameters/switch_to_clip", "GameLevel")
+	
 	GameEvents.signal_check_win_condition.connect(check_win_condition)
 	var daynight_mode = GameLog.get_daynight_mode()
 	%Label.text = ""
@@ -106,7 +108,7 @@ func check_win_condition():
 		if not (i as Akari).is_satisfied:
 			is_win = false
 			if is_all_lighted:
-				i.get_parent().move_child(i, i.get_parent().get_child_count(-1))
+				#i.get_parent().move_child(i, i.get_parent().get_child_count(-1))
 				(i as Akari).notify()
 				%RuleLabel3.add_theme_color_override("font_color", Color("06a4eb"))
 				
@@ -120,6 +122,7 @@ func check_win_condition():
 		%Label.text = "Solved"
 		%NextButton.show()
 		%NextButtonPlaceHold.hide()
+		SfxManager.play_level_clear()
 	else:
 		%Label.text = ""
 		%NextButton.hide()

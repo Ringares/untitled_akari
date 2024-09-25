@@ -1,4 +1,60 @@
-[gd_scene format=3 uid="uid://bln1tbuys7dgi"]
+[gd_scene load_steps=13 format=3 uid="uid://bln1tbuys7dgi"]
+
+[ext_resource type="AudioStream" uid="uid://dn1u8emj44n2f" path="res://assets/music/Morning.mp3" id="1_isn62"]
+[ext_resource type="AudioStream" uid="uid://c63s70r4pc0e8" path="res://assets/music/A Very Brady Special.mp3" id="2_yi56i"]
+[ext_resource type="AudioStream" uid="uid://brwdaes4pp87w" path="res://assets/music/Wholesome.mp3" id="4_ef4qo"]
+[ext_resource type="AudioStream" uid="uid://uswor4i26fqt" path="res://assets/music/Devonshire Waltz Andante.mp3" id="6_3ktjn"]
+[ext_resource type="AudioStream" uid="uid://datr8y1jxt61y" path="res://assets/music/Floating Cities.mp3" id="7_tv5a7"]
+[ext_resource type="AudioStream" uid="uid://ckd08oqbf3o5b" path="res://assets/music/Lobby Time.mp3" id="8_hpral"]
+[ext_resource type="AudioStream" uid="uid://cs5h123706csx" path="res://assets/music/Peppers Theme.mp3" id="9_kdk5c"]
+[ext_resource type="AudioStream" uid="uid://os3kt8ee8nq3" path="res://assets/music/Suonatore di Liuto.mp3" id="11_pp823"]
+[ext_resource type="AudioStream" uid="uid://dg0vfvucujls6" path="res://assets/music/Water Lily.mp3" id="12_wh1bt"]
+[ext_resource type="Script" path="res://autoload/bg_music.gd" id="13_772d0"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_0r82d"]
+shuffle = true
+fade_time = 1.0
+stream_count = 8
+stream_0 = ExtResource("2_yi56i")
+stream_1 = ExtResource("6_3ktjn")
+stream_2 = ExtResource("7_tv5a7")
+stream_3 = ExtResource("8_hpral")
+stream_4 = ExtResource("9_kdk5c")
+stream_5 = ExtResource("11_pp823")
+stream_6 = ExtResource("12_wh1bt")
+stream_7 = ExtResource("4_ef4qo")
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_e7pqn"]
+clip_count = 2
+clip_0/name = &"MainUI"
+clip_0/stream = ExtResource("1_isn62")
+clip_0/auto_advance = 0
+clip_1/name = &"GameLevel"
+clip_1/stream = SubResource("AudioStreamPlaylist_0r82d")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 1,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(1, 0): {
+"fade_beats": 1,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(1, 1): {
+"fade_beats": 10,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+}
+}
 
 [node name="BgMusic" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamInteractive_e7pqn")
 autoplay = true
+bus = &"Music"
+script = ExtResource("13_772d0")
