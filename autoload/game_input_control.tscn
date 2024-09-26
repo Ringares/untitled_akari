@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdlw253n2nkpm"]
+
+[ext_resource type="Script" path="res://autoload/game_input_control.gd" id="1_dumay"]
+
+[node name="GameInputControl" type="Node"]
+script = ExtResource("1_dumay")

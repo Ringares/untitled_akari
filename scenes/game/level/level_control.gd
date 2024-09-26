@@ -23,8 +23,10 @@ var PROGRESS_SPEED = 10.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	BgMusic.set("parameters/switch_to_clip", "GameLevel")
-	
+	GameEvents.signal_input_scheme_changed.connect(on_signal_input_scheme_changed)
 	GameEvents.signal_check_win_condition.connect(check_win_condition)
+	on_signal_input_scheme_changed()
+	
 	var daynight_mode = GameLog.get_daynight_mode()
 	%Label.text = ""
 	%NextButton.hide()
@@ -123,6 +125,9 @@ func check_win_condition():
 		%NextButton.show()
 		%NextButtonPlaceHold.hide()
 		SfxManager.play_level_clear()
+		if GameInputControl.is_controller():
+			%NextButton.focus_mode = Control.FocusMode.FOCUS_ALL
+			%NextButton.grab_focus()
 	else:
 		%Label.text = ""
 		%NextButton.hide()
@@ -173,3 +178,17 @@ func _on_help_button_pressed() -> void:
 		tween.tween_callback(func():%HintContainer.visible = true)
 		tween.tween_property(%HintContainer, "position:y", to_y, 0.2).from(from_y)
 		
+
+func on_signal_input_scheme_changed():
+	if GameInputControl.is_mouse():
+		%MouseHintContainer.show()
+		%ControllerHintContainer.hide()
+		
+		var focus_owner = get_viewport().gui_get_focus_owner()
+		if focus_owner:
+			focus_owner.release_focus()
+			focus_owner.focus_mode = Control.FocusMode.FOCUS_NONE
+		
+	elif GameInputControl.is_controller():
+		%MouseHintContainer.hide()
+		%ControllerHintContainer.show()

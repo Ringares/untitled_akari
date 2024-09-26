@@ -1,5 +1,6 @@
 extends Node
 
+signal signal_input_scheme_changed
 
 signal signal_level_won
 signal signal_level_reset
@@ -10,3 +11,6 @@ signal signal_check_win_condition
 
 signal signal_daynight_mode_changed
 signal signal_translation_locale_changed
+
+signal signal_simu_event_left_clk
+signal signal_simu_event_right_clk

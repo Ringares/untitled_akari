@@ -20,3 +20,6 @@ var type:MARKER_TYPE:
 			MARKER_TYPE.NOSURE: no_sure_marker.show()
 			MARKER_TYPE.EMPTY: empty_marker.show()
 			MARKER_TYPE.LIGHTED: lighted_marker.show()
+
+func _ready() -> void:
+	SfxManager.play_mark()

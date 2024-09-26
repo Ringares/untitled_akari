@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d15v1m0f60r81"]
+[gd_scene load_steps=12 format=3 uid="uid://d15v1m0f60r81"]
 
 [ext_resource type="Script" path="res://scenes/game/components/ground.gd" id="1_xka7d"]
 [ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/img/sprite_sheet.png" id="2_vyplm"]
@@ -12,6 +12,9 @@ region = Rect2(128, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fg1s"]
 atlas = ExtResource("2_vyplm")
 region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2srkx"]
+size = Vector2(64, 64)
 
 [sub_resource type="Animation" id="Animation_c3rby"]
 length = 0.001
@@ -126,6 +129,15 @@ offset_bottom = 64.0
 color = Color(1, 1, 1, 0)
 script = ExtResource("4_xqgbn")
 
+[node name="GroundArea2D" type="Area2D" parent="GroundClickRect"]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundClickRect/GroundArea2D"]
+position = Vector2(64, 64)
+scale = Vector2(1.54, 1.54)
+shape = SubResource("RectangleShape2D_2srkx")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_5cpfa")
@@ -135,3 +147,5 @@ libraries = {
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="mouse_entered" from="GroundClickRect" to="." method="_on_ground_click_rect_mouse_entered"]
 [connection signal="mouse_exited" from="GroundClickRect" to="." method="_on_ground_click_rect_mouse_exited"]
+[connection signal="area_entered" from="GroundClickRect/GroundArea2D" to="." method="_on_ground_area_2d_area_entered"]
+[connection signal="area_exited" from="GroundClickRect/GroundArea2D" to="." method="_on_ground_area_2d_area_exited"]

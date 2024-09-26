@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvvbeso36s0o4"]
+[gd_scene load_steps=12 format=3 uid="uid://dvvbeso36s0o4"]
 
 [ext_resource type="Script" path="res://scenes/menu/main_menu.gd" id="1_du782"]
 [ext_resource type="PackedScene" uid="uid://beaj3udobexnc" path="res://scenes/menu/option_menu/simple_option_menu.tscn" id="2_wyugc"]
 [ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="3_6qppe"]
 [ext_resource type="Script" path="res://script/ui_sound.gd" id="3_8hidd"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://scenes/credits/credits.tscn" id="3_k8a0f"]
+[ext_resource type="PackedScene" uid="uid://derhufmdqpk7a" path="res://script/input_control.tscn" id="4_t70qh"]
 [ext_resource type="Script" path="res://script/theme_label.gd" id="5_cxdd7"]
 [ext_resource type="Texture2D" uid="uid://xs7qrvvf27b8" path="res://assets/img/title3.png" id="5_tjsu4"]
 [ext_resource type="Script" path="res://script/theme_button.gd" id="6_tsq01"]
@@ -23,6 +24,9 @@ script = ExtResource("1_du782")
 game_scene_path = "res://scenes/game/game_ui.tscn"
 options_packed_scene = ExtResource("2_wyugc")
 credits_packed_scene = ExtResource("3_k8a0f")
+
+[node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("4_t70qh")]
+init_focus_node = NodePath("../MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/PlayButton")
 
 [node name="BGCanvasLayer" parent="." instance=ExtResource("3_6qppe")]
 
@@ -91,44 +95,52 @@ alignment = 1
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
-[node name="PlayButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer" groups=["input_control_focusable"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../../../LightModeButton")
+focus_neighbor_bottom = NodePath("../OptionsButton")
 focus_mode = 0
 theme_override_colors/font_color = Color(0.996078, 0.631373, 0.0117647, 1)
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
 text = "Play"
 
-[node name="OptionsButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer" groups=["input_control_focusable"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../CreditsButton")
 focus_mode = 0
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
 text = "Options"
 script = ExtResource("6_tsq01")
 
-[node name="CreditsButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer" groups=["input_control_focusable"]]
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../ExitButton")
 focus_mode = 0
 theme_override_font_sizes/font_size = 48
 text = "Credits"
 script = ExtResource("6_tsq01")
 
-[node name="ExitButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer" groups=["input_control_focusable"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../CreditsButton")
+focus_neighbor_bottom = NodePath("../../../../../LightModeButton")
 focus_mode = 0
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i85jh")
@@ -198,7 +210,7 @@ size_flags_horizontal = 4
 text = "v unkonw"
 script = ExtResource("5_cxdd7")
 
-[node name="LightModeButton" type="Button" parent="."]
+[node name="LightModeButton" type="Button" parent="." groups=["input_control_focusable"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 0
@@ -208,6 +220,8 @@ offset_right = 1888.0
 offset_bottom = 128.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
+focus_neighbor_top = NodePath("../MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/ExitButton")
+focus_neighbor_bottom = NodePath("../MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/PlayButton")
 focus_mode = 0
 icon = ExtResource("9_evyek")
 icon_alignment = 1

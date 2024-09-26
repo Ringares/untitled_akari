@@ -32,7 +32,7 @@ func adjust_position_scale() -> Vector2:
 	var scale_y = (get_viewport_rect().size.y * 2 / 3) / board_rect.y
 	
 	var final_scale = clamp(min(scale_x, scale_y), 0.1, 1.0)
-	print(final_scale)
+	#print(final_scale)
 	self.scale = Vector2(final_scale, final_scale)
 	self.global_position = Vector2(
 		get_viewport_rect().size.x / 2. - board_rect.x * final_scale / 2.,

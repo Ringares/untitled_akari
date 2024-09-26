@@ -13,6 +13,8 @@ const MARKER = preload("res://scenes/game/components/marker.tscn")
 
 var marker: Marker
 var akari: Akari
+
+var is_focused = false
 var is_lighted = false
 var passed_lights = []
 var interactable = true:
@@ -23,6 +25,11 @@ var interactable = true:
 		else:
 			ground_click_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+
+func _ready() -> void:
+	super()
+	GameEvents.signal_simu_event_left_clk.connect(func(): if is_focused:left_clk())
+	GameEvents.signal_simu_event_right_clk.connect(func(): if is_focused:right_clk())
 
 func set_last_in_parent():
 	get_parent().move_child(self, get_parent().get_child_count()-1)
@@ -97,12 +104,28 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 
 func _on_ground_click_rect_mouse_entered() -> void:
-	#self.modulate = Color(0.85,0.85,0.85)
+	focus()
+
+func _on_ground_click_rect_mouse_exited() -> void:
+	unfocus()
+
+
+func _on_ground_area_2d_area_entered(area: Area2D) -> void:
+	focus()
+
+
+func _on_ground_area_2d_area_exited(area: Area2D) -> void:
+	unfocus()
+
+
+func focus():
+	is_focused = true
 	self.modulate = Color(1.15,1.15, 1.15)
 	$AnimationPlayer.play("hover")
 	SfxManager.play_hover()
-
-func _on_ground_click_rect_mouse_exited() -> void:
+	
+func unfocus():
+	is_focused = false
 	self.modulate = Color.WHITE
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("RESET")

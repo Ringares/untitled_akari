@@ -21,6 +21,7 @@ var sub_menu
 @onready var version_label = %VersionLabel
 
 
+
 func _ready():
 	BgMusic.set("parameters/switch_to_clip", "MainUI")
 	
@@ -47,6 +48,7 @@ func _ready():
 	#AppLog.version_opened(version_name)
 	version_label.text = 'v ' + version_name
 	
+
 	
 func _open_sub_menu(menu : Control):
 	#curr_container.show()

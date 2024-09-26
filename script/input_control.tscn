@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://derhufmdqpk7a"]
+
+[ext_resource type="Script" path="res://script/input_control.gd" id="1_rodel"]
+
+[node name="InputControl" type="Node2D" node_paths=PackedStringArray("init_focus_node")]
+script = ExtResource("1_rodel")
+init_focus_node = NodePath("")
