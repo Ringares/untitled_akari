@@ -11,7 +11,7 @@ static var scene_tree : SceneTree
 static var saved_mouse_mode : int
 static var saved_focus_control
 
-static func open_menu(menu_scene : PackedScene, viewport : Viewport, set_pause : bool = true) -> void:
+static func open_menu(menu_scene : PackedScene, viewport : Viewport, set_pause : bool = false) -> void:
 	if scene_tree == null:
 		push_error("scene_tree is null")
 		return

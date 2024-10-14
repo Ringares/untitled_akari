@@ -5,7 +5,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_10dlr"]
 atlas = ExtResource("2_tfmyi")
-region = Rect2(640, 128, 128, 128)
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mh6xe"]
 atlas = ExtResource("2_tfmyi")

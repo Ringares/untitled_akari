@@ -12,8 +12,7 @@
 [node name="PlaySaveSlots" type="CanvasLayer"]
 script = ExtResource("1_yb8uc")
 
-[node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("2_wnbbr")]
-init_focus_node = NodePath("../HBoxContainer/SaveSlot/VBoxContainer/SlotButton")
+[node name="InputControl" parent="." instance=ExtResource("2_wnbbr")]
 
 [node name="UISound" type="Node" parent="."]
 script = ExtResource("1_ls0lu")
@@ -42,6 +41,7 @@ layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
 focus_neighbor_left = NodePath("../../../HBoxContainer/SaveSlot3/VBoxContainer/SlotButton")
+focus_neighbor_top = NodePath("../LightModeButton")
 focus_neighbor_right = NodePath("../../../HBoxContainer/SaveSlot/VBoxContainer/SlotButton")
 focus_neighbor_bottom = NodePath("../LightModeButton")
 focus_mode = 0
@@ -59,6 +59,7 @@ size_flags_vertical = 5
 focus_neighbor_left = NodePath("../../../HBoxContainer/SaveSlot3/VBoxContainer/SlotButton")
 focus_neighbor_top = NodePath("../MainButton")
 focus_neighbor_right = NodePath("../../../HBoxContainer/SaveSlot/VBoxContainer/SlotButton")
+focus_neighbor_bottom = NodePath("../MainButton")
 focus_mode = 0
 icon = ExtResource("4_qn0io")
 icon_alignment = 1
@@ -84,51 +85,39 @@ layout_mode = 2
 save_name = "Save1"
 show_name = "1"
 
-[node name="SlotButton" parent="HBoxContainer/SaveSlot/VBoxContainer" index="0"]
-focus_neighbor_left = NodePath("../../../../UILayer/VBoxContainer/MainButton")
-focus_neighbor_right = NodePath("../../../SaveSlot2/VBoxContainer/SlotButton")
-focus_neighbor_bottom = NodePath("../RestButton")
-text = "1"
-
-[node name="SlotFinishedLabel" parent="HBoxContainer/SaveSlot/VBoxContainer" index="2"]
-text = "5 %"
-
-[node name="RestButton" parent="HBoxContainer/SaveSlot/VBoxContainer" index="3"]
+[node name="RestButton" parent="HBoxContainer/SaveSlot/VBoxContainer" index="5"]
 focus_neighbor_left = NodePath("../../../../UILayer/VBoxContainer/MainButton")
 focus_neighbor_top = NodePath("../SlotButton")
 focus_neighbor_right = NodePath("../../../SaveSlot2/VBoxContainer/RestButton")
+focus_neighbor_bottom = NodePath("../SlotButton")
 
 [node name="SaveSlot2" parent="HBoxContainer" instance=ExtResource("1_7584m")]
 layout_mode = 2
 save_name = "Save2"
 show_name = "2"
 
-[node name="SlotButton" parent="HBoxContainer/SaveSlot2/VBoxContainer" index="0"]
-focus_neighbor_left = NodePath("../../../SaveSlot/VBoxContainer/SlotButton")
-focus_neighbor_right = NodePath("../../../SaveSlot3/VBoxContainer/SlotButton")
-focus_neighbor_bottom = NodePath("../RestButton")
+[node name="SlotButton" parent="HBoxContainer/SaveSlot2/VBoxContainer/Container" index="1"]
 text = "2"
 
-[node name="RestButton" parent="HBoxContainer/SaveSlot2/VBoxContainer" index="3"]
+[node name="RestButton" parent="HBoxContainer/SaveSlot2/VBoxContainer" index="5"]
 focus_neighbor_left = NodePath("../../../SaveSlot/VBoxContainer/RestButton")
 focus_neighbor_top = NodePath("../SlotButton")
 focus_neighbor_right = NodePath("../../../SaveSlot3/VBoxContainer/RestButton")
+focus_neighbor_bottom = NodePath("../SlotButton")
 
 [node name="SaveSlot3" parent="HBoxContainer" instance=ExtResource("1_7584m")]
 layout_mode = 2
 save_name = "Save3"
 show_name = "3"
 
-[node name="SlotButton" parent="HBoxContainer/SaveSlot3/VBoxContainer" index="0"]
-focus_neighbor_left = NodePath("../../../SaveSlot2/VBoxContainer/SlotButton")
-focus_neighbor_right = NodePath("../../../../UILayer/VBoxContainer/MainButton")
-focus_neighbor_bottom = NodePath("../RestButton")
+[node name="SlotButton" parent="HBoxContainer/SaveSlot3/VBoxContainer/Container" index="1"]
 text = "3"
 
-[node name="RestButton" parent="HBoxContainer/SaveSlot3/VBoxContainer" index="3"]
+[node name="RestButton" parent="HBoxContainer/SaveSlot3/VBoxContainer" index="5"]
 focus_neighbor_left = NodePath("../../../SaveSlot2/VBoxContainer/RestButton")
 focus_neighbor_top = NodePath("../SlotButton")
 focus_neighbor_right = NodePath("../../../../UILayer/VBoxContainer/MainButton")
+focus_neighbor_bottom = NodePath("../SlotButton")
 
 [connection signal="pressed" from="UILayer/VBoxContainer/MainButton" to="." method="_on_main_button_pressed"]
 [connection signal="pressed" from="UILayer/VBoxContainer/LightModeButton" to="." method="_on_light_mode_button_pressed"]

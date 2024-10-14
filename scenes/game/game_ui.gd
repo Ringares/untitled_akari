@@ -50,3 +50,4 @@ func _on_level_advance():
 func _on_level_reset():
 	print('game_ui _on_level_reset')
 	level_loader.load_level()
+	

@@ -59,3 +59,4 @@ CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_ktirp")
 CheckButton/styles/normal = SubResource("StyleBoxEmpty_qkb75")
 CheckButton/styles/pressed = SubResource("StyleBoxEmpty_hxvq0")
 Label/font_sizes/font_size = 32
+OptionButton/constants/arrow_margin = 16

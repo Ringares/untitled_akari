@@ -4,6 +4,7 @@ class_name SaveSlot
 
 @export var save_name:String = "test"
 @export_file("*.tscn") var game_scene_path : String
+@export_file("*.tscn") var infi_game_scene_path : String
 @export var show_name:String:
 	set(value):
 		show_name = value
@@ -42,6 +43,16 @@ func init_save_slot():
 				GameLevelLog.reset_save_slot(save_name)
 				init_save_slot()
 		)
+	
+	var is_infinite_mode_unlocked = GameLevelLog.get_infinite_mode_unlocked(save_name)
+	if is_infinite_mode_unlocked:
+		%InfiniteButton.show()
+		%Placehold.hide()
+	else:
+		%InfiniteButton.hide()
+		%Placehold.show()
+		
+	
 
 func _on_slot_button_pressed() -> void:
 	GameLevelLog.set_curr_save(save_name)
@@ -58,3 +69,8 @@ func _on_rest_button_button_up() -> void:
 	%Timer.stop()
 	%ProgressBar.hide()
 	%ProgressBar.value = 0
+
+
+func _on_infinite_button_pressed() -> void:
+	GameLevelLog.set_curr_save(save_name)
+	SceneLoader.load_scene(infi_game_scene_path)

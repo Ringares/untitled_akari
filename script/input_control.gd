@@ -27,40 +27,12 @@ func _process(delta: float) -> void:
 		focus_next("ui_right")
 		
 		
-	#Get input direction and handle movement
-	var mouse_sens = 1000
-	var direction: Vector2
-	direction.x = Input.get_action_strength("cursor_right") - Input.get_action_strength("cursor_left")
-	direction.y = Input.get_action_strength("cursor_down") - Input.get_action_strength("cursor_up")
-	#print("direction", direction)
-	if abs(direction.x) == 1 and abs(direction.y) == 1:
-		direction = direction.normalized()
-		
-	var movement = mouse_sens * direction * delta
-	if(movement):
-		simu_mouse_move(movement)
-		
-	if Input.is_action_just_pressed("place_light"):
+	if Input.is_action_just_pressed("place_light") or Input.is_action_just_pressed("left_clk"):
 		GameEvents.signal_simu_event_left_clk.emit()
 		#simu_left_clik()
-	if Input.is_action_just_pressed("place_mark"):
+	if Input.is_action_just_pressed("place_mark") or Input.is_action_just_pressed("right_clk"):
 		GameEvents.signal_simu_event_right_clk.emit()
 		#simu_right_clik()
-	
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		if %JoystickCursor:
-			%JoystickCursor.global_position = get_global_mouse_position()
-
-
-func simu_mouse_move(movement):
-	#%JoystickCursor.show()
-	if %JoystickCursor:
-		%JoystickCursor.global_position = Vector2(
-			clamp(%JoystickCursor.global_position.x + movement.x, 0., get_viewport_rect().size.x),
-			clamp(%JoystickCursor.global_position.y + movement.y, 0., get_viewport_rect().size.y)
-		)
-		get_viewport().warp_mouse(%JoystickCursor.global_position)
 		
 		
 func focus_next(action:String):
@@ -79,12 +51,21 @@ func focus_next(action:String):
 	
 	var new_focus_node
 	match action:
-		"ui_up": new_focus_node = focus_owner.get_node(focus_owner.focus_neighbor_top)
-		"ui_down": new_focus_node = focus_owner.get_node(focus_owner.focus_neighbor_bottom)
-		"ui_left": new_focus_node = focus_owner.get_node(focus_owner.focus_neighbor_left)
-		"ui_right": new_focus_node = focus_owner.get_node(focus_owner.focus_neighbor_right)
+		"ui_up": 
+			if focus_owner.focus_neighbor_top:
+				new_focus_node = focus_owner.get_node(focus_owner.focus_neighbor_top)
+		"ui_down": 
+			if focus_owner.focus_neighbor_bottom:
+				new_focus_node = focus_owner.get_node(focus_owner.focus_neighbor_bottom)
+		"ui_left": 
+			if focus_owner.focus_neighbor_left:
+				new_focus_node = focus_owner.get_node(focus_owner.focus_neighbor_left)
+		"ui_right": 
+			if focus_owner.focus_neighbor_right:
+				new_focus_node = focus_owner.get_node(focus_owner.focus_neighbor_right)
 	
 	if new_focus_node:
+		print(new_focus_node)
 		new_focus_node.focus_mode = Control.FocusMode.FOCUS_ALL
 		focus_owner.focus_mode = Control.FocusMode.FOCUS_NONE
 		new_focus_node.grab_focus()

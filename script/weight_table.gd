@@ -19,9 +19,12 @@ func calulate_accu_weight_dict(temp_weight_dict):
 	return [temp_accu_weight_dict, temp_total_weight]
 
 
-func add_item(obj, weight:float):
+func add_item(obj, weight:float, reset=false):
 	if obj in weight_dict:
-		weight_dict[obj] += weight
+		if reset:
+			weight_dict[obj] = weight
+		else:
+			weight_dict[obj] += weight
 	else:
 		weight_dict[obj] = weight
 		

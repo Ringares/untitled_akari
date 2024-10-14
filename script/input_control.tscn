@@ -2,6 +2,5 @@
 
 [ext_resource type="Script" path="res://script/input_control.gd" id="1_rodel"]
 
-[node name="InputControl" type="Node2D" node_paths=PackedStringArray("init_focus_node")]
+[node name="InputControl" type="Node2D"]
 script = ExtResource("1_rodel")
-init_focus_node = NodePath("")

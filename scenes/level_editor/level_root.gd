@@ -16,6 +16,7 @@ func adjust_position_scale() -> Vector2:
 	var furthest_x_cell = 0
 	var furthest_y_cell = 0
 	for i in get_children():
+		#print(i.global_position)
 		if i.global_position.x > furthest_x_pos:
 			furthest_x_pos = i.global_position.x
 			furthest_x_cell = i.cell_id.x

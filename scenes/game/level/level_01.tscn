@@ -6,5 +6,5 @@
 [node name="Level" instance=ExtResource("1_5fi2l")]
 packed_level = ExtResource("2_gxywd")
 
-[node name="LevelContainer" parent="." index="2"]
+[node name="LevelContainer" parent="." index="3"]
 script = null

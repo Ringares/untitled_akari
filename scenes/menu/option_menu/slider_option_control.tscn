@@ -4,13 +4,14 @@
 [ext_resource type="Script" path="res://script/theme_label.gd" id="2_ubrqg"]
 
 [node name="OptionControl" instance=ExtResource("1_an6i2")]
+offset_right = 736.0
+offset_bottom = 49.0
 
 [node name="OptionLabel" parent="." index="0"]
-text = " :"
 script = ExtResource("2_ubrqg")
 
 [node name="HSlider" type="HSlider" parent="." index="1"]
-custom_minimum_size = Vector2(256, 2.08165e-12)
+custom_minimum_size = Vector2(512, 0)
 layout_mode = 2
 size_flags_vertical = 4
 max_value = 1.0

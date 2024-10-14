@@ -1,0 +1,270 @@
+[gd_scene load_steps=15 format=3 uid="uid://bswbe4vdvxtqn"]
+
+[ext_resource type="Script" path="res://scenes/game/game_ui_infinite.gd" id="1_l3i3a"]
+[ext_resource type="PackedScene" uid="uid://bmd3n7oiftiss" path="res://scenes/game/game_ui/pause_controler.tscn" id="2_yviqn"]
+[ext_resource type="PackedScene" uid="uid://cew1lc4b8f86w" path="res://scenes/menu/pause_menu.tscn" id="3_476jn"]
+[ext_resource type="Script" path="res://script/theme_panel_container.gd" id="4_y15r2"]
+[ext_resource type="Script" path="res://script/theme_label.gd" id="5_m8311"]
+[ext_resource type="Script" path="res://script/theme_button.gd" id="6_0w81w"]
+[ext_resource type="Texture2D" uid="uid://vj5d0sljoqhx" path="res://assets/img/icon/icons8-home-96.png" id="7_qsxvc"]
+[ext_resource type="Texture2D" uid="uid://dvo0syth5khae" path="res://assets/img/icon/icons8-menu-96.png" id="8_5btnk"]
+[ext_resource type="Texture2D" uid="uid://bcq0hgbdpgdfb" path="res://assets/img/icon/icons8-sun-96.png" id="10_g5bwt"]
+[ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="11_sfd8v"]
+[ext_resource type="Script" path="res://scenes/game/level_generator.gd" id="12_evvgo"]
+[ext_resource type="PackedScene" uid="uid://dyo2m2g4f3c3c" path="res://scenes/level_editor/puzzle_generator.tscn" id="13_55mjv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ymfg"]
+
+[sub_resource type="Environment" id="Environment_11cwd"]
+background_mode = 3
+glow_enabled = true
+glow_strength = 1.1
+
+[node name="GameUIInfinite" type="Control" groups=["game_ui"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l3i3a")
+
+[node name="PauseController" parent="." instance=ExtResource("2_yviqn")]
+pause_menu_packed = ExtResource("3_476jn")
+
+[node name="LevelGenerator" type="Node" parent="."]
+script = ExtResource("12_evvgo")
+
+[node name="PuzzleGenerator" parent="LevelGenerator" instance=ExtResource("13_55mjv")]
+unique_name_in_owner = true
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="BGCanvasLayer" parent="UILayer" instance=ExtResource("11_sfd8v")]
+
+[node name="GeneratorContainer" type="PanelContainer" parent="UILayer"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -269.5
+offset_top = -318.5
+offset_right = 269.5
+offset_bottom = 318.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ymfg")
+script = ExtResource("4_y15r2")
+light_color = Color(0.898039, 0.898039, 0.898039, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/GeneratorContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/GeneratorContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="SizeSettingContainer" type="HBoxContainer" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SizeSettingContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Board Size"
+script = ExtResource("5_m8311")
+
+[node name="SizeOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SizeSettingContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+selected = 0
+item_count = 2
+popup/item_0/text = "7x7"
+popup/item_1/text = "10x10"
+popup/item_1/id = 1
+script = ExtResource("6_0w81w")
+
+[node name="SymetrySettingContainer" type="HBoxContainer" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SymetrySettingContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Symmetry Type"
+script = ExtResource("5_m8311")
+
+[node name="SymetryOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SymetrySettingContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+selected = 0
+item_count = 4
+popup/item_0/text = "2-way mirror"
+popup/item_1/text = "2-way rotation"
+popup/item_1/id = 1
+popup/item_2/text = "4-way mirror"
+popup/item_2/id = 2
+popup/item_3/text = "4-way rotation"
+popup/item_3/id = 3
+script = ExtResource("6_0w81w")
+
+[node name="WallSettingContainer" type="HBoxContainer" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/WallSettingContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Fill Percent"
+script = ExtResource("5_m8311")
+
+[node name="PercentOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/WallSettingContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+selected = 0
+item_count = 2
+popup/item_0/text = "20%"
+popup/item_1/text = "30%"
+popup/item_1/id = 1
+script = ExtResource("6_0w81w")
+
+[node name="DifficultySettingContainer" type="HBoxContainer" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/DifficultySettingContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Difficulty"
+script = ExtResource("5_m8311")
+
+[node name="DifficultyOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/DifficultySettingContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+selected = 0
+item_count = 2
+popup/item_0/text = "Easy"
+popup/item_1/text = "Tricky"
+popup/item_1/id = 1
+script = ExtResource("6_0w81w")
+
+[node name="SeedSettingContainer" type="HBoxContainer" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SeedSettingContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Seed"
+script = ExtResource("5_m8311")
+
+[node name="SeedEdit" type="TextEdit" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SeedSettingContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Random"
+
+[node name="Control" type="Control" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="GenerateButton" type="Button" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(384, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Generate"
+script = ExtResource("6_0w81w")
+
+[node name="LeftButtonContainer" type="VBoxContainer" parent="UILayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -148.0
+offset_right = 96.0
+offset_bottom = 148.0
+grow_vertical = 2
+
+[node name="MainButton" type="Button" parent="UILayer/LeftButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
+focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_neighbor_bottom = NodePath("../MenuButton")
+focus_mode = 0
+icon = ExtResource("7_qsxvc")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("6_0w81w")
+
+[node name="MenuButton" type="Button" parent="UILayer/LeftButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
+focus_neighbor_top = NodePath("../MainButton")
+focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_mode = 0
+icon = ExtResource("8_5btnk")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("6_0w81w")
+
+[node name="LightModeButton" type="Button" parent="UILayer/LeftButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
+focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_mode = 0
+icon = ExtResource("10_g5bwt")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("6_0w81w")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_11cwd")
+
+[connection signal="level_loaded" from="LevelGenerator" to="." method="_on_level_generator_level_loaded"]
+[connection signal="levels_finished" from="LevelGenerator" to="." method="_on_level_generator_levels_finished"]
+[connection signal="pressed" from="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/GenerateButton" to="LevelGenerator" method="_on_generate_button_pressed"]
+[connection signal="pressed" from="UILayer/LeftButtonContainer/MainButton" to="." method="_on_main_button_pressed"]
+[connection signal="pressed" from="UILayer/LeftButtonContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="UILayer/LeftButtonContainer/LightModeButton" to="." method="_on_light_mode_button_pressed"]

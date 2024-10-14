@@ -1,23 +1,39 @@
-key,en,fr,de,jp,cn
-Play,Play,Jouer,Spiel,プレイ,开始
-Options,Options,Options,Optionen,オプション,选项
-Exit,Exit,Quitter,Beenden,退出,退出
-Master,Overall,Global,Gesamt,全体,整体音量
-Music,Music,Musique,Musik,音楽,音乐音量
-SFX,SFX,Effets sonores,Soundeffekte,効果音,音效音量
-Mute,Mute,Muet,Stumm,ミュート,静音设置
-Fullscreen,Fullscreen,Plein écran,Vollbild,全画面,全屏设置
-Credits,Credits,Crédits,Credits,クレジット,制作人员
-Back,Back,Retour,Zurück,戻る,返回
-Reset,Reset,Réinitialiser,Zurücksetzen,リセット,重置
-Pause,Pause,Pause,Pause,一時停止,暂停
-Resume,Resume,Reprendre,Fortsetzen,再開,继续
-Level Select,Level Select,Sélectionner le niveau,Levelauswahl,レベル選択,关卡选择
-Main Menu,Main Menu,Menu principal,Hauptmenü,メインメニュー,主菜单
-Solved,Solved,Victoire,Sieg,勝利,完成
-LeftMouseHint,Place a light / Undo,Placer une lumière / Annuler,Licht platzieren / Rückgängig machen,ライトを置く / 元に戻す,放置光源 / 撤销
-RightMouseHint,Place a mark to help,Placez un marqueur pour aider,"Setzen Sie ein Zeichen, um zu helfen",助けるためにマークを置く,放置标记以帮助
-Rule1,1. Place lights in empty cells to illuminate all non-black cells. ,1. Placez des lumières dans les cellules vides pour éclairer toutes les cellules non noires.,"1. Platziere Lichter in leere Zellen, um alle nicht-schwarzen Zellen zu beleuchten.",1. 空のセルにライトを置いて、すべての非黒セルを照らします。,1. 在空白格子中放置光源，以照亮所有非黑色格子。
-Rule2,2. Lights illuminate their own cell and adjacent cells in straight lines until black cells.,2. Les lumières éclairent leur propre cellule et les cellules adjacentes en lignes droites jusqu'aux cellules noires.,2. Lichter beleuchten ihre eigene Zelle und angrenzende Zellen in geraden Linien bis zu schwarzen Zellen.,2. ライトは自分のセルと隣接するセルを直線で照らし、黒いセルに到達します。,2. 光源照亮它所在的和直线上的格子，直到黑色格子为止。
-Rule3,3. Lights cannot shine on each other. ,3. Les lumières ne peuvent pas s'éclairer mutuellement.,3. Lichter können sich gegenseitig nicht beleuchten.,3. ライトは互いに照らし合うことができません。,3. 光源无法互相照亮。
-Rule4,4. Number Clues indicate the number of surrounding lights.,4. Les indices numériques indiquent le nombre de lumières environnantes.,4. Zahlenhinweise geben die Anzahl der umliegenden Lichter an.,4. 数字のヒントは周囲のライトの数を示しています。,4. 数字提示表示周围光源的数量。
+key,en,fr,de,jp,cn,es,ko,pt,ru,it
+Play,Play,Jouer,Spiel,プレイ,开始,Jugar,게임 시작,Jogar,Играть,Gioca
+Options,Options,Options,Optionen,オプション,选项,Opciones,옵션,Opções,Настройки,Opzioni
+Exit,Exit,Quitter,Beenden,退出,退出,Salir,종료,Sair,Выход,Esci
+Master,Overall,Global,Gesamt,全体,整体音量,Total,전체,Geral,Всего,Totale
+Music,Music,Musique,Musik,音楽,音乐音量,Música,음악,Música,Музыка,Musica
+SFX,SFX,Effets sonores,Soundeffekte,効果音,音效音量,Efectos de sonido,음향 효과,SFX,Звуковые эффекты,Effetti sonori
+Mute,Mute,Muet,Stumm,ミュート,静音设置,Silenciar,음소거,Silenciar,Выключить звук,Disattiva
+Fullscreen,Fullscreen,Plein écran,Vollbild,全画面,全屏设置,Pantalla completa,전체 화면,Tela cheia,На весь экран,Schermo intero
+Credits,Credits,Crédits,Credits,クレジット,制作人员,Créditos,크레딧,Créditos,Создать,Crediti
+Back,Back,Retour,Zurück,戻る,返回,Atrás,뒤로,Voltar,Назад,Indietro
+Reset,Reset,Réinitialiser,Zurücksetzen,リセット,重置,Reiniciar,재설정,Reiniciar,Сбросить,Ripristina
+Pause,Pause,Pause,Pause,一時停止,暂停,Pausar,일시 정지,Pausar,Пауза,Pausa
+Resume,Resume,Reprendre,Fortsetzen,再開,继续,Reanudar,재개,Retomar,Продолжить,Riprendi
+Level Select,Level Select,Sélectionner le niveau,Levelauswahl,レベル選択,关卡选择,Seleccionar nivel,레벨 선택,Selecionar nível,Выбор уровня,Seleziona livello
+Main Menu,Main Menu,Menu principal,Hauptmenü,メインメニュー,主菜单,Menú principal,메인 메뉴,Menu principal,Главное меню,Menu principale
+Solved,Solved,Victoire,Sieg,勝利,完成,Resuelto,해결됨,Resolvido,Решено,Risolto
+Perfect,Perfect,Parfait,Perfekt,完璧,完美,Perfecto,완벽,Perfeito,Совершенно,Perfetto
+Infinite Mode,Infinite Mode,Mode Infini,Unendlicher Modus,無限モード,无限模式,Modo Infinito,무한 모드,Modo Infinito,Бесконечный режим,Modalità Infinita
+Generate,Generate,Générer,Erzeugen,生成,生成,Generar,생성,Gerar,Сгенерировать,Genera
+Board Size,Board Size,Taille du plateau,Brettgröße,ボードサイズ,棋盘大小,Tamaño del tablero,보드 크기,Tamanho do tabuleiro,Размер доски,Dimensione della scheda
+Symmetry Type,Symmetry Type,Type de symétrie,Symmetrie-Typ,対称タイプ,对称类型,Tipo de simetría,대칭 유형,Tipo de simetria,Тип симметрии,Tipo di simmetria
+Fill Percent,Fill Percent ,Pourcentage de remplissage,Füllprozentsatz,充填率,填充百分比,Porcentaje de llenado,채우기 비율,Porcentagem de preenchimento,Процент заполнения,Percentuale di riempimento
+Difficulty,Difficulty,Difficulté,Schwierigkeit,難易度,难度,Dificultad,난이도,Dificuldade,Сложность,Difficoltà
+Seed,Seed,Graine,Saat,シード,种子,Semilla,시드,Semente,Сид,Seed
+2-way mirror,2-way mirrored,Miroir à 2 voies,2-Wege-Spiegel,2方向対称,双向对称,Espejo de 2 vías,2방향 대칭,Espelho de 2 vias,Зеркало на 2 стороны,Specchio a 2 vie
+2-way rotation,2-way rotated,Rotation à 2 voies,2-Wege-Drehung,2方向回転,双向旋转,Rotación de 2 vías,2방향 회전,Rotação de 2 vias,Поворот на 2 стороны,Rotazione a 2 vie
+4-way mirror,4-way mirrored,Miroir à 4 voies,4-Wege-Spiegel,4方向対称,四向对称,Espejo de 4 vías,4방향 대칭,Espelho de 4 vias,Зеркало на 4 стороны,Specchio a 4 vie
+4-way rotation,4-way rotated,Rotation à 4 voies,4-Wege-Drehung,4方向回転,四向旋转,Rotación de 4 vías,4방향 회전,Rotação de 4 vias,Поворот на 4 стороны,Rotazione a 4 vie
+Easy,Easy,Facile,Einfach,簡単,简单,Fácil,쉬움,Fácil,Легко,Facile
+Tricky,Tricky,Difficile,Knifflig,トリッキー,技巧,Difícil,어려움,Difícil,Запутанно,Difficile
+Random,Random,Aléatoire,Zufällig,ランダム,随机,Aleatorio,무작위,Aleatório,Случайно,Casuale
+RightMouseHint,Place a mark / Undo,Placer une marque / Annuler,Markierung setzen / Rückgängig,マークを置く / 元に戻す,放置标记 / 撤消,Colocar una marca / Deshacer,표시를 놓다 / 실행 취소,Colocar uma marca / Desfazer,Поставить отметку / Отменить,Posiziona un segno / Annulla
+LeftMouseHint,Place a light / Undo,Placer une lumière / Annuler,Licht platzieren / Rückgängig machen,ライトを置く / 元に戻す,放置光源 / 撤销,Colocar una luz / Deshacer,빛을 놓기 / 실행 취소,Colocar uma luz / Desfazer,Поставить свет / Отменить,Posiziona una luce / Annulla
+Rule1,1. Place lights in empty cells to illuminate all non-black cells. ,1. Placez des lumières dans les cellules vides pour éclairer toutes les cellules non noires.,"1. Platziere Lichter in leere Zellen, um alle nicht-schwarzen Zellen zu beleuchten.",1. 空のセルにライトを置いて、すべての非黒セルを照らします。,1. 在空白格子中放置光源，以照亮所有非黑色格子。,1. Coloca luces en celdas vacías para iluminar todas las celdas no negras.,1. 빈 셀에 빛을 놓아서 모든 비검은 셀을 밝히십시오.,1. Coloque luzes em células vazias para iluminar todas as células não negras.,"1. Поместите светильники в пустые клетки, чтобы осветить все нечерные клетки.",1. Posiziona luci in celle vuote per illuminare tutte le celle non nere.
+Rule2,2. Lights illuminate their own cell and adjacent cells in straight lines until black cells.,2. Les lumières éclairent leur propre cellule et les cellules adjacentes en lignes droites jusqu'aux cellules noires.,2. Lichter beleuchten ihre eigene Zelle und angrenzende Zellen in geraden Linien bis zu schwarzen Zellen.,2. ライトは自分のセルと隣接するセルを直線で照らし、黒いセルに到達します。,2. 光源照亮它所在的和直线上的格子，直到黑色格子为止。,2. Las luces iluminan su propia celda y las celdas adyacentes en líneas rectas hasta las celdas negras.,2. 빛은 자신의 셀과 인접한 셀을 검은 셀까지 직선으로 비춥니다.,2. As luzes iluminam sua própria célula e células adjacentes em linhas retas até células pretas.,2. Светильники освещают свою клетку и соседние клетки по прямым линиям до черных клеток.,2. Le luci illuminano la propria cella e celle adiacenti in linee rette fino alle celle nere.
+Rule3,3. Lights cannot shine on each other. ,3. Les lumières ne peuvent pas s'éclairer mutuellement.,3. Lichter können sich gegenseitig nicht beleuchten.,3. ライトは互いに照らし合うことができません。,3. 光源无法互相照亮。,3. Las luces no pueden brillar entre sí.,3. 빛은 서로 비출 수 없습니다.,3. As luzes não podem brilhar uma na outra.,3. Светильники не могут светить друг на друга.,3. Le luci non possono brillare l'una sull'altra.
+Rule4,4. Number Clues indicate the number of surrounding lights.,4. Les indices numériques indiquent le nombre de lumières environnantes.,4. Zahlenhinweise geben die Anzahl der umliegenden Lichter an.,4. 数字のヒントは周囲のライトの数を示しています。,4. 数字提示表示周围光源的数量。,4. Las pistas numéricas indican el número de luces circundantes.,4. 숫자 단서는 주변 빛의 개수를 나타냅니다. ,4. As pistas numéricas indicam o número de luzes ao redor.,4. Цифровые подсказки указывают количество окружающих светильников.,4. Gli indizi numerici indicano il numero di luci circostanti.
+RightStickHint,Move to select cell ,Déplacez-vous pour sélectionner une cellule,"Bewege dich, um eine Zelle auszuwählen",セルを選択するために移動,移动以选择格子,Muévete para seleccionar una celda,셀을 선택하기 위해 이동,Mova-se para selecionar uma célula,"Переместитесь, чтобы выбрать клетку",Muoviti per selezionare una cella

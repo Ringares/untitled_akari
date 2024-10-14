@@ -7,6 +7,8 @@ const LIGHT_AREA = preload("res://scenes/game/components/light_area.tscn")
 @onready var self_area: Area2D = $SelfArea
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
+var light_direction = [0, 90, 180, -90]
+
 var is_satisfied:bool:
 	get():
 		if connected_akari.size() == 0:
@@ -22,11 +24,10 @@ func _ready() -> void:
 
 
 func init_light_area():
-	
 	SfxManager.play_akari_drop()
-	for r in [0, PI/2, PI, -PI/2]:
+	for r in light_direction:
 		var light_area = LIGHT_AREA.instantiate()
-		light_area.rotate(r)
+		light_area.rotate(deg_to_rad(r))
 		
 		#light_area.name = "LightArea %s" % r
 		light_area.area_entered.connect(_on_light_area_entered.bind(light_area))
@@ -58,7 +59,7 @@ func _on_self_area_area_exited(area: Area2D) -> void:
 
 func _on_light_area_entered(area: Area2D, light_area:AkariLight) -> void:
 	var obstacle = area.get_parent()
-	print(obstacle)
+	#print(obstacle)
 	if obstacle is Obstacle:
 		var distance = to_local(obstacle.global_position).distance_to(to_local((light_area.global_position)))
 		#print("light_area.scale", distance, " ", round(distance / 128) -1)
@@ -69,7 +70,7 @@ func _on_light_area_entered(area: Area2D, light_area:AkariLight) -> void:
 	await get_tree().create_timer(0.2).timeout
 	
 	if obstacle is ObstacleRepeater:
-		print("_on_light_area_entered", light_area)
+		#print("_on_light_area_entered", light_area)
 		for repeater_rotation in [0, -PI/2, PI/2]:
 			var new_light_area = light_area.duplicate() as AkariLight
 			new_light_area.scale.x = 1.0
@@ -91,7 +92,8 @@ func _on_light_area_entered(area: Area2D, light_area:AkariLight) -> void:
 		new_light_area.scale.x = 1.0
 		new_light_area.position = new_light_area.position + to_local(obstacle.global_position) - to_local(light_area.global_position)
 		#print(light_direction, obstacle.reflect_map[obstacle_in_direction], light_direction.angle_to(obstacle.reflect_map[light_direction]))
-		new_light_area.rotate(light_direction.angle_to(obstacle.reflect_map[obstacle_in_direction]))
+		#new_light_area.rotate(light_direction.angle_to(obstacle.reflect_map[obstacle_in_direction]))
+		new_light_area.rotate(light_direction.angle_to(ReflectUtils.get_reflect_dir(obstacle.degree_set, Vector2i(obstacle_in_direction))))
 		new_light_area.area_entered.connect(_on_light_area_entered.bind(new_light_area))
 		call_deferred("add_child", new_light_area)
 		new_light_area.call_deferred("start_spread")

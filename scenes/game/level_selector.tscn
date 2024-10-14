@@ -59,7 +59,7 @@ script = ExtResource("1_dky57")
 [node name="UISound" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_k7qki")
-root_path = NodePath("..")
+root_path = NodePath("../CanvasLayer")
 
 [node name="BGCanvasLayer" parent="." instance=ExtResource("1_j6vg6")]
 layer = 0

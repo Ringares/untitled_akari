@@ -44,7 +44,20 @@ static func get_passed_levels(save_name=null) -> Array:
 	if save_name == null:
 		save_name = get_curr_save()
 	return Config.get_config(GAME_LOG_SECTION, LEVEL_PASSED + "_" + save_name, [])
-	
+
+
+const INFINITE_UNLOCKED = "InfiniteUnlocked"
+
+static func get_infinite_mode_unlocked(save_name=null):
+	if save_name == null:
+		save_name = get_curr_save()
+	Config.get_config(GAME_LOG_SECTION, INFINITE_UNLOCKED + "_" + save_name, false)
+
+
+static func set_infinite_mode_unlocked():
+	Config.set_config(GAME_LOG_SECTION, INFINITE_UNLOCKED + "_" + get_curr_save(), true)
+
+
 static func reset_save_slot(save_name):
 	Config.set_config(GAME_LOG_SECTION, LEVEL_PASSED + "_" + save_name, [])
 	Config.set_config(GAME_LOG_SECTION, CURRENT_LEVEL + "_" + save_name, 0)

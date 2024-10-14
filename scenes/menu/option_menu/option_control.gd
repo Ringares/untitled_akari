@@ -103,6 +103,8 @@ func set_editable(value : bool = true):
 func _ready():
 	option_section = option_section
 	option_name = option_name
+	if option_name in ['Master', 'SFX', 'Music']:
+		default_value = 1.0
 	set_value(_get_setting(default_value))
 	for child in get_children():
 		_connect_option_inputs(child)

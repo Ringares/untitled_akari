@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb0n26ywik67u"]
+
+[ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="1_m1kay"]
+[ext_resource type="PackedScene" uid="uid://bgefxs45kk8u5" path="res://scenes/game/components/obstacle_num_triangle_down.tscn" id="2_l6whg"]
+[ext_resource type="PackedScene" uid="uid://dlpi1468l20vn" path="res://scenes/game/components/obstacle_num_triangle_up.tscn" id="3_8cicy"]
+
+[node name="TestArrage" type="Node2D"]
+
+[node name="BGCanvasLayer" parent="." instance=ExtResource("1_m1kay")]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(256, 256)
+
+[node name="ObstacleNumTriangleDown2" parent="Node2D" instance=ExtResource("2_l6whg")]
+position = Vector2(0, 110.48)
+
+[node name="ObstacleNumTriangleDown3" parent="Node2D" instance=ExtResource("2_l6whg")]
+position = Vector2(139.094, 110.48)
+
+[node name="ObstacleNumTriangleUp" parent="Node2D" instance=ExtResource("3_8cicy")]
+
+[node name="ObstacleNumTriangleUp4" parent="Node2D" instance=ExtResource("3_8cicy")]
+position = Vector2(69.547, -110.46)
+
+[node name="ObstacleNumTriangleUp2" parent="Node2D" instance=ExtResource("3_8cicy")]
+position = Vector2(69.547, 110.48)
+
+[node name="ObstacleNumTriangleUp3" parent="Node2D" instance=ExtResource("3_8cicy")]
+position = Vector2(139.094, 0)
+
+[node name="ObstacleNumTriangleDown" parent="Node2D" instance=ExtResource("2_l6whg")]
+position = Vector2(69.547, 0)
+
+[node name="CollisionShape2D" parent="Node2D/ObstacleNumTriangleDown/Node2D/AkariCheckArea" index="0"]
+position = Vector2(69.5, 33.486)
+
+[node name="CollisionShape2D2" parent="Node2D/ObstacleNumTriangleDown/Node2D/AkariCheckArea" index="1"]
+position = Vector2(-69.5, 33.486)
+
+[node name="CollisionShape2D3" parent="Node2D/ObstacleNumTriangleDown/Node2D/AkariCheckArea" index="2"]
+position = Vector2(0, -77)
+
+[editable path="Node2D/ObstacleNumTriangleUp"]
+[editable path="Node2D/ObstacleNumTriangleUp4"]
+[editable path="Node2D/ObstacleNumTriangleDown"]

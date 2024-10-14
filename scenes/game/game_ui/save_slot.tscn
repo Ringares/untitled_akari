@@ -15,8 +15,32 @@ offset_right = 128.0
 offset_bottom = 169.0
 script = ExtResource("1_eqc1c")
 game_scene_path = "res://scenes/game/game_ui.tscn"
+infi_game_scene_path = "res://scenes/game/game_ui_infinite.tscn"
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="InfiniteButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "Infinite Mode"
+icon_alignment = 1
+script = ExtResource("2_xdbvq")
+
+[node name="Placehold" type="Control" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 77)
+layout_mode = 2
+
+[node name="Container" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Container"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(192, 192)
@@ -27,21 +51,17 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_lnhvg")
 fill_mode = 3
 show_percentage = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="SlotButton" type="Button" parent="VBoxContainer"]
+[node name="SlotButton" type="Button" parent="VBoxContainer/Container"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 192)
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 56
-text = "1
-"
+theme_override_font_sizes/font_size = 64
+text = "1"
 icon_alignment = 1
 script = ExtResource("2_xdbvq")
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/SlotButton"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/Container/SlotButton"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -77,6 +97,7 @@ script = ExtResource("2_xdbvq")
 unique_name_in_owner = true
 one_shot = true
 
-[connection signal="pressed" from="VBoxContainer/SlotButton" to="." method="_on_slot_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/InfiniteButton" to="." method="_on_infinite_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Container/SlotButton" to="." method="_on_slot_button_pressed"]
 [connection signal="button_down" from="VBoxContainer/RestButton" to="." method="_on_rest_button_button_down"]
 [connection signal="button_up" from="VBoxContainer/RestButton" to="." method="_on_rest_button_button_up"]

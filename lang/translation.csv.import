@@ -6,10 +6,10 @@ uid="uid://cmq1murille3y"
 
 [deps]
 
-files=["res://lang/translation.en.translation", "res://lang/translation.fr.translation", "res://lang/translation.de.translation", "res://lang/translation.jp.translation", "res://lang/translation.cn.translation"]
+files=["res://lang/translation.en.translation", "res://lang/translation.fr.translation", "res://lang/translation.de.translation", "res://lang/translation.jp.translation", "res://lang/translation.cn.translation", "res://lang/translation.es.translation", "res://lang/translation.ko.translation", "res://lang/translation.pt.translation", "res://lang/translation.ru.translation", "res://lang/translation.it.translation"]
 
 source_file="res://lang/translation.csv"
-dest_files=["res://lang/translation.en.translation", "res://lang/translation.fr.translation", "res://lang/translation.de.translation", "res://lang/translation.jp.translation", "res://lang/translation.cn.translation"]
+dest_files=["res://lang/translation.en.translation", "res://lang/translation.fr.translation", "res://lang/translation.de.translation", "res://lang/translation.jp.translation", "res://lang/translation.cn.translation", "res://lang/translation.es.translation", "res://lang/translation.ko.translation", "res://lang/translation.pt.translation", "res://lang/translation.ru.translation", "res://lang/translation.it.translation"]
 
 [params]
 

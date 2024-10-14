@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://beaj3udobexnc"]
+[gd_scene load_steps=18 format=3 uid="uid://beaj3udobexnc"]
 
 [ext_resource type="Script" path="res://scenes/menu/option_menu/simple_option_menu.gd" id="1_glyp7"]
 [ext_resource type="PackedScene" uid="uid://ba30xhnse6vcf" path="res://scenes/menu/option_menu/slider_option_control.tscn" id="2_kveum"]
+[ext_resource type="PackedScene" uid="uid://derhufmdqpk7a" path="res://script/input_control.tscn" id="2_qtu7y"]
 [ext_resource type="Script" path="res://script/theme_label.gd" id="3_tyngx"]
 [ext_resource type="PackedScene" uid="uid://ly0qfj2ewghx" path="res://scenes/menu/option_menu/toggle_option_control.tscn" id="4_empim"]
 [ext_resource type="Texture2D" uid="uid://c40uinsn4lpfq" path="res://assets/img/lang/icons8-uk-96.png" id="4_vr1h8"]
@@ -9,7 +10,13 @@
 [ext_resource type="Script" path="res://scenes/menu/option_menu/lang_selector.gd" id="5_qwnu1"]
 [ext_resource type="Texture2D" uid="uid://cp4fmgyy5ioex" path="res://assets/img/lang/icons8-japan-96.png" id="6_g7ni3"]
 [ext_resource type="Texture2D" uid="uid://bhlh1std5gdip" path="res://assets/img/lang/icons8-germany-96.png" id="7_jaid1"]
+[ext_resource type="Texture2D" uid="uid://c1wivxvrr85dt" path="res://assets/img/lang/icons8-usa-96.png" id="7_m74vs"]
 [ext_resource type="Texture2D" uid="uid://cr6281ovgno5t" path="res://assets/img/lang/icons8-france-96.png" id="8_4idr6"]
+[ext_resource type="Texture2D" uid="uid://3who24aavc0s" path="res://assets/img/lang/icons8-spain-96.png" id="11_s7uj3"]
+[ext_resource type="Texture2D" uid="uid://dv3ofjt3pbduy" path="res://assets/img/lang/icons8-south-korea-96.png" id="12_2qcqx"]
+[ext_resource type="Texture2D" uid="uid://ds6qu7xb3teak" path="res://assets/img/lang/icons8-portugal-96.png" id="13_dupg8"]
+[ext_resource type="Texture2D" uid="uid://dk5bvljfoq8jp" path="res://assets/img/lang/icons8-russian-federation-96.png" id="14_oguol"]
+[ext_resource type="Texture2D" uid="uid://uaku1juiwrrs" path="res://assets/img/lang/icons8-italy-96.png" id="15_u1odp"]
 
 [node name="SimpleOptionMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -18,7 +25,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_glyp7")
-audio_control_scene = ExtResource("2_kveum")
+
+[node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("2_qtu7y")]
+init_focus_node = NodePath("../VBoxContainer/ControlContainer/MasterOptionControl/HSlider")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -41,6 +50,56 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="MasterOptionControl" parent="VBoxContainer/ControlContainer" instance=ExtResource("2_kveum")]
+layout_mode = 2
+option_name = "Master"
+option_section = 2
+key = "Master"
+section = "AudioSettings"
+default_value = 1.0
+
+[node name="OptionLabel" parent="VBoxContainer/ControlContainer/MasterOptionControl" index="0"]
+text = "Master    "
+
+[node name="HSlider" parent="VBoxContainer/ControlContainer/MasterOptionControl" index="1"]
+focus_neighbor_bottom = NodePath("../../SFXOptionControl/HSlider")
+focus_mode = 0
+value = 0.7
+
+[node name="SFXOptionControl" parent="VBoxContainer/ControlContainer" instance=ExtResource("2_kveum")]
+layout_mode = 2
+option_name = "SFX"
+option_section = 2
+key = "Sfx"
+section = "AudioSettings"
+default_value = 1.0
+
+[node name="OptionLabel" parent="VBoxContainer/ControlContainer/SFXOptionControl" index="0"]
+text = "SFX    "
+
+[node name="HSlider" parent="VBoxContainer/ControlContainer/SFXOptionControl" index="1"]
+focus_neighbor_top = NodePath("../../MasterOptionControl/HSlider")
+focus_neighbor_bottom = NodePath("../../MusicOptionControl/HSlider")
+focus_mode = 0
+value = 1.0
+
+[node name="MusicOptionControl" parent="VBoxContainer/ControlContainer" instance=ExtResource("2_kveum")]
+layout_mode = 2
+option_name = "Music"
+option_section = 2
+key = "Music"
+section = "AudioSettings"
+default_value = 1.0
+
+[node name="OptionLabel" parent="VBoxContainer/ControlContainer/MusicOptionControl" index="0"]
+text = "Music    "
+
+[node name="HSlider" parent="VBoxContainer/ControlContainer/MusicOptionControl" index="1"]
+focus_neighbor_top = NodePath("../../SFXOptionControl/HSlider")
+focus_neighbor_bottom = NodePath("../../MuteControl/CheckButton")
+focus_mode = 0
+value = 1.0
+
 [node name="AudioControlContainer" type="VBoxContainer" parent="VBoxContainer/ControlContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -53,6 +112,14 @@ option_section = 2
 key = "Mute"
 section = "AudioSettings"
 
+[node name="OptionLabel" parent="VBoxContainer/ControlContainer/MuteControl" index="0"]
+text = "Mute    "
+
+[node name="CheckButton" parent="VBoxContainer/ControlContainer/MuteControl" index="1"]
+focus_neighbor_top = NodePath("../../MusicOptionControl/HSlider")
+focus_neighbor_bottom = NodePath("../../FullScreenControl/CheckButton")
+focus_mode = 0
+
 [node name="FullScreenControl" parent="VBoxContainer/ControlContainer" instance=ExtResource("4_empim")]
 unique_name_in_owner = true
 layout_mode = 2
@@ -60,6 +127,14 @@ option_name = "Fullscreen"
 option_section = 3
 key = "Fullscreen"
 section = "VideoSettings"
+
+[node name="OptionLabel" parent="VBoxContainer/ControlContainer/FullScreenControl" index="0"]
+text = "Fullscreen    "
+
+[node name="CheckButton" parent="VBoxContainer/ControlContainer/FullScreenControl" index="1"]
+focus_neighbor_top = NodePath("../../MuteControl/CheckButton")
+focus_neighbor_bottom = NodePath("../../HBoxContainer/TextureRect")
+focus_mode = 0
 
 [node name="Control2" type="Control" parent="VBoxContainer/ControlContainer"]
 custom_minimum_size = Vector2(0, 16)
@@ -71,6 +146,9 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_neighbor_left = NodePath("../TextureRect10")
+focus_neighbor_top = NodePath("../../FullScreenControl/CheckButton")
+focus_neighbor_right = NodePath("../TextureRect2")
 texture = ExtResource("4_vr1h8")
 expand_mode = 2
 stretch_mode = 5
@@ -85,6 +163,14 @@ stretch_mode = 5
 script = ExtResource("5_qwnu1")
 local = "cn"
 
+[node name="TextureRect11" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("7_m74vs")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+
 [node name="TextureRect3" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -93,6 +179,15 @@ expand_mode = 2
 stretch_mode = 5
 script = ExtResource("5_qwnu1")
 local = "jp"
+
+[node name="TextureRect7" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("12_2qcqx")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = "ko"
 
 [node name="TextureRect4" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -112,9 +207,54 @@ stretch_mode = 5
 script = ExtResource("5_qwnu1")
 local = "fr"
 
+[node name="TextureRect6" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("11_s7uj3")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = "es"
+
+[node name="TextureRect8" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("13_dupg8")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = "pt"
+
+[node name="TextureRect9" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("14_oguol")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = "ru"
+
+[node name="TextureRect10" type="TextureRect" parent="VBoxContainer/ControlContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("15_u1odp")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("5_qwnu1")
+local = "it"
+
 [node name="Control" type="Control" parent="VBoxContainer/ControlContainer"]
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 
+[connection signal="setting_changed" from="VBoxContainer/ControlContainer/MasterOptionControl" to="." method="_on_master_option_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/ControlContainer/SFXOptionControl" to="." method="_on_sfx_option_control_setting_changed"]
+[connection signal="setting_changed" from="VBoxContainer/ControlContainer/MusicOptionControl" to="." method="_on_music_option_control_setting_changed"]
 [connection signal="setting_changed" from="VBoxContainer/ControlContainer/MuteControl" to="." method="_on_mute_control_setting_changed"]
 [connection signal="setting_changed" from="VBoxContainer/ControlContainer/FullScreenControl" to="." method="_on_full_screen_control_setting_changed"]
+
+[editable path="VBoxContainer/ControlContainer/MasterOptionControl"]
+[editable path="VBoxContainer/ControlContainer/SFXOptionControl"]
+[editable path="VBoxContainer/ControlContainer/MusicOptionControl"]
+[editable path="VBoxContainer/ControlContainer/MuteControl"]
+[editable path="VBoxContainer/ControlContainer/FullScreenControl"]

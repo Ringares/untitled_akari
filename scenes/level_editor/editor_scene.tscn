@@ -1,17 +1,21 @@
-[gd_scene load_steps=19 format=3 uid="uid://c3dasc7vgjghk"]
+[gd_scene load_steps=23 format=3 uid="uid://c3dasc7vgjghk"]
 
 [ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/img/sprite_sheet.png" id="1_dguww"]
 [ext_resource type="Script" path="res://scenes/level_editor/editor.gd" id="1_gfdv1"]
 [ext_resource type="Texture2D" uid="uid://c453jojbqlry0" path="res://assets/img/editor_marker.png" id="2_giimk"]
+[ext_resource type="PackedScene" uid="uid://dyo2m2g4f3c3c" path="res://scenes/level_editor/puzzle_generator.tscn" id="2_hpdn2"]
 [ext_resource type="Texture2D" uid="uid://boobf28elk077" path="res://assets/img/editor_cursor.png" id="2_uywsa"]
 [ext_resource type="Script" path="res://scenes/level_editor/editor_element.gd" id="3_40fib"]
-[ext_resource type="Script" path="res://scenes/level_editor/level_root.gd" id="3_tmkc7"]
+[ext_resource type="PackedScene" uid="uid://bf4adnnrqhr8f" path="res://scenes/game/level/level_root.tscn" id="3_324s7"]
 [ext_resource type="Texture2D" uid="uid://b5ckaujr1o6y0" path="res://assets/img/editor_selected.png" id="4_f3dli"]
 [ext_resource type="PackedScene" uid="uid://d15v1m0f60r81" path="res://scenes/game/components/ground.tscn" id="4_w4hul"]
 [ext_resource type="PackedScene" uid="uid://c0kdm60qi266j" path="res://scenes/game/components/obstacle_num.tscn" id="5_3km2i"]
 [ext_resource type="PackedScene" uid="uid://g6i1wrpm2bxr" path="res://scenes/game/components/obstacle_repeater.tscn" id="6_e1mn5"]
 [ext_resource type="PackedScene" uid="uid://dvxgo3ut6glwa" path="res://scenes/game/components/obstacle_reflecter.tscn" id="7_m3oh8"]
 [ext_resource type="PackedScene" uid="uid://dby3kfawhg1iy" path="res://scenes/game/components/obstacle_edge.tscn" id="10_opgny"]
+[ext_resource type="Script" path="res://script/theme_panel_container.gd" id="13_rkjt2"]
+[ext_resource type="Script" path="res://script/theme_label.gd" id="14_37gd2"]
+[ext_resource type="Script" path="res://script/theme_button.gd" id="15_7gw51"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r3cln"]
 atlas = ExtResource("1_dguww")
@@ -19,7 +23,7 @@ region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iepcc"]
 atlas = ExtResource("1_dguww")
-region = Rect2(640, 128, 128, 128)
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rtbnh"]
 atlas = ExtResource("1_dguww")
@@ -40,6 +44,8 @@ region = Rect2(256, 256, 128, 128)
 [node name="EditorScene" type="Node2D"]
 script = ExtResource("1_gfdv1")
 
+[node name="PuzzleGenerator" parent="." instance=ExtResource("2_hpdn2")]
+
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -52,9 +58,8 @@ position = Vector2(512, 160)
 [node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
 texture = ExtResource("2_giimk")
 
-[node name="LevelRoot" type="Node2D" parent="Marker2D"]
+[node name="LevelRoot" parent="Marker2D" instance=ExtResource("3_324s7")]
 unique_name_in_owner = true
-script = ExtResource("3_tmkc7")
 
 [node name="InsertCursor" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -121,30 +126,44 @@ script = ExtResource("3_40fib")
 scene = ExtResource("7_m3oh8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorUI"]
-offset_left = 1728.0
-offset_top = 576.0
-offset_right = 1903.0
-offset_bottom = 944.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -536.0
+offset_right = 13.0
+offset_bottom = -135.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="PlayButton" type="Button" parent="EditorUI/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Play"
 
 [node name="LoadButton" type="Button" parent="EditorUI/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Load Level"
+
+[node name="CopyButton" type="Button" parent="EditorUI/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Copy Code"
 
 [node name="SaveButton" type="Button" parent="EditorUI/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Save Level
 "
 
@@ -152,7 +171,7 @@ text = "Save Level
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Reset"
 
 [node name="InfoContainer" type="PanelContainer" parent="EditorUI"]
@@ -174,12 +193,14 @@ layout_mode = 2
 [node name="LabelTitle" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Mouse Rela Pos"
 
 [node name="LabelMousePos" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="EditorUI/InfoContainer/VBoxContainer"]
 layout_mode = 2
@@ -187,12 +208,14 @@ layout_mode = 2
 [node name="LabelTitle" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Mouse in Cell"
 
 [node name="LabelCell" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="EditorUI/InfoContainer/VBoxContainer"]
 layout_mode = 2
@@ -200,12 +223,14 @@ layout_mode = 2
 [node name="LabelTitle" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Edit Mode"
 
 [node name="LabelEditMode" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "EDIT_MODE.IDEL"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="EditorUI/InfoContainer/VBoxContainer"]
@@ -214,12 +239,14 @@ layout_mode = 2
 [node name="LabelTitle" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer4"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Zoom Scale"
 
 [node name="LabelZoomScale" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer4"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "1.0"
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="EditorUI/InfoContainer/VBoxContainer"]
@@ -228,48 +255,254 @@ layout_mode = 2
 [node name="LabelTitle" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer5"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "GameStatus"
 
 [node name="LabelWinCheck" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer5"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="EditorUI"]
-offset_left = 1408.0
-offset_top = 864.0
-offset_right = 1700.0
-offset_bottom = 929.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/VBoxContainer2"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="EditorUI/InfoContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="EditorUI/VBoxContainer2/HBoxContainer"]
+[node name="LabelTitle" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "GridSize: "
+theme_override_font_sizes/font_size = 24
+text = "Check Solution"
 
-[node name="RowSizeEdit" type="TextEdit" parent="EditorUI/VBoxContainer2/HBoxContainer"]
+[node name="LabelSolutionCount" type="Label" parent="EditorUI/InfoContainer/VBoxContainer/HBoxContainer6"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="GeneratorContainer" type="PanelContainer" parent="EditorUI"]
+unique_name_in_owner = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -208.0
+offset_right = 444.0
+offset_bottom = 208.0
+grow_vertical = 2
+script = ExtResource("13_rkjt2")
+light_color = Color(0.921569, 0.929412, 0.913725, 0.529412)
+
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/GeneratorContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/GeneratorContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SizeSettingContainer" type="HBoxContainer" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/SizeSettingContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Board Size"
+script = ExtResource("14_37gd2")
+
+[node name="RowSizeEdit" type="TextEdit" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/SizeSettingContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
-text = "3"
+text = "7"
 
-[node name="Label" type="Label" parent="EditorUI/VBoxContainer2/HBoxContainer"]
+[node name="Label2" type="Label" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/SizeSettingContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "x"
 
-[node name="ColSizeEdit" type="TextEdit" parent="EditorUI/VBoxContainer2/HBoxContainer"]
+[node name="ColSizeEdit" type="TextEdit" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/SizeSettingContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(56, 36)
 layout_mode = 2
-text = "3"
+text = "7"
 
-[node name="InitGridButton" type="Button" parent="EditorUI/VBoxContainer2/HBoxContainer"]
+[node name="SymetrySettingContainer" type="HBoxContainer" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/SymetrySettingContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Symetry Type"
+script = ExtResource("14_37gd2")
+
+[node name="SymetryOptionButton" type="OptionButton" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/SymetrySettingContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+selected = 0
+item_count = 4
+popup/item_0/text = "2-way mirror"
+popup/item_1/text = "2-way rotation"
+popup/item_1/id = 1
+popup/item_2/text = "4-way mirror"
+popup/item_2/id = 2
+popup/item_3/text = "4-way rotation"
+popup/item_3/id = 3
+script = ExtResource("15_7gw51")
+
+[node name="WallSettingContainer" type="HBoxContainer" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/WallSettingContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Block Percent"
+script = ExtResource("14_37gd2")
+
+[node name="PercentOptionButton" type="OptionButton" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/WallSettingContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+selected = 0
+item_count = 2
+popup/item_0/text = "20%"
+popup/item_1/text = "30%"
+popup/item_1/id = 1
+script = ExtResource("15_7gw51")
+
+[node name="DifficultySettingContainer" type="HBoxContainer" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/DifficultySettingContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Difficulty"
+script = ExtResource("14_37gd2")
+
+[node name="DifficultyOptionButton" type="OptionButton" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/DifficultySettingContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+selected = 0
+item_count = 2
+popup/item_0/text = "Easy"
+popup/item_1/text = "Tricky"
+popup/item_1/id = 1
+script = ExtResource("15_7gw51")
+
+[node name="SeedSettingContainer" type="HBoxContainer" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/SeedSettingContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Seed
+"
+script = ExtResource("14_37gd2")
+
+[node name="SeedEdit" type="TextEdit" parent="EditorUI/GeneratorContainer/MarginContainer/HBoxContainer/VBoxContainer/SeedSettingContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Random"
+
+[node name="BottomButtonContainer" type="VBoxContainer" parent="EditorUI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -239.5
+offset_top = -198.0
+offset_right = 239.5
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/BottomButtonContainer"]
+layout_mode = 2
+
+[node name="InitGridButton" type="Button" parent="EditorUI/BottomButtonContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Init Grids"
+
+[node name="RandomWallButton" type="Button" parent="EditorUI/BottomButtonContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "RandomWall"
+
+[node name="SymmetryWallButton" type="Button" parent="EditorUI/BottomButtonContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SymmetryWall"
+
+[node name="RandomSolutionButton" type="Button" parent="EditorUI/BottomButtonContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "TryRandomSolution"
+
+[node name="RandomLightButton" type="Button" parent="EditorUI/BottomButtonContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "RandomLight"
+
+[node name="SetNumButton" type="Button" parent="EditorUI/BottomButtonContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SetNums"
+
+[node name="CheckSolutionButton" type="Button" parent="EditorUI/BottomButtonContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "CheckSolution"
+
+[node name="PolishButton" type="Button" parent="EditorUI/BottomButtonContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "PolishPuzzle"
+
+[node name="ClearButton" type="Button" parent="EditorUI/BottomButtonContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Clear
+"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="EditorUI"]
+unique_name_in_owner = true
+initial_position = 2
 
 [connection signal="pressed" from="EditorUI/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="EditorUI/VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="EditorUI/VBoxContainer/CopyButton" to="." method="_on_copy_button_pressed"]
 [connection signal="pressed" from="EditorUI/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="EditorUI/VBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="EditorUI/VBoxContainer2/HBoxContainer/InitGridButton" to="." method="_on_init_grid_button_pressed"]
+[connection signal="pressed" from="EditorUI/BottomButtonContainer/HBoxContainer/InitGridButton" to="." method="_on_init_grid_button_pressed"]
+[connection signal="pressed" from="EditorUI/BottomButtonContainer/HBoxContainer/RandomWallButton" to="." method="_on_random_wall_button_pressed"]
+[connection signal="pressed" from="EditorUI/BottomButtonContainer/HBoxContainer/SymmetryWallButton" to="." method="_on_symmetry_wall_button_pressed"]
+[connection signal="pressed" from="EditorUI/BottomButtonContainer/HBoxContainer/RandomSolutionButton" to="." method="_on_random_solution_button_pressed"]
+[connection signal="pressed" from="EditorUI/BottomButtonContainer/HBoxContainer/RandomLightButton" to="." method="_on_random_light_button_pressed"]
+[connection signal="pressed" from="EditorUI/BottomButtonContainer/HBoxContainer/SetNumButton" to="." method="_on_set_num_button_pressed"]
+[connection signal="pressed" from="EditorUI/BottomButtonContainer/HBoxContainer/CheckSolutionButton" to="." method="_on_check_solution_button_pressed"]
+[connection signal="pressed" from="EditorUI/BottomButtonContainer/HBoxContainer/PolishButton" to="." method="_on_polish_button_pressed"]
+[connection signal="pressed" from="EditorUI/BottomButtonContainer/HBoxContainer/ClearButton" to="." method="_on_clear_button_pressed"]

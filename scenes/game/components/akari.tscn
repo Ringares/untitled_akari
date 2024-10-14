@@ -5,7 +5,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yijyo"]
 atlas = ExtResource("2_auxtn")
-region = Rect2(384, 0, 128, 128)
+region = Rect2(384, 384, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6t7r"]
 atlas = ExtResource("2_auxtn")
@@ -108,6 +108,21 @@ _data = {
 "show": SubResource("Animation_gqfl1")
 }
 
+[sub_resource type="Animation" id="Animation_jgsgs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_oum4m"]
 resource_name = "notify"
 loop_mode = 1
@@ -123,21 +138,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(-2, -2, -2),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_jgsgs"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t3srd"]
@@ -161,7 +161,6 @@ texture = SubResource("AtlasTexture_w6t7r")
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelfArea"]
-visible = false
 shape = SubResource("CircleShape2D_a1h6i")
 
 [node name="ShowUpAnimPlayer" type="AnimationPlayer" parent="."]

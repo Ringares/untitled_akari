@@ -1,0 +1,592 @@
+[gd_scene load_steps=33 format=3 uid="uid://brb21st2fwkl8"]
+
+[ext_resource type="Script" path="res://scenes/game/level/level_control_triangle.gd" id="1_f8444"]
+[ext_resource type="PackedScene" uid="uid://derhufmdqpk7a" path="res://script/input_control.tscn" id="2_kf16u"]
+[ext_resource type="Script" path="res://script/ui_sound.gd" id="3_qfq8a"]
+[ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="4_xnfj5"]
+[ext_resource type="Script" path="res://script/theme_panel_container.gd" id="5_jnarf"]
+[ext_resource type="Texture2D" uid="uid://bd1vti0nnodye" path="res://assets/img/icon/mouse.png" id="6_pt7di"]
+[ext_resource type="Script" path="res://script/theme_texture_rect.gd" id="7_jikcr"]
+[ext_resource type="Texture2D" uid="uid://b6twubdvnqu7c" path="res://assets/img/icon/mouse_left.png" id="8_g6nrh"]
+[ext_resource type="Texture2D" uid="uid://bpgnpqwbpxwmt" path="res://assets/img/icon/mouse_right.png" id="9_h0igp"]
+[ext_resource type="Texture2D" uid="uid://cqrpmc4agjb5h" path="res://assets/img/icon/control_stick_right.png" id="10_1k8ae"]
+[ext_resource type="Texture2D" uid="uid://bk5o02tf2evja" path="res://assets/img/icon/control_r1.png" id="11_4gyqc"]
+[ext_resource type="Texture2D" uid="uid://bx8nhgr81ivng" path="res://assets/img/icon/control_r2.png" id="12_3dd5j"]
+[ext_resource type="Texture2D" uid="uid://dmwxq3v5smwrt" path="res://assets/img/icon/control_l1.png" id="13_cpj3u"]
+[ext_resource type="Texture2D" uid="uid://cxpsqm31sjl2m" path="res://assets/img/icon/control_l2.png" id="14_ftgqd"]
+[ext_resource type="Texture2D" uid="uid://vj5d0sljoqhx" path="res://assets/img/icon/icons8-home-96.png" id="15_8ph54"]
+[ext_resource type="Script" path="res://script/theme_button.gd" id="16_foxs6"]
+[ext_resource type="Texture2D" uid="uid://dvo0syth5khae" path="res://assets/img/icon/icons8-menu-96.png" id="17_ups70"]
+[ext_resource type="Texture2D" uid="uid://cpfdxjfpx6oen" path="res://assets/img/icon/collection-96.png" id="18_4how6"]
+[ext_resource type="Texture2D" uid="uid://bcq0hgbdpgdfb" path="res://assets/img/icon/icons8-sun-96.png" id="19_52qsq"]
+[ext_resource type="Texture2D" uid="uid://dqs0quaqbe2le" path="res://assets/img/icon/icons8-question-96.png" id="20_p1ryx"]
+[ext_resource type="Script" path="res://script/theme_label.gd" id="21_as6q4"]
+[ext_resource type="Texture2D" uid="uid://brpwkn7ewwbud" path="res://assets/img/icon/icons8-reset-96.png" id="22_budw3"]
+[ext_resource type="Texture2D" uid="uid://5nviccb4dw8r" path="res://assets/img/progress_bg.png" id="23_xlmi2"]
+[ext_resource type="Texture2D" uid="uid://gl1kdh8omcj5" path="res://assets/img/progress_fill.png" id="24_fdp8t"]
+[ext_resource type="Script" path="res://script/theme_progressbar.gd" id="25_osup8"]
+[ext_resource type="Texture2D" uid="uid://cshsriq11uxvc" path="res://assets/img/icon/icons8-play-96.png" id="26_mjm4j"]
+[ext_resource type="Texture2D" uid="uid://i2dphu7ocm48" path="res://assets/img/icon/icons8-hint-96.png" id="27_dus23"]
+[ext_resource type="Script" path="res://scenes/level_editor/level_root.gd" id="28_l6aoa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eiu6l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xeblf"]
+texture = ExtResource("23_xlmi2")
+texture_margin_left = 1.0
+texture_margin_right = 1.0
+region_rect = Rect2(0, 0, 3, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nll4m"]
+texture = ExtResource("24_fdp8t")
+texture_margin_left = 1.0
+texture_margin_right = 1.0
+region_rect = Rect2(0, 0, 3, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q0yag"]
+radius = 4.0
+
+[node name="LevelBaseScene" type="Node2D"]
+script = ExtResource("1_f8444")
+
+[node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("2_kf16u")]
+init_focus_node = NodePath("../UILayer/LeftButtonContainer/HelpButton")
+
+[node name="UISound" type="Node" parent="."]
+script = ExtResource("3_qfq8a")
+root_path = NodePath("../UILayer")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BGCanvasLayer" parent="UILayer" instance=ExtResource("4_xnfj5")]
+unique_name_in_owner = true
+
+[node name="HintContainer" type="PanelContainer" parent="UILayer"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -597.5
+offset_top = -208.0
+offset_right = 597.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eiu6l")
+script = ExtResource("5_jnarf")
+light_color = Color(0.898039, 0.898039, 0.898039, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/HintContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/HintContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 64
+
+[node name="MouseHintContainer" type="VBoxContainer" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="HBoxContainer" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/MouseHintContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/MouseHintContainer/VBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("6_pt7di")
+expand_mode = 4
+stretch_mode = 5
+script = ExtResource("7_jikcr")
+dark_color = Color(0.501407, 0.501406, 0.501406, 1)
+light_color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/MouseHintContainer/VBoxContainer/TextureRect"]
+show_behind_parent = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("8_g6nrh")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/MouseHintContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.503375, 0.503375, 0.503375, 1)
+theme_override_font_sizes/font_size = 24
+text = "LeftMouseHint"
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/MouseHintContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/MouseHintContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("6_pt7di")
+expand_mode = 4
+stretch_mode = 5
+script = ExtResource("7_jikcr")
+dark_color = Color(0.501407, 0.501406, 0.501406, 1)
+light_color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/MouseHintContainer/VBoxContainer2/TextureRect3"]
+show_behind_parent = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("9_h0igp")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/MouseHintContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.503375, 0.503375, 0.503375, 1)
+theme_override_font_sizes/font_size = 24
+text = "RightMouseHint"
+
+[node name="ControllerHintContainer" type="VBoxContainer" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer3" type="HBoxContainer" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 4
+stretch_mode = 5
+script = ExtResource("7_jikcr")
+dark_color = Color(0.501407, 0.501406, 0.501406, 1)
+light_color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("10_1k8ae")
+expand_mode = 4
+stretch_mode = 5
+script = ExtResource("7_jikcr")
+dark_color = Color(0.501407, 0.501406, 0.501406, 1)
+light_color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[node name="Label" type="Label" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.503375, 0.503375, 0.503375, 1)
+theme_override_font_sizes/font_size = 24
+text = "RightStickHint"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer/VBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("11_4gyqc")
+expand_mode = 4
+stretch_mode = 5
+script = ExtResource("7_jikcr")
+dark_color = Color(0.501407, 0.501406, 0.501406, 1)
+light_color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer/VBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("12_3dd5j")
+expand_mode = 4
+stretch_mode = 5
+script = ExtResource("7_jikcr")
+dark_color = Color(0.501407, 0.501406, 0.501406, 1)
+light_color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[node name="Label" type="Label" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.503375, 0.503375, 0.503375, 1)
+theme_override_font_sizes/font_size = 24
+text = "LeftMouseHint"
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("13_cpj3u")
+expand_mode = 4
+stretch_mode = 5
+script = ExtResource("7_jikcr")
+dark_color = Color(0.501407, 0.501406, 0.501406, 1)
+light_color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[node name="TextureRect4" type="TextureRect" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("14_ftgqd")
+expand_mode = 4
+stretch_mode = 5
+script = ExtResource("7_jikcr")
+dark_color = Color(0.501407, 0.501406, 0.501406, 1)
+light_color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[node name="Label" type="Label" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/ControllerHintContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.503375, 0.503375, 0.503375, 1)
+theme_override_font_sizes/font_size = 24
+text = "RightMouseHint"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="RuleLabel1" type="Label" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.503375, 0.503375, 0.503375, 1)
+theme_override_font_sizes/font_size = 24
+text = "Rule1"
+
+[node name="RuleLabel2" type="Label" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.503375, 0.503375, 0.503375, 1)
+theme_override_font_sizes/font_size = 24
+text = "Rule2"
+
+[node name="RuleLabel3" type="Label" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.501407, 0.501406, 0.501406, 1)
+theme_override_font_sizes/font_size = 24
+text = "Rule3"
+
+[node name="RuleLabel4" type="Label" parent="UILayer/HintContainer/MarginContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.503375, 0.503375, 0.503375, 1)
+theme_override_font_sizes/font_size = 24
+text = "Rule4"
+
+[node name="LeftButtonContainer" type="VBoxContainer" parent="UILayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -198.0
+offset_right = 96.0
+offset_bottom = 198.0
+grow_vertical = 2
+
+[node name="MainButton" type="Button" parent="UILayer/LeftButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
+focus_neighbor_top = NodePath("../HelpButton")
+focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_neighbor_bottom = NodePath("../MenuButton")
+focus_mode = 0
+icon = ExtResource("15_8ph54")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("16_foxs6")
+
+[node name="MenuButton" type="Button" parent="UILayer/LeftButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
+focus_neighbor_top = NodePath("../MainButton")
+focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_neighbor_bottom = NodePath("../LevelSelectButton")
+focus_mode = 0
+icon = ExtResource("17_ups70")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("16_foxs6")
+
+[node name="LevelSelectButton" type="Button" parent="UILayer/LeftButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
+focus_neighbor_top = NodePath("../MenuButton")
+focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_neighbor_bottom = NodePath("../LightModeButton")
+focus_mode = 0
+icon = ExtResource("18_4how6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("16_foxs6")
+
+[node name="LightModeButton" type="Button" parent="UILayer/LeftButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
+focus_neighbor_top = NodePath("../LevelSelectButton")
+focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_neighbor_bottom = NodePath("../HelpButton")
+focus_mode = 0
+icon = ExtResource("19_52qsq")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("16_foxs6")
+
+[node name="HelpButton" type="Button" parent="UILayer/LeftButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
+focus_neighbor_top = NodePath("../LightModeButton")
+focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_neighbor_bottom = NodePath("../MainButton")
+focus_mode = 0
+icon = ExtResource("20_p1ryx")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("16_foxs6")
+
+[node name="CenterContainer" type="MarginContainer" parent="UILayer"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -164.0
+offset_right = 192.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="UILayer/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 62
+text = "Solved"
+horizontal_alignment = 1
+script = ExtResource("21_as6q4")
+
+[node name="PlaceholdRect" type="ColorRect" parent="UILayer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(1, 1, 1, 0)
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UILayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="ResetButton" type="Button" parent="UILayer/CenterContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../../../../LeftButtonContainer/HelpButton")
+focus_neighbor_top = NodePath("../../../../LeftButtonContainer/HelpButton")
+focus_neighbor_right = NodePath("../NextButton")
+focus_neighbor_bottom = NodePath("../../../../LeftButtonContainer/MainButton")
+focus_mode = 0
+icon = ExtResource("22_budw3")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("16_foxs6")
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="UILayer/CenterContainer/VBoxContainer/HBoxContainer3/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxTexture_xeblf")
+theme_override_styles/fill = SubResource("StyleBoxTexture_nll4m")
+show_percentage = false
+script = ExtResource("25_osup8")
+
+[node name="NextButton" type="Button" parent="UILayer/CenterContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../ResetButton")
+focus_neighbor_top = NodePath("../../../../LeftButtonContainer/HelpButton")
+focus_neighbor_right = NodePath("../../../../LeftButtonContainer/HelpButton")
+focus_neighbor_bottom = NodePath("../../../../LeftButtonContainer/MainButton")
+focus_mode = 0
+icon = ExtResource("26_mjm4j")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("16_foxs6")
+
+[node name="NextButtonPlaceHold" type="ReferenceRect" parent="UILayer/CenterContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="VLeftContainer" type="VBoxContainer" parent="UILayer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 32
+
+[node name="ReferenceRect" type="ReferenceRect" parent="UILayer/CenterContainer/HBoxContainer/VLeftContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/CenterContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+alignment = 1
+
+[node name="VRightBoxContainer" type="VBoxContainer" parent="UILayer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 32
+
+[node name="ReferenceRect" type="ReferenceRect" parent="UILayer/CenterContainer/HBoxContainer/VRightBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="CollectionContainer" type="MarginContainer" parent="UILayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -204.0
+offset_bottom = 137.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/CollectionContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="UILayer/CollectionContainer/HBoxContainer"]
+custom_minimum_size = Vector2(72, 64)
+layout_mode = 2
+texture = ExtResource("27_dus23")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("7_jikcr")
+
+[node name="CollectionLabel" type="Label" parent="UILayer/CollectionContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 42
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("21_as6q4")
+
+[node name="MarginContainer2" type="MarginContainer" parent="UILayer"]
+offset_right = 160.0
+offset_bottom = 128.0
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="LevelIDLabel" type="Label" parent="UILayer/MarginContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 64
+text = "1-2"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("21_as6q4")
+
+[node name="LevelContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("28_l6aoa")
+
+[node name="JoystickCursor" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(960, 544)
+scale = Vector2(2, 2)
+
+[node name="Area2D" type="Area2D" parent="JoystickCursor"]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JoystickCursor/Area2D"]
+shape = SubResource("CircleShape2D_q0yag")
+
+[connection signal="pressed" from="UILayer/LeftButtonContainer/MainButton" to="." method="_on_main_button_pressed"]
+[connection signal="pressed" from="UILayer/LeftButtonContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="UILayer/LeftButtonContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="UILayer/LeftButtonContainer/LightModeButton" to="." method="_on_light_mode_button_pressed"]
+[connection signal="pressed" from="UILayer/LeftButtonContainer/HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="UILayer/CenterContainer/VBoxContainer/HBoxContainer3/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="UILayer/CenterContainer/VBoxContainer/HBoxContainer3/NextButton" to="." method="_on_next_button_pressed"]

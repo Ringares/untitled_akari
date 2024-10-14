@@ -17,3 +17,6 @@ func show_up(delay:float):
 	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.15).from(Vector2(0.0, 0.0))
 	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1)
 	
+
+func to_puzzle_cell():
+	push_error(get_class_name(), " unimplemented method")
