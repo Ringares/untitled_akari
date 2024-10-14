@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceyhxxns700q0"]
+
+[ext_resource type="Script" path="res://scenes/level_editor/level_root.gd" id="1_1dmql"]
+[ext_resource type="PackedScene" uid="uid://c0kdm60qi266j" path="res://scenes/game/components/obstacle_num.tscn" id="2_ac8vg"]
+[ext_resource type="PackedScene" uid="uid://d15v1m0f60r81" path="res://scenes/game/components/ground.tscn" id="3_td02c"]
+
+[node name="LevelRoot" type="Node2D"]
+unique_name_in_owner = true
+script = ExtResource("1_1dmql")
+
+[node name="ObstacleNum_1_2" parent="." instance=ExtResource("2_ac8vg")]
+position = Vector2(192, 320)
+hint_num = 1
+cell_id = Vector2i(1, 2)
+
+[node name="ObstacleNum_2_2" parent="." instance=ExtResource("2_ac8vg")]
+position = Vector2(320, 192)
+hint_num = 0
+cell_id = Vector2i(2, 1)
+
+[node name="ObstacleNum_3_3" parent="." instance=ExtResource("2_ac8vg")]
+position = Vector2(448, 448)
+cell_id = Vector2i(3, 3)
+
+[node name="ObstacleNum_0_0" parent="." instance=ExtResource("2_ac8vg")]
+position = Vector2(64, 64)
+hint_num = 1
+
+[node name="Ground_3_0" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(448, 64)
+cell_id = Vector2i(3, 0)
+
+[node name="Ground_2_4" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(320, 320)
+cell_id = Vector2i(2, 2)
+
+[node name="Ground_3_1" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(448, 192)
+cell_id = Vector2i(3, 1)
+
+[node name="Ground_2_0" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(320, 64)
+cell_id = Vector2i(2, 0)
+
+[node name="Ground_0_3" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(64, 192)
+cell_id = Vector2i(0, 1)
+
+[node name="Ground_1_3" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(192, 64)
+cell_id = Vector2i(1, 0)
+
+[node name="Ground_1_4" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(192, 192)
+cell_id = Vector2i(1, 1)
+
+[node name="Ground_2_5" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(320, 448)
+cell_id = Vector2i(2, 3)
+
+[node name="Ground_3_2" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(448, 320)
+cell_id = Vector2i(3, 2)
+
+[node name="Ground_0_5" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(64, 448)
+cell_id = Vector2i(0, 3)
+
+[node name="Ground_0_4" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(64, 320)
+cell_id = Vector2i(0, 2)
+
+[node name="Ground_1_6" parent="." instance=ExtResource("3_td02c")]
+position = Vector2(192, 448)
+cell_id = Vector2i(1, 3)
