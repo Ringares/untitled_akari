@@ -151,12 +151,6 @@ cell_id = Vector2i(1, 5)
 [node name="ObstacleReflecter_2_1" parent="." instance=ExtResource("6_gx0l5")]
 position = Vector2(320, 192)
 rotation = 1.5708
-reflect_map = {
-Vector2(-1, 0): Vector2(0, 1),
-Vector2(0, -1): Vector2(1, 0),
-Vector2(0, 1): Vector2(-1, 0),
-Vector2(1, 0): Vector2(0, -1)
-}
 cell_id = Vector2i(2, 1)
 
 [node name="Ground_2_9" parent="." instance=ExtResource("2_r5amu")]

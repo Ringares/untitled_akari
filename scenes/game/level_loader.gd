@@ -38,7 +38,8 @@ func _attach_level(level_resource, level_id):
 	
 	var instance = LEVEL_BASE_SCENE.instantiate()
 	instance.current_level_id_str = LevelRes.get_levels()[level_resource]
-	instance.packed_level = load(level_resource)
+	#instance.packed_level = load(level_resource)
+	instance.level_code = level_resource
 	level_container.call_deferred("add_child", instance)
 	return instance
 
@@ -65,8 +66,8 @@ func get_level_file(level_id : int = get_current_level_id()):
 
 func advance_level() -> bool:
 	var level_id : int = get_current_level_id()
-	var level_path = LevelRes.get_levels().keys()[level_id]
-	var level_id_str = LevelRes.get_levels()[level_path]
+	var level_code = LevelRes.get_levels().keys()[level_id]
+	var level_id_str = LevelRes.get_levels()[level_code]
 	GameLevelLog.append_passed_level(level_id_str)
 	
 	level_id += 1

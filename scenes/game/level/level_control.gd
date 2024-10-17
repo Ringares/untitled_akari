@@ -310,3 +310,53 @@ func on_signal_input_scheme_changed():
 	elif GameInputControl.is_controller():
 		%MouseHintContainer.hide()
 		%ControllerHintContainer.show()
+
+
+func _on_hidden_puzzle_code_button_pressed() -> void:
+	var level_root = level_container.get_child(0)
+	if level_root is not LevelRoot:
+		return
+	var col_num = 0
+	var row_num = 0
+	for child in level_root.get_children():
+		if child.cell_id.x > col_num:
+			col_num = child.cell_id.x
+		if child.cell_id.y > row_num:
+			row_num = child.cell_id.y
+	col_num += 1
+	row_num += 1
+	var puzzle_data = []
+	for r in row_num:
+		var row = []
+		for c in col_num:
+			row.append(null)
+		puzzle_data.append(row) 
+	
+	for obj in level_root.get_children():
+		var puzzle_cell = obj.to_puzzle_cell() as PuzzleCell
+		puzzle_data[puzzle_cell.cell_id.x][puzzle_cell.cell_id.y] = puzzle_cell
+	
+	var code = PuzzleGenerator.puzzle2code(puzzle_data)
+	PuzzleUtils.print_puzzle(puzzle_data)
+	print(code)
+	DisplayServer.clipboard_set(code)
+	
+	var puzzle_generator = PuzzleGenerator.new()
+	puzzle_generator.reset_puzzle(puzzle_data)
+	var solution_res = puzzle_generator.get_all_solutions(puzzle_data, true)
+	var curr_solutions = solution_res[0]
+	var curr_diffi_info = {}
+	curr_diffi_info["leaf_count"] = solution_res[1].size()
+	var branches = []
+	var depth_sum = 0
+	var depth_max = 0
+	for i in solution_res[1]:
+		var d = i.split("->").size()-1
+		if d > depth_max:
+			depth_max = d
+		branches.append(d)
+		depth_sum += d
+	curr_diffi_info["max_depth"] = depth_max
+	curr_diffi_info["avg_depth"] = int(depth_sum / branches.size())
+	
+	print("curr_diffi_info", curr_diffi_info)

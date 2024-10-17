@@ -52,12 +52,6 @@ cell_id = Vector2i(4, 1)
 [node name="ObstacleReflecter_0_1" parent="." instance=ExtResource("4_cnhdj")]
 position = Vector2(64, 192)
 rotation = 1.5708
-reflect_map = {
-Vector2(-1, 0): Vector2(0, 1),
-Vector2(0, -1): Vector2(1, 0),
-Vector2(0, 1): Vector2(-1, 0),
-Vector2(1, 0): Vector2(0, -1)
-}
 cell_id = Vector2i(0, 1)
 
 [node name="ObstacleReflecter_0_2" parent="." instance=ExtResource("4_cnhdj")]
@@ -67,12 +61,6 @@ cell_id = Vector2i(0, 2)
 [node name="ObstacleReflecter_4_2" parent="." instance=ExtResource("4_cnhdj")]
 position = Vector2(576, 320)
 rotation = 1.5708
-reflect_map = {
-Vector2(-1, 0): Vector2(0, 1),
-Vector2(0, -1): Vector2(1, 0),
-Vector2(0, 1): Vector2(-1, 0),
-Vector2(1, 0): Vector2(0, -1)
-}
 cell_id = Vector2i(4, 2)
 
 [node name="ObstacleNum_2_2" parent="." instance=ExtResource("6_vnm76")]
