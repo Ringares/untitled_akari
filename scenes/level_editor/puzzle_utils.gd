@@ -132,27 +132,59 @@ static func get_conner_cells(curr_cell_idx:Vector2i, cells:Array):
 static func get_candidate_to_light_cell(puzzle_data, curr_cell_idx:Vector2i):
 	"""
 	计算点亮当前格的所有可能其它位置
+	# FixME
 	"""
 	var candidates_to_light = []
 	var curr_cell = puzzle_data[curr_cell_idx.x][curr_cell_idx.y]
 	if not curr_cell.is_lit and not curr_cell.is_implacable:
 		candidates_to_light.append(curr_cell)
 	for dir in [Vector2i(1,0),Vector2i(-1,0),Vector2i(0,1),Vector2i(0,-1)]:
-		var temp_cell_id = curr_cell_idx
-		while true:
-			temp_cell_id = temp_cell_id + dir
-			if not PuzzleUtils.is_valid_cell(puzzle_data, temp_cell_id): # 到边界，停止
-				break
-			var temp_cell = puzzle_data[temp_cell_id.x][temp_cell_id.y]
-			if temp_cell.type != PuzzleCell.Type.BLANK:  # 到阻挡，停止
-				break
-			if not temp_cell.is_lit and not temp_cell.is_implacable:
-				candidates_to_light.append(temp_cell)
+		get_candidate_to_light_cell_on_dir(puzzle_data, curr_cell_idx, dir, candidates_to_light)
+		#var temp_cell_id = curr_cell_idx
+		#while true:
+			#temp_cell_id = temp_cell_id + dir
+			#if not PuzzleUtils.is_valid_cell(puzzle_data, temp_cell_id): # 到边界，停止
+				#break
+			#var temp_cell = puzzle_data[temp_cell_id.x][temp_cell_id.y]
+			#if temp_cell.type != PuzzleCell.Type.BLANK:  # 到阻挡，停止
+				#break
+			#if not temp_cell.is_lit and not temp_cell.is_implacable:
+				#candidates_to_light.append(temp_cell)
 	return candidates_to_light
 
 
-static func get_candidate_to_light_cell_on_dir(puzzle_data, curr_cell_idx:Vector2i, dir:Vector2i):
-	pass
+static func get_candidate_to_light_cell_on_dir(puzzle_data, curr_cell_idx:Vector2i, dir:Vector2i, candidates_to_light:Array):
+	"""
+	dir: reverse-light dir
+	"""
+	var temp_cell_id = curr_cell_idx
+	while true:
+		temp_cell_id = temp_cell_id + dir
+		if not PuzzleUtils.is_valid_cell(puzzle_data, temp_cell_id): # 到边界，停止
+			break
+		if puzzle_data[temp_cell_id.x][temp_cell_id.y].type in [PuzzleCell.Type.BLACK, PuzzleCell.Type.NUM, PuzzleCell.Type.EDGE]:  # 到阻挡，停止
+			break
+		if puzzle_data[temp_cell_id.x][temp_cell_id.y].type == PuzzleCell.Type.SPEC_REFLECTER_135:
+			var reflect_dir = ReflectUtils.get_reflect_dir(ReflectUtils.DEGREE_SET.DEG_135, -dir)
+			get_candidate_to_light_cell_on_dir(puzzle_data, temp_cell_id, reflect_dir, candidates_to_light)
+			break
+		if puzzle_data[temp_cell_id.x][temp_cell_id.y].type == PuzzleCell.Type.SPEC_REFLECTER_45:
+			var reflect_dir = ReflectUtils.get_reflect_dir(ReflectUtils.DEGREE_SET.DEG_45, -dir)
+			get_candidate_to_light_cell_on_dir(puzzle_data, temp_cell_id, reflect_dir, candidates_to_light)
+			break
+		if puzzle_data[temp_cell_id.x][temp_cell_id.y].type == PuzzleCell.Type.SPEC_REPEATER:
+			var all_dir = [Vector2i(1,0),Vector2i(-1,0),Vector2i(0,1),Vector2i(0,-1)]
+			all_dir.erase(-dir)
+			for repeat_dir in all_dir:
+				get_candidate_to_light_cell_on_dir(puzzle_data, temp_cell_id, repeat_dir, candidates_to_light)
+			break
+		if puzzle_data[temp_cell_id.x][temp_cell_id.y].type == PuzzleCell.Type.SPEC_WH:
+			var linked_cell_id = puzzle_data[temp_cell_id.x][temp_cell_id.y].linked_cell_id
+			get_candidate_to_light_cell_on_dir(puzzle_data, linked_cell_id, dir, candidates_to_light)
+			break
+			
+		if not puzzle_data[temp_cell_id.x][temp_cell_id.y].is_lit and not puzzle_data[temp_cell_id.x][temp_cell_id.y].is_implacable:
+			candidates_to_light.append(puzzle_data[temp_cell_id.x][temp_cell_id.y])
 
 
 
@@ -212,6 +244,10 @@ static func pass_light(puzzle_data, curr_cell_idx, dir:Vector2i):
 			all_dir.erase(-dir)
 			for repeat_dir in all_dir:
 				has_new_mark = pass_light(puzzle_data, temp_cell, repeat_dir) or has_new_mark
+			break
+		if puzzle_data[temp_cell.x][temp_cell.y].type == PuzzleCell.Type.SPEC_WH:
+			var linked_cell_id = puzzle_data[temp_cell.x][temp_cell.y].linked_cell_id
+			has_new_mark = pass_light(puzzle_data, linked_cell_id, dir) or has_new_mark
 			break
 		puzzle_data[temp_cell.x][temp_cell.y].is_lit = true
 		has_new_mark = mark_implacable(puzzle_data, temp_cell) or has_new_mark

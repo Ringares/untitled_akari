@@ -1,8 +1,8 @@
 extends Node
 class_name PuzzleGenerator
 
-@export var width:int
-@export var height:int
+#@export var width:int
+#@export var height:int
 
 const ALPHABET = {
 	"a":1,"b":2,"c":3,"d":4,"e":5,"f":6,"g":7,"h":8,"i":9,"j":10,"k":11,
@@ -145,8 +145,8 @@ func generate_new_puzzle(
 
 func generate_empty_puzzle_with_wall(size:Vector2i, symmetry_type:SymmetryType, wall_count_required:float, edge_list=[]):
 	# 初始化分布权重
-	height = int(size.x)
-	width = int(size.y)
+	var height = int(size.x)
+	var width = int(size.y)
 	var puzzle_data = []
 	for i in height:
 		var row = []
@@ -264,8 +264,8 @@ func restore_walls(puzzle_data):
 func symmetry_walls(puzzle_data, symmetry_type):
 	if puzzle_data == []:
 		return
-	width = puzzle_data[0].size()
-	height = puzzle_data.size()
+	var width = puzzle_data[0].size()
+	var height = puzzle_data.size()
 	for row in puzzle_data:
 		for cell in row:
 			if cell.type == PuzzleCell.Type.BLACK:
@@ -298,6 +298,8 @@ func gen_init_lights(puzzle_data):
 
 
 func gen_init_nums(puzzle_data):
+	var height = puzzle_data.size()
+	var width = puzzle_data[0].size()
 	for i in height:
 		for j in width:
 			var curr_cell = puzzle_data[i][j] as PuzzleCell
@@ -323,8 +325,8 @@ func get_all_solutions(puzzle_data, verbose=false):
 func generate_puzzle_by_code(level_code:String):
 	var grid = level_code.split(":")[0]
 	var cells = level_code.split(":")[1]
-	width = int(grid.split("x")[0])
-	height = int(grid.split("x")[1])
+	var width = int(grid.split("x")[0])
+	var height = int(grid.split("x")[1])
 	var puzzle_data = []
 	for i in height:
 		var row = []
@@ -336,6 +338,7 @@ func generate_puzzle_by_code(level_code:String):
 	var col_id
 	
 	var cell_idx = 0
+	var wh_list = []
 	for i in cells:
 		match i:
 			"B":
@@ -344,6 +347,13 @@ func generate_puzzle_by_code(level_code:String):
 				puzzle_data[row_id][col_id] = PuzzleCell.inst(Vector2i(row_id, col_id), PuzzleCell.Type.BLACK)
 				cell_idx += 1
 			
+			"W":
+				row_id = int(cell_idx/width)
+				col_id = int(cell_idx%width)
+				puzzle_data[row_id][col_id] = PuzzleCell.inst(Vector2i(row_id, col_id), PuzzleCell.Type.SPEC_WH)
+				cell_idx += 1
+				wh_list.append(puzzle_data[row_id][col_id])
+				
 			"X":
 				row_id = int(cell_idx/width)
 				col_id = int(cell_idx%width)
@@ -382,6 +392,12 @@ func generate_puzzle_by_code(level_code:String):
 						cell_idx += 1
 				else:
 					push_error("invalid level code")
+	
+	assert(wh_list.size() == 0 or wh_list.size() == 2)
+	if wh_list.size() == 2:
+		wh_list[0].linked_cell_id = wh_list[1].cell_id
+		wh_list[1].linked_cell_id = wh_list[2].cell_id
+	
 	return puzzle_data
 
 
@@ -424,6 +440,7 @@ static func puzzle2code(puzzle_data):
 					
 				PuzzleCell.Type.BLACK: code.append("B")
 				PuzzleCell.Type.NUM: code.append(str(cell.num))
+				PuzzleCell.Type.SPEC_WH: code.append("W")
 				PuzzleCell.Type.SPEC_REPEATER: code.append("X")
 				PuzzleCell.Type.SPEC_REFLECTER_135: code.append("Y")
 				PuzzleCell.Type.SPEC_REFLECTER_45: code.append("Z")
@@ -432,7 +449,7 @@ static func puzzle2code(puzzle_data):
 	return res
 
 
-func reset_puzzle(puzzle_data):
+static func reset_puzzle(puzzle_data):
 	"""
 	重置puzzle数据，取消 implacable, light 标记
 	"""

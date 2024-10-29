@@ -2,12 +2,18 @@ extends Control
 
 
 const LEVEL_SELECTOR_BUTTON = preload("res://scenes/game/game_ui/level_selector_button.tscn")
+const PAUSE_MENU = preload("res://scenes/menu/pause_menu.tscn")
 
 @onready var ui_sound: UISound = %UISound
 @onready var page_container: HBoxContainer = %PageContainer
-@onready var page_1_grid_container: GridContainer = %Page1GridContainer
+
+@onready var first_page_grid_container: GridContainer = %FirstPageGridContainer
 @onready var page_2_grid_container: GridContainer = %Page2GridContainer
 @onready var page_3_grid_container: GridContainer = %Page3GridContainer
+@onready var page_4_grid_container: GridContainer = %Page4GridContainer
+@onready var page_5_grid_container: GridContainer = %Page5GridContainer
+@onready var last_page_grid_container: GridContainer = %LastPageGridContainer
+
 
 var level_instants = {}
 var passed_level_ids = []
@@ -18,9 +24,12 @@ func _ready() -> void:
 	GameEvents.signal_level_jump_to.connect(func(_id):queue_free())
 
 	var pages = [
-		page_1_grid_container,
+		first_page_grid_container,
 		page_2_grid_container,
-		page_3_grid_container
+		page_3_grid_container,
+		page_4_grid_container,
+		page_5_grid_container,
+		last_page_grid_container
 	]
 	for level_id_str in GameLevelLog.get_passed_levels():
 		passed_level_ids.append(int(level_id_str.split("-")[1]))

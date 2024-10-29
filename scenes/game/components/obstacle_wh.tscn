@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://p8ojfrc6eg3d"]
+
+[ext_resource type="Script" path="res://scenes/game/components/obstacle_wh.gd" id="1_urdc8"]
+[ext_resource type="Texture2D" uid="uid://majifcdsi8xh" path="res://assets/img/sprite_sheet.png" id="2_3wo13"]
+[ext_resource type="PackedScene" uid="uid://bbohw1tlxow7b" path="res://scenes/game/components/square_shadow.tscn" id="3_sy0qx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q84bj"]
+atlas = ExtResource("2_3wo13")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pl60v"]
+radius = 16.0
+
+[node name="ObstacleWormhole" type="Node2D"]
+script = ExtResource("1_urdc8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_q84bj")
+
+[node name="SquareShadow" parent="Sprite2D" instance=ExtResource("3_sy0qx")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pl60v")
+debug_color = Color(0.974968, 0.0549332, 0.380017, 0.42)

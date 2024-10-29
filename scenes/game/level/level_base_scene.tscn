@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://b6twubdvnqu7c" path="res://assets/img/icon/mouse_left.png" id="18_iotvr"]
 [ext_resource type="Script" path="res://script/theme_panel_container.gd" id="18_onwif"]
 [ext_resource type="Texture2D" uid="uid://bpgnpqwbpxwmt" path="res://assets/img/icon/mouse_right.png" id="19_w4jug"]
-[ext_resource type="Texture2D" uid="uid://dut6ghjuig852" path="res://assets/img/icon/lock_unlocked.png" id="21_58b4u"]
+[ext_resource type="Texture2D" uid="uid://ofjy4klx5jli" path="res://assets/img/icon/icons8-options-96-2.png" id="21_n8530"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eiu6l"]
 
@@ -49,6 +49,7 @@ radius = 4.0
 
 [node name="LevelBaseScene" type="Node2D"]
 script = ExtResource("1_0oed0")
+level_code = "10x10:1dBBbBb1c1BcBBBcBa1b2l1BbBBb21l2b1aBcBB1cB1c1bBbB1dB"
 
 [node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("2_vq8lp")]
 init_focus_node = NodePath("../UILayer/LeftButtonContainer/HelpButton")
@@ -379,7 +380,7 @@ focus_neighbor_top = NodePath("../LightModeButton")
 focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
 focus_neighbor_bottom = NodePath("../MainButton")
 focus_mode = 0
-icon = ExtResource("21_58b4u")
+icon = ExtResource("21_n8530")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("4_ttych")

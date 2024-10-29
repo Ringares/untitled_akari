@@ -69,6 +69,14 @@ func _on_light_area_entered(area: Area2D, light_area:AkariLight) -> void:
 			#return
 	await get_tree().create_timer(0.2).timeout
 	
+	if obstacle is ObstacleWH:
+		var new_light_area = light_area.duplicate() as AkariLight
+		new_light_area.scale.x = 1.0
+		new_light_area.position = new_light_area.position + to_local(obstacle.get_linked_wh().global_position) - to_local(light_area.global_position)
+		new_light_area.area_entered.connect(_on_light_area_entered.bind(new_light_area))
+		call_deferred("add_child", new_light_area)
+		new_light_area.call_deferred("start_spread")
+	
 	if obstacle is ObstacleRepeater:
 		#print("_on_light_area_entered", light_area)
 		for repeater_rotation in [0, -PI/2, PI/2]:

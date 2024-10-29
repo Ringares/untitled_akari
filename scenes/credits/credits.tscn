@@ -33,12 +33,12 @@ size_flags_horizontal = 3
 
 [node name="HeaderSpace" type="Control" parent="ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 720)
+custom_minimum_size = Vector2(0, 1080)
 layout_mode = 2
 
 [node name="CreditsLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1280, 0)
+custom_minimum_size = Vector2(1920, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
@@ -46,34 +46,38 @@ bbcode_enabled = true
 text = "[center]
 [font_size=64]Collaborators[/font_size]
 
-[font_size=32]Godot Game Template[/font_size]
-Author: [url=https://github.com/Maaack/Godot-Game-Template/graphs/contributors]Marek Belski and contributors[/url]  
-Source: [url=https://github.com/Maaack/Godot-Game-Template]github: Godot-Game-Template[/url]  
-License: [url=LICENSE.txt]MIT License[/url]  
+[font_size=32]Developed by[/font_size]
+SumFell
 
-[font_size=64]Tools[/font_size]
-[font_size=24]Godot[/font_size]
-Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]  
-Source: [url=https://godotengine.org/]godotengine.org[/url]  
-License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url] 
+[font_size=32]Musics by[/font_size]
+\"Morning\" 
+\"A Very Brady Special\"
+\"Devonshire Waltz Andante\"
+\"Floating Cities\"
+\"Lobby Time\"
+\"Pepper's Theme\"
+\"Suonatore di Liuto\"
+\"Water Lily\"
+\"Wholesome\"
+Kevin MacLeod [url=http://incompetech.com/)]incompetech.com[/url]  
+Licensed under Creative Commons: [url=http://creativecommons.org/licenses/by/4.0/]By Attribution 4.0 License[/url]
 
-[font_size=24]Visual Studio Code[/font_size]
-Author: [url=https://opensource.microsoft.com/]Microsoft[/url]  
-Source: [url=https://github.com/microsoft/vscode]github: vscode[/url]  
-License: [url=https://github.com/microsoft/vscode/blob/main/LICENSE.txt]MIT License[/url]
-
-[font_size=24]Git[/font_size]
-Author: [url=https://github.com/torvalds]Linus Torvalds[/url]  
-Source: [url=https://git-scm.com/downloads]git-scm.com[/url]  
-License: [url=https://opensource.org/licenses/GPL-2.0]GNU General Public License version 2[/url]
-[/center]"
+[font_size=32]Special Thanks for Playtest[/font_size]
+CypiXmu
+Paradachsh
+MadsterW
+Warmwalker
+Kosins
+AlexFijer
+Kingbob
+multiapp6215"
 fit_content = true
 scroll_active = false
 script = ExtResource("3_d46f0")
 
 [node name="FooterSpace" type="Control" parent="ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 720)
+custom_minimum_size = Vector2(0, 1080)
 layout_mode = 2
 
 [node name="ScrollResetTimer" type="Timer" parent="."]

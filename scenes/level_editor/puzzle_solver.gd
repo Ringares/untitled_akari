@@ -194,6 +194,8 @@ static func trivial_solver(puzzle_data, verbose=false):
 							print("place only possible candi ", cell.cell_id, candidate_to_light_cell[0].cell_id)
 						new_mark_implacable = PuzzleUtils.place_light(puzzle_data, candidate_to_light_cell[0].cell_id) or new_mark_implacable
 						candidate_to_light_cell[0].light_reason = PuzzleCell.LIGHT_REASON.SOLVE_ONLY_POSSIBLE
+						# temp need opti
+						new_mark_implacable = true
 	
 	var blank_count = 0
 	var lit_count = 0

@@ -16,7 +16,7 @@ func _ready() -> void:
 		focus_next("ui_down")
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("ui_down"):
 		focus_next("ui_down")
 	if Input.is_action_pressed("ui_up"):

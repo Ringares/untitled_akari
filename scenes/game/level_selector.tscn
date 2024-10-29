@@ -71,11 +71,26 @@ unique_name_in_owner = true
 offset_right = 5768.0
 offset_bottom = 1080.0
 
-[node name="Page1" type="Control" parent="CanvasLayer/PageContainer"]
+[node name="FirstPage" type="Control" parent="CanvasLayer/PageContainer"]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/Page1"]
+[node name="Label" type="Label" parent="CanvasLayer/PageContainer/FirstPage"]
+self_modulate = Color(1, 1, 1, 0.141176)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -193.5
+offset_right = 395.0
+offset_bottom = 193.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+text = "W1"
+script = ExtResource("9_vtm0f")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/FirstPage"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -89,17 +104,17 @@ offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ReferenceRect" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+[node name="ReferenceRect" type="ReferenceRect" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 border_width = 0.0
 
-[node name="ReferenceRect3" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+[node name="ReferenceRect3" type="ReferenceRect" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 border_width = 0.0
 
-[node name="Page1GridContainer" type="GridContainer" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+[node name="FirstPageGridContainer" type="GridContainer" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
@@ -107,38 +122,39 @@ theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 6
 
-[node name="ReferenceRect2" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+[node name="ReferenceRect2" type="ReferenceRect" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 border_width = 0.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PageContainer/Page1/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/Page1/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PageContainer/Page1/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 texture = ExtResource("7_23vtg")
 expand_mode = 2
 script = ExtResource("8_taaw5")
 
-[node name="Page1UnlockButton" type="Label" parent="CanvasLayer/PageContainer/Page1/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Page1UnlockButton" type="Label" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "10 / 25"
 horizontal_alignment = 1
 script = ExtResource("9_vtm0f")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/PageContainer/Page1/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer/VBoxContainer/HBoxContainer"]
 libraries = {
 "": SubResource("AnimationLibrary_rcp55")
 }
 
-[node name="Page1NextButton" type="Button" parent="CanvasLayer/PageContainer/Page1/HBoxContainer/VBoxContainer"]
+[node name="Page1NextButton" type="Button" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -207,6 +223,21 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("5_alce4")
 
+[node name="Label" type="Label" parent="CanvasLayer/PageContainer/Page2"]
+self_modulate = Color(1, 1, 1, 0.141176)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -193.5
+offset_right = 395.0
+offset_bottom = 193.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+text = "W2"
+script = ExtResource("9_vtm0f")
+
 [node name="Page3" type="Control" parent="CanvasLayer/PageContainer"]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 2
@@ -254,10 +285,244 @@ custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 border_width = 0.0
 
-[node name="ReferenceRect3" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page3/HBoxContainer"]
+[node name="NextButton" type="Button" parent="CanvasLayer/PageContainer/Page3/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+icon = ExtResource("6_iy5b6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="Label" type="Label" parent="CanvasLayer/PageContainer/Page3"]
+self_modulate = Color(1, 1, 1, 0.141176)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -193.5
+offset_right = 395.0
+offset_bottom = 193.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+text = "W3"
+script = ExtResource("9_vtm0f")
+
+[node name="Page4" type="Control" parent="CanvasLayer/PageContainer"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/Page4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -128.0
+offset_right = 328.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/Page4/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+icon = ExtResource("4_uuubw")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page4/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 border_width = 0.0
+
+[node name="Page4GridContainer" type="GridContainer" parent="CanvasLayer/PageContainer/Page4/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 6
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page4/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="NextButton" type="Button" parent="CanvasLayer/PageContainer/Page4/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+icon = ExtResource("6_iy5b6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="Label" type="Label" parent="CanvasLayer/PageContainer/Page4"]
+self_modulate = Color(1, 1, 1, 0.141176)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -193.5
+offset_right = 395.0
+offset_bottom = 193.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+text = "W4"
+script = ExtResource("9_vtm0f")
+
+[node name="Page5" type="Control" parent="CanvasLayer/PageContainer"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/Page5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -128.0
+offset_right = 328.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/Page5/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+icon = ExtResource("4_uuubw")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page5/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="Page5GridContainer" type="GridContainer" parent="CanvasLayer/PageContainer/Page5/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 6
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="CanvasLayer/PageContainer/Page5/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="NextButton" type="Button" parent="CanvasLayer/PageContainer/Page5/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+icon = ExtResource("6_iy5b6")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="Label" type="Label" parent="CanvasLayer/PageContainer/Page5"]
+self_modulate = Color(1, 1, 1, 0.141176)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -193.5
+offset_right = 395.0
+offset_bottom = 193.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+text = "W5"
+script = ExtResource("9_vtm0f")
+
+[node name="LastPage" type="Control" parent="CanvasLayer/PageContainer"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PageContainer/LastPage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -128.0
+offset_right = 328.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/LastPage/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+icon = ExtResource("4_uuubw")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_alce4")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="CanvasLayer/PageContainer/LastPage/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="LastPageGridContainer" type="GridContainer" parent="CanvasLayer/PageContainer/LastPage/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 6
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="CanvasLayer/PageContainer/LastPage/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="ReferenceRect3" type="ReferenceRect" parent="CanvasLayer/PageContainer/LastPage/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+border_width = 0.0
+
+[node name="Label" type="Label" parent="CanvasLayer/PageContainer/LastPage"]
+self_modulate = Color(1, 1, 1, 0.141176)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -193.5
+offset_right = 395.0
+offset_bottom = 193.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+text = "W6"
+script = ExtResource("9_vtm0f")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 7
@@ -266,10 +531,11 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -192.0
-offset_top = -177.0
+offset_top = -209.0
 offset_right = 192.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 4
 theme_override_constants/margin_bottom = 96
 
 [node name="BackButton" type="Button" parent="CanvasLayer/MarginContainer"]
@@ -319,8 +585,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("9_vtm0f")
 
-[connection signal="pressed" from="CanvasLayer/PageContainer/Page1/HBoxContainer/VBoxContainer/Page1NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/FirstPage/HBoxContainer/VBoxContainer/Page1NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PageContainer/Page2/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PageContainer/Page2/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PageContainer/Page3/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/Page3/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/Page4/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/Page4/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/Page5/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/Page5/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PageContainer/LastPage/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

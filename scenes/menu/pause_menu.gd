@@ -48,13 +48,14 @@ func _on_option_button_pressed():
 
 
 func _on_main_menu_button_pressed():
-	InGameMenuController.close_menu()
 	SceneLoader.load_scene(main_menu_scene)
+	#InGameMenuController.close_menu()
 
 
 func _on_back_button_pressed():
 	_close_sub_menu()
-	
+
+
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		InGameMenuController.close_menu()

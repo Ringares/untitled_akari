@@ -6,6 +6,7 @@ const GROUND = preload("res://scenes/game/components/ground.tscn")
 const OBSTACLE_NUM = preload("res://scenes/game/components/obstacle_num.tscn")
 const OBSTACLE_REFLECTER = preload("res://scenes/game/components/obstacle_reflecter.tscn")
 const OBSTACLE_REPEATER = preload("res://scenes/game/components/obstacle_repeater.tscn")
+const OBSTACLE_WH = preload("res://scenes/game/components/obstacle_wh.tscn")
 
 @onready var puzzle_generator: PuzzleGenerator = $PuzzleGenerator
 
@@ -84,10 +85,11 @@ var curr_edit_mode:EDIT_MODE = EDIT_MODE.IDEL:
 				selected_indicator.show()
 				
 			EDIT_MODE.PLAY:
-				just_placed_obstacle = null
-				for i in placed_data.keys():
-					placed_data[i].set("interactable", true)
-					%PlayButton.text = "Edit"
+				if check_wh(null):
+					just_placed_obstacle = null
+					for i in placed_data.keys():
+						placed_data[i].set("interactable", true)
+						%PlayButton.text = "Edit"
 
 
 func _ready() -> void:
@@ -145,7 +147,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			# select mode
 			curr_edit_mode = EDIT_MODE.MODIFY
 			selected_indicator.global_position = to_global(grid_to_local(mouse_cell_id) + level_root.global_position)
-			
+		
+		check_wh(null)
 	
 	if event.is_action_pressed("num0"):
 		set_number_obstacle_num(0)
@@ -162,6 +165,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("rotate"):
 		set_reflect_obstacle_rotate()
+	
+	
 
 
 func set_number_obstacle_num(num:int):
@@ -212,7 +217,7 @@ func place_at_cell(new_scene:GridComponent, place_cell_id:Vector2i):
 	new_scene.show()
 	
 	
-	if new_scene is ObstacleNum or new_scene is ObstacleReflecter:
+	if new_scene is ObstacleNum or new_scene is ObstacleReflecter or new_scene is ObstacleWH:
 		just_placed_obstacle = new_scene
 	else:
 		just_placed_obstacle = null
@@ -222,7 +227,8 @@ func init_grids_by_puzzle_data(puzzle_data):
 	for cell_id in placed_data.keys():
 		placed_data[cell_id].queue_free()
 		placed_data.erase(cell_id)
-		
+	
+
 	for row in puzzle_data:
 		for cell in row:
 			var new_scene
@@ -246,8 +252,12 @@ func init_grids_by_puzzle_data(puzzle_data):
 				new_scene.swicth_degree_set()
 			elif cell.type == PuzzleCell.Type.SPEC_REPEATER:
 				new_scene = OBSTACLE_REPEATER.instantiate()
+			elif cell.type == PuzzleCell.Type.SPEC_WH:
+				new_scene = OBSTACLE_WH.instantiate()
 				
 			place_at_cell(new_scene, Vector2i(cell.cell_id.y, cell.cell_id.x))
+	
+	check_wh(null)
 	
 	while init_grids.x * 128 * zoom > 920 * 0.7:
 		zoom /= 1.2
@@ -323,7 +333,23 @@ func get_puzzle_data_by_grid():
 	return puzzle_data
 	
 	
+func check_wh(wh_list):
+	if wh_list == null:
+		wh_list = []
+		for key in placed_data.keys():
+			var obj = placed_data[key] as GridComponent
+			if obj is ObstacleWH:
+				wh_list.append(obj)
+	if wh_list.size() == 0:
+		return true
+		
+	if wh_list.size() == 2:
+		wh_list[0].linked_wh = wh_list[1]
+		wh_list[1].linked_wh = wh_list[0]
+		return true
 	
+	push_error("WH condition not valid")
+	return false
 	
 	
 	
@@ -438,7 +464,7 @@ func _on_check_solution_button_pressed() -> void:
 	if curr_solutions.size() == 0:
 		var puzzle_data = get_puzzle_data_by_grid()
 		puzzle_generator.reset_puzzle(puzzle_data)
-		var solution_res = puzzle_generator.get_all_solutions(puzzle_data, true)
+		var solution_res = puzzle_generator.get_all_solutions(puzzle_data, false)
 		curr_solutions = solution_res[0]
 		curr_diffi_info["leaf_count"] = solution_res[1].size()
 		var branches = []
@@ -475,9 +501,9 @@ func _on_clear_button_pressed() -> void:
 	curr_solutions = []
 	%LabelSolutionCount.text = ""
 	var puzzle_data = get_puzzle_data_by_grid()
-	puzzle_generator.reset_puzzle(puzzle_data)
+	PuzzleGenerator.reset_puzzle(puzzle_data)
 	init_grids_by_puzzle_data(puzzle_data)
-	print(puzzle_generator.puzzle2code(puzzle_data))
+	print(PuzzleGenerator.puzzle2code(puzzle_data))
 
 
 func _on_symmetry_wall_button_pressed() -> void:
@@ -504,7 +530,7 @@ func _on_random_solution_button_pressed() -> void:
 
 func _on_polish_button_pressed() -> void:
 	var puzzle_data = get_puzzle_data_by_grid()
-	puzzle_generator.reset_puzzle(puzzle_data)
+	PuzzleGenerator.reset_puzzle(puzzle_data)
 	puzzle_generator.polish_puzzle(puzzle_data)
 	init_grids_by_puzzle_data(puzzle_data)
 	curr_solutions = []

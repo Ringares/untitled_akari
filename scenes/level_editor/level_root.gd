@@ -35,7 +35,7 @@ func adjust_position_scale() -> Vector2:
 		furthest_y_pos + GRID_SIZE / 2.0 - global_position.y
 	)
 	
-	var scale_x = (get_viewport_rect().size.x * 2 / 3) / board_rect.x
+	var scale_x = (get_viewport_rect().size.x * 1 / 2) / board_rect.x
 	var scale_y = (get_viewport_rect().size.y * 2 / 3) / board_rect.y
 	
 	var final_scale = clamp(min(scale_x, scale_y), 0.1, 1.0)
@@ -88,13 +88,14 @@ func _on_button_pressed() -> void:
 		var puzzle_cell = obj.to_puzzle_cell() as PuzzleCell
 		puzzle_data[puzzle_cell.cell_id.x][puzzle_cell.cell_id.y] = puzzle_cell
 	
+	var puzzle_generator = PuzzleGenerator.new()
 	var code = PuzzleGenerator.puzzle2code(puzzle_data)
 	PuzzleUtils.print_puzzle(puzzle_data)
 	print(code)
 	DisplayServer.clipboard_set(code)
 	
-	var puzzle_generator = PuzzleGenerator.new()
-	puzzle_generator.reset_puzzle(puzzle_data)
+	
+	PuzzleGenerator.reset_puzzle(puzzle_data)
 	var solution_res = puzzle_generator.get_all_solutions(puzzle_data, false)
 	var curr_solutions = solution_res[0]
 	var curr_diffi_info = {}

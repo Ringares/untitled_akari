@@ -336,12 +336,12 @@ func _on_hidden_puzzle_code_button_pressed() -> void:
 		var puzzle_cell = obj.to_puzzle_cell() as PuzzleCell
 		puzzle_data[puzzle_cell.cell_id.x][puzzle_cell.cell_id.y] = puzzle_cell
 	
-	var code = PuzzleGenerator.puzzle2code(puzzle_data)
+	var puzzle_generator = PuzzleGenerator.new()
+	var code = puzzle_generator.puzzle2code(puzzle_data)
 	PuzzleUtils.print_puzzle(puzzle_data)
 	print(code)
 	DisplayServer.clipboard_set(code)
 	
-	var puzzle_generator = PuzzleGenerator.new()
 	puzzle_generator.reset_puzzle(puzzle_data)
 	var solution_res = puzzle_generator.get_all_solutions(puzzle_data, true)
 	var curr_solutions = solution_res[0]

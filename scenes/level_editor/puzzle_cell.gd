@@ -7,6 +7,7 @@ enum Type{
 	NUM,
 	BLACK, # B
 	
+	SPEC_WH, # W
 	SPEC_REPEATER, # X
 	SPEC_REFLECTER_135, # Y
 	SPEC_REFLECTER_45, # Z
@@ -24,6 +25,7 @@ var type:Type
 var is_implacable = true
 var has_light = false
 var is_lit = false
+var linked_cell_id = null
 
 var has_trivialed = false  # 是否初解过
 var heuristic_value = 1
@@ -72,5 +74,7 @@ func self_duplicate():
 	inst.is_implacable = self.is_implacable
 	inst.has_light = self.has_light
 	inst.is_lit = self.is_lit
+	inst.linked_cell_id = self.linked_cell_id 
 	inst.has_trivialed = self.has_trivialed  # 是否初解过
+	
 	return inst
