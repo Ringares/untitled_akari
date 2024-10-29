@@ -47,7 +47,7 @@ func _physics_process(_delta: float) -> void:
 				Time.get_ticks_msec() - last_sfx_played[sfx_path] < 1000:
 				return
 			
-			if sfx_path == "res://assets/audio/game_sfx/FUI Button Beep Clean.wav":
+			if sfx_path in ["res://assets/audio/game_sfx/FUI Button Beep Clean.wav",]:
 				#print("pitch_scale_times", pitch_scale_times.get(sfx_path, 0))
 				if Time.get_ticks_msec() - last_sfx_played[sfx_path] < 1000:
 					pitch_scale_times[sfx_path] = pitch_scale_times.get(sfx_path, 0) + 1
@@ -57,7 +57,7 @@ func _physics_process(_delta: float) -> void:
 		
 		last_sfx_played[sfx_path] = Time.get_ticks_msec()
 		available[0].stream = load(sfx_path)
-		(available[0] as AudioStreamPlayer).pitch_scale  = 1.05 ** pitch_scale_times.get(sfx_path, 0)
+		(available[0] as AudioStreamPlayer).pitch_scale  = 1.05 ** min(pitch_scale_times.get(sfx_path, 0), 20)
 		available[0].play()
 		available.pop_front()
 		
