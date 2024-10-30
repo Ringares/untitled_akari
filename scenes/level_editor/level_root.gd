@@ -59,8 +59,6 @@ func adjust_position_scale() -> Vector2:
 		SfxManager.play_light_up()
 	
 	return Vector2((furthest_x_cell + 1) * GRID_SIZE * final_scale, (furthest_y_cell + 1) * GRID_SIZE * final_scale)
-	
-	
 
 
 func _on_button_pressed() -> void:

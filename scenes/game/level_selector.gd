@@ -3,6 +3,7 @@ extends Control
 
 const LEVEL_SELECTOR_BUTTON = preload("res://scenes/game/game_ui/level_selector_button.tscn")
 const PAUSE_MENU = preload("res://scenes/menu/pause_menu.tscn")
+@export_file("*.tscn") var infi_game_scene_path : String
 
 @onready var ui_sound: UISound = %UISound
 @onready var page_container: HBoxContainer = %PageContainer
@@ -68,11 +69,23 @@ func _ready() -> void:
 	for level_id in passed_level_ids:
 		level_instants[level_id].status = LevelSelector.STATUS.PASSED
 	
+	# jump to curr level page
 	var curr_level_id = GameLevelLog.get_current_level()
 	var level_code = LevelRes.get_levels().keys()[curr_level_id]
 	var curr_level_id_str = LevelRes.get_levels()[level_code]
 	var curr_world = int(curr_level_id_str.split('-')[0])
 	page_container.position -= Vector2(1920,0) * curr_world
+	
+	# process infinite mode button
+	var is_infinite_mode_unlocked = GameLevelLog.get_infinite_mode_unlocked()
+	if is_infinite_mode_unlocked:
+		%InfiniteModeButton.disabled = false
+		%InfiniteModeButton.text = tr("Infinite Mode")
+		%InfiniteModeButton.icon = null
+	else:
+		%InfiniteModeButton.disabled = true
+		%InfiniteModeButton.text = tr("Infinite Mode") + "  %d/48" % [GameLevelLog.get_passed_levels().size()]
+	
 	
 	ui_sound.install_sounds(get_parent())
 
@@ -95,3 +108,7 @@ func _on_previous_button_pressed() -> void:
 
 func _on_back_button_pressed() -> void:
 	self.queue_free()
+
+
+func _on_infinite_mode_button_pressed() -> void:
+	SceneLoader.load_scene(infi_game_scene_path)

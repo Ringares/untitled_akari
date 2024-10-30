@@ -277,7 +277,8 @@ func _on_main_button_pressed() -> void:
 	if '-' in current_level_id_str:
 		SceneLoader.load_scene("res://scenes/game/game_ui/play_save_slots.tscn")
 	else:
-		SceneLoader.load_scene("res://scenes/game/game_ui_infinite.tscn")
+		#SceneLoader.load_scene("res://scenes/game/game_ui_infinite.tscn")
+		SceneLoader.reload_current_scene()
 		
 
 

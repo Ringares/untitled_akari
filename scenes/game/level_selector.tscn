@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://i6igkf5whup"]
+[gd_scene load_steps=17 format=3 uid="uid://i6igkf5whup"]
 
 [ext_resource type="Script" path="res://scenes/game/level_selector.gd" id="1_dky57"]
 [ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="1_j6vg6"]
@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://i2dphu7ocm48" path="res://assets/img/icon/icons8-hint-96.png" id="7_23vtg"]
 [ext_resource type="Script" path="res://script/theme_texture_rect.gd" id="8_taaw5"]
 [ext_resource type="Script" path="res://script/theme_label.gd" id="9_vtm0f"]
+[ext_resource type="Texture2D" uid="uid://b0cqk52kibo3s" path="res://assets/img/icon/icons8-hint-48.png" id="10_7eew1"]
+[ext_resource type="StyleBox" uid="uid://5l77cb5lyepb" path="res://themes/black_style_box_texture.tres" id="10_hn42r"]
+[ext_resource type="StyleBox" uid="uid://cnlyf4l31c4tv" path="res://themes/yellow_hover_style_box_texture.tres" id="11_3mvyw"]
+[ext_resource type="StyleBox" uid="uid://cmpm5odyryg8e" path="res://themes/yellow_style_box_texture.tres" id="11_p6qua"]
 
 [sub_resource type="Animation" id="Animation_mdxg8"]
 length = 0.001
@@ -55,6 +59,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dky57")
+infi_game_scene_path = "res://scenes/game/game_ui_infinite.tscn"
 
 [node name="UISound" type="Node" parent="."]
 unique_name_in_owner = true
@@ -82,9 +87,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 96.0
-offset_top = -444.0
-offset_right = 363.0
-offset_bottom = -57.0
+offset_top = -348.0
+offset_right = 405.0
+offset_bottom = 39.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 256
 text = "W0"
@@ -230,9 +235,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 96.0
-offset_top = -444.0
+offset_top = -348.0
 offset_right = 405.0
-offset_bottom = -57.0
+offset_bottom = 39.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 256
 text = "W1"
@@ -303,9 +308,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 96.0
-offset_top = -444.0
+offset_top = -348.0
 offset_right = 405.0
-offset_bottom = -57.0
+offset_bottom = 39.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 256
 text = "W2"
@@ -376,9 +381,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 96.0
-offset_top = -444.0
+offset_top = -348.0
 offset_right = 405.0
-offset_bottom = -57.0
+offset_bottom = 39.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 256
 text = "W3"
@@ -449,9 +454,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 96.0
-offset_top = -444.0
+offset_top = -348.0
 offset_right = 405.0
-offset_bottom = -57.0
+offset_bottom = 39.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 256
 text = "W5"
@@ -516,33 +521,50 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 96.0
-offset_top = -444.0
+offset_top = -348.0
 offset_right = 405.0
-offset_bottom = -57.0
+offset_bottom = 39.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 256
 text = "W5"
 script = ExtResource("9_vtm0f")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 7
+anchors_preset = 13
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -192.0
-offset_top = -209.0
 offset_right = 192.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/margin_top = 96
 theme_override_constants/margin_bottom = 96
+
+[node name="InfiniteModeButton" type="Button" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(384, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/disabled = ExtResource("10_hn42r")
+theme_override_styles/hover = ExtResource("11_3mvyw")
+theme_override_styles/normal = ExtResource("11_p6qua")
+disabled = true
+text = "Infinite Mode  x/48"
+icon = ExtResource("10_7eew1")
+icon_alignment = 2
 
 [node name="BackButton" type="Button" parent="CanvasLayer/MarginContainer"]
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 8
 focus_mode = 0
 theme_override_font_sizes/font_size = 48
 text = "Back"
@@ -595,4 +617,5 @@ script = ExtResource("9_vtm0f")
 [connection signal="pressed" from="CanvasLayer/PageContainer/Page5/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PageContainer/Page5/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PageContainer/LastPage/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/InfiniteModeButton" to="." method="_on_infinite_mode_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

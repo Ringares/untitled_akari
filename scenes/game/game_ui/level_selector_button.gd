@@ -1,3 +1,4 @@
+@tool
 extends Control
 class_name LevelSelector
 
@@ -27,7 +28,7 @@ var status :STATUS = STATUS.LOCKED:
 				%Unlocked.hide()
 
 
-var text:String:
+@export var text:String:
 	set(value):
 		text = value
 		%Label.text = value

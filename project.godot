@@ -42,6 +42,7 @@ window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://assets/img/cursor_light.png"
 mouse_cursor/custom_image_hotspot=Vector2(12, 12)
+window/quality/msaa_2d=1
 
 [file_customization]
 
@@ -205,7 +206,3 @@ locale/translations=PackedStringArray("res://lang/translation.cn.translation", "
 2d_physics/layer_3="obstacle"
 2d_physics/layer_4="ground"
 2d_physics/layer_9="cursor"
-
-[rendering]
-
-anti_aliasing/quality/msaa_2d=1

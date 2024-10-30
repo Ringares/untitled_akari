@@ -161,6 +161,7 @@ popup/item_1/id = 1
 script = ExtResource("6_0w81w")
 
 [node name="SeedSettingContainer" type="HBoxContainer" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 32
 

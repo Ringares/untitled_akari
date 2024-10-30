@@ -85,8 +85,14 @@ layout_mode = 2
 save_name = "Save1"
 show_name = "1"
 
+[node name="InfiniteButton" parent="HBoxContainer/SaveSlot/VBoxContainer" index="0"]
+visible = false
+
+[node name="Placehold" parent="HBoxContainer/SaveSlot/VBoxContainer" index="1"]
+visible = true
+
 [node name="SlotFinishedLabel" parent="HBoxContainer/SaveSlot/VBoxContainer" index="4"]
-text = "73 %"
+text = "33 %"
 
 [node name="RestButton" parent="HBoxContainer/SaveSlot/VBoxContainer" index="5"]
 focus_neighbor_left = NodePath("../../../../UILayer/VBoxContainer/MainButton")
@@ -102,6 +108,9 @@ show_name = "2"
 [node name="SlotButton" parent="HBoxContainer/SaveSlot2/VBoxContainer/Container" index="1"]
 text = "2"
 
+[node name="SlotFinishedLabel" parent="HBoxContainer/SaveSlot2/VBoxContainer" index="4"]
+text = "33 %"
+
 [node name="RestButton" parent="HBoxContainer/SaveSlot2/VBoxContainer" index="5"]
 focus_neighbor_left = NodePath("../../../SaveSlot/VBoxContainer/RestButton")
 focus_neighbor_top = NodePath("../SlotButton")
@@ -112,6 +121,12 @@ focus_neighbor_bottom = NodePath("../SlotButton")
 layout_mode = 2
 save_name = "Save3"
 show_name = "3"
+
+[node name="InfiniteButton" parent="HBoxContainer/SaveSlot3/VBoxContainer" index="0"]
+visible = false
+
+[node name="Placehold" parent="HBoxContainer/SaveSlot3/VBoxContainer" index="1"]
+visible = true
 
 [node name="SlotButton" parent="HBoxContainer/SaveSlot3/VBoxContainer/Container" index="1"]
 text = "3"

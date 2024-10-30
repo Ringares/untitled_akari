@@ -82,6 +82,10 @@ func advance_level() -> bool:
 	print("level passed ", level_id_str)
 	GameLevelLog.append_passed_level(level_id_str)
 	
+	if GameLevelLog.get_passed_levels().size() == 48:
+		GameLevelLog.set_infinite_mode_unlocked()
+		
+	
 	level_id += 1
 	if level_id >= LevelRes.get_levels().size():
 		emit_signal("levels_finished")
