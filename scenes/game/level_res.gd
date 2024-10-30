@@ -215,6 +215,9 @@ static var levels:Dictionary
 
 
 static func get_levels():
+	"""
+	return {"level_code":"1-1"}
+	"""
 	var world_id = 0
 	var level_id = 0
 	if LevelRes.levels.size() == 0:

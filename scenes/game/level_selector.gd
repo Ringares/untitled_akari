@@ -67,7 +67,13 @@ func _ready() -> void:
 	
 	for level_id in passed_level_ids:
 		level_instants[level_id].status = LevelSelector.STATUS.PASSED
-		
+	
+	var curr_level_id = GameLevelLog.get_current_level()
+	var level_code = LevelRes.get_levels().keys()[curr_level_id]
+	var curr_level_id_str = LevelRes.get_levels()[level_code]
+	var curr_world = int(curr_level_id_str.split('-')[0])
+	page_container.position -= Vector2(1920,0) * curr_world
+	
 	ui_sound.install_sounds(get_parent())
 
 
@@ -75,7 +81,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		self.queue_free()
-		
 
 
 func _on_next_button_pressed() -> void:
