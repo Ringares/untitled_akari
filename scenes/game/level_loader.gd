@@ -68,6 +68,18 @@ func advance_level() -> bool:
 	var level_id : int = get_current_level_id()
 	var level_code = LevelRes.get_levels().keys()[level_id]
 	var level_id_str = LevelRes.get_levels()[level_code]
+	var level_world = int(level_id_str.split('-')[0])
+	var level_in_world = int(level_id_str.split('-')[1])
+	if level_in_world == 23:
+		match level_world:
+			0: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W0_COMPLETE)
+			1: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W1_COMPLETE)
+			2: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W2_COMPLETE)
+			3: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W3_COMPLETE)
+			4: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W4_COMPLETE)
+			5: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W5_COMPLETE)
+	
+	print("level passed ", level_id_str)
 	GameLevelLog.append_passed_level(level_id_str)
 	
 	level_id += 1
