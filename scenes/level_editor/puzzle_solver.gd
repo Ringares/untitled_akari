@@ -57,21 +57,31 @@ class_name PuzzleSolver
 	#backtrack_step(new_puzzle_data2, new_candidates2, solutions, trace_log)
 	#
 	
-static func backtrack_solver2(puzzle_data, solutions, solution_logs, verbose=false):
-	backtrack_step2(puzzle_data, solutions, "", solution_logs, verbose)
+static func backtrack_solver2(puzzle_data, solutions, solution_logs, verbose=false, gen_time_cond=null):
+	backtrack_step2(puzzle_data, solutions, "", solution_logs, verbose, gen_time_cond)
 	if verbose:
 		print("solutions count: ", solutions.size())
 		for s in solutions:
 			PuzzleUtils.print_puzzle(s, ">>> after backtrack_solver")
 	
 	
-static func backtrack_step2(puzzle_data, solutions, trace_log, solution_logs, verbose=false):
+static func backtrack_step2(puzzle_data, solutions, trace_log, solution_logs, verbose=false, gen_time_cond=null):
+	if gen_time_cond != null:
+		var start_msec = gen_time_cond[0]
+		var threshold = gen_time_cond[1]
+		if Time.get_ticks_msec() - start_msec > threshold:
+			print("time's up")
+			return
+	if BgPuzzleGenerator.is_terminated():
+		print("is_terminated")
+		return
+	
 	# 先进性初步求解
 	var depth = trace_log.split("->").size()
 	var depth_prefix = ""
 	for i in depth:
 		depth_prefix += "\t"
-	print(depth_prefix + "start backtrack_step2 ", trace_log)
+	print_verbose(depth_prefix + "start backtrack_step2 ", trace_log)
 	var trivial_result = trivial_solver(puzzle_data, verbose)
 	var has_new_mark = trivial_result[0]
 	while has_new_mark:
@@ -82,7 +92,7 @@ static func backtrack_step2(puzzle_data, solutions, trace_log, solution_logs, ve
 	# 排序：贴着数字约束的候选位置优先级高， 数字和越大约优先
 	var candidates = trivial_result[1]
 	var progress_count = trivial_result[2]
-	print(depth_prefix + progress_count)
+	print_verbose(depth_prefix + progress_count)
 	
 	#trace_log += "->tr:" + str(candidates.size())
 	
@@ -95,19 +105,19 @@ static func backtrack_step2(puzzle_data, solutions, trace_log, solution_logs, ve
 	#PuzzleUtils.print_puzzle(puzzle_data)
 	if PuzzleUtils.check_invalid_num(puzzle_data):
 		solution_logs.append("0=>"+trace_log)
-		print(depth_prefix + "end backtrack_step2 ", "0=>"+trace_log)
+		print_verbose(depth_prefix + "end backtrack_step2 ", "0=>"+trace_log)
 		return
 	
 	if PuzzleUtils.check_invalid_blank(puzzle_data):
 		solution_logs.append("0=>"+trace_log)
-		print(depth_prefix + "end backtrack_step2 ", "0=>"+trace_log)
+		print_verbose(depth_prefix + "end backtrack_step2 ", "0=>"+trace_log)
 		return
 		
 	if PuzzleUtils.check_is_solved(puzzle_data):
 		if PuzzleUtils.puzzle2str(puzzle_data) not in solutions.map(PuzzleUtils.puzzle2str):
 			solutions.append(puzzle_data)
 			solution_logs.append("1=>"+trace_log)
-			print(depth_prefix + "end backtrack_step2 ", "1=>"+trace_log)
+			print_verbose(depth_prefix + "end backtrack_step2 ", "1=>"+trace_log)
 			if verbose:
 				PuzzleUtils.print_puzzle(puzzle_data)
 				
@@ -115,7 +125,7 @@ static func backtrack_step2(puzzle_data, solutions, trace_log, solution_logs, ve
 		
 	if candidates.size() == 0:
 		solution_logs.append("0=>"+trace_log)
-		print(depth_prefix + "end backtrack_step2 ", "0=>"+trace_log)
+		print_verbose(depth_prefix + "end backtrack_step2 ", "0=>"+trace_log)
 		return
 
 	var new_puzzle_data = PuzzleUtils.duplicate_obj_array(puzzle_data)

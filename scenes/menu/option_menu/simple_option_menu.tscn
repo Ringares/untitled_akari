@@ -64,7 +64,7 @@ text = "Master    "
 [node name="HSlider" parent="VBoxContainer/ControlContainer/MasterOptionControl" index="1"]
 focus_neighbor_bottom = NodePath("../../SFXOptionControl/HSlider")
 focus_mode = 0
-value = 0.7
+value = 1.0
 
 [node name="SFXOptionControl" parent="VBoxContainer/ControlContainer" instance=ExtResource("2_kveum")]
 layout_mode = 2

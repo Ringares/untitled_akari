@@ -25,6 +25,8 @@ const ALPHABET_EDGE_LIST = [
 	#"U","V","W","X","Y","Z"
 ]
 
+const SINGLETIME_GEN_MSEC = 20000
+
 
 enum SymmetryType {
 	TwoWayMirror=0,
@@ -32,37 +34,6 @@ enum SymmetryType {
 	FourWayMirror=2,
 	FourWayRotational=3,
 }
-
-func _ready() -> void:
-	#var puzzle_code = "5x5:a3g1bBb0gBa"
-	#var puzzle_code = "5x7:f0B0dBb0f2b10Bf"
-	#var puzzle_code = "7x7:a1a0d1cB2g1e1g11c2dBaBa"
-	#var puzzle_code = "7x7:bBb2aBh2a1a1gBa0a1h2a2bBb"
-	#var puzzle_code = "7x7:e0a2aBa2cBcBi2cBc1a1aBa1e"
-	#var puzzle_code = "7x7:a2fBbB1Ba0qBaBB2bBf1a"
-	#var puzzle_code = "10x10:a0c0cBh0d0Bg1d3hBa2b3a1h3d2g02dBhBc0c0a"
-	#var puzzle_code = "10x10:mBaBBeBd1c2c2b1bBa2l1aBbBb4c2c1dBe0BaBm"
-	#var puzzle_code = "10x10:aBcBb1aBh1c2aB0e1dBb1a1aB2h1BaBaBbBd1e02a1c1hBaBb0cBa"
-	#var puzzle_code = "10x10:cBbBe1a0Bb3b01k2jBa00bBBa1j2kBBb2bBBaBeBb0c"
-	#var puzzle_code = "10x10:a1bBBiBb4hBd0dBaBiB1i1a1d2dBh0b0iB1b1a"
-	#var puzzle_code = "10x10:c0b1dB1dBc1c1c1fBa0vBa3fBc3c0c1dB2d0b0c"
-	#var puzzle_data = generate_puzzle_by_code(puzzle_code)
-	#print_puzzle(puzzle_data)
-	#
-	#var solutions = []
-	##backtrack_solver(puzzle_data, solutions)
-	#backtrack_solver2(puzzle_data, solutions)
-	
-	#var w = 7
-	#var h = 7
-	#var fill_percent = 0.3
-	#var edge_list = [
-		#Vector2i(0,0), Vector2i(h-1,0), Vector2i(0,w-1), Vector2i(h-1,w-1),
-		#Vector2i(0,1), Vector2i(h-1,1), Vector2i(0,w-2), Vector2i(h-1,w-2),
-		#Vector2i(1,0), Vector2i(h-2,0), Vector2i(1,w-1), Vector2i(h-2,w-1),
-	#]
-	#generate_new_puzzle(Vector2i(w,w), SymmetryType.TwoWayMirror, fill_percent, edge_list)
-	pass
 
 
 func generate_new_puzzle(
@@ -72,75 +43,87 @@ func generate_new_puzzle(
 	edge_list=[],
 	rand_seed=Time.get_ticks_msec()
 	):
+	"""
+	return 
+		final_puzzle_data: [[], ...]
+		puzzle_diffi_info: {}
+	"""
 	if rand_seed:
 		seed(int(rand_seed))
 		
 	var wall_count_required = size.x * size.y * wall_percent
 	var is_valid = false
 	var puzzle_data
+	var gen_time_cond = [Time.get_ticks_msec(), SINGLETIME_GEN_MSEC]
 	while not is_valid:
 		# Step1
+		# 创建空网格+blackblock
 		var original_puzzle_data = generate_empty_puzzle_with_wall(size, symmetry_type, wall_count_required, edge_list)
-		print("empty puzzle")
-		PuzzleUtils.print_puzzle(original_puzzle_data)
+		#PuzzleUtils.print_puzzle(original_puzzle_data)
 		
 		# Step2+3
 		var init_try_count = 0
 		var solution_count = 0
 		
 		while solution_count != 1 and init_try_count < 5:
+			if BgPuzzleGenerator.is_terminated():
+				return null
+			
 			puzzle_data = PuzzleUtils.duplicate_obj_array(original_puzzle_data)
+			# 放置初始解+计算数字
 			gen_init_solution_and_nums(puzzle_data)
+			# 清空解 + 打印
 			reset_puzzle(puzzle_data)
-			PuzzleUtils.print_puzzle(puzzle_data)
-		
-			solution_count = get_solution_count(puzzle_data)
+			#PuzzleUtils.print_puzzle(puzzle_data)
+			
+			# 计算解的数量
+			# 尝试 5 次生成初解
+			print('	try solving ', init_try_count)
+			solution_count = get_solution_count(puzzle_data, gen_time_cond)
+			print('	try solving done')
 			init_try_count += 1
+			
 		
+		if gen_time_cond != null:
+			var start_msec = gen_time_cond[0]
+			var threshold = gen_time_cond[1]
+			if Time.get_ticks_msec() - start_msec > threshold:
+				print("time's up")
+				return null
+			
 		is_valid = solution_count == 1
 		wall_count_required += 1
-	##
-	### Step4
-	#while solution_count != 1:
-		#print("init solution_count !=1, add wall")
-		#adjust_puzzle_wall(original_puzzle_data, symmetry_type, wall_percent)
-		#
-		#puzzle_data = PuzzleUtils.duplicate_obj_array(original_puzzle_data)
-		#gen_init_solution_and_nums(puzzle_data)
-		#reset_puzzle(puzzle_data)
-		#PuzzleUtils.print_puzzle(puzzle_data)
-		#
-		#solution_count = get_solution_count(puzzle_data)
-		#reset_puzzle(puzzle_data)
-		#PuzzleUtils.print_puzzle(puzzle_data)
 	
-	#
-	## Step5
-	polish_puzzle(puzzle_data)
-	#for row in puzzle_data:
-		#for cell in row:
-			#if cell.type == PuzzleCell.Type.NUM:
-				#var original_type = cell.type
-				#var original_num = cell.num
-				#cell.type = PuzzleCell.Type.BLACK
-				#cell.num = -1
-				#
-				#if get_solution_count(puzzle_data) != 1:
-					#cell.type = original_type
-					#cell.num = original_num
-	#
-	var final_puzzle_data = PuzzleUtils.duplicate_obj_array(puzzle_data)
-	var solutions = []
-	var solution_logs = []
-	PuzzleSolver.backtrack_solver2(puzzle_data, solutions, solution_logs)
+	## Step5 打磨调整 puzzle, 尝试去掉多余的条件
+	print('	start polishing')
+	polish_puzzle(puzzle_data, gen_time_cond)
+	if BgPuzzleGenerator.is_terminated():
+		return null
+	reset_puzzle(puzzle_data)
+	##var puzzle_data2 = generate_puzzle_by_code(puzzle2code(puzzle_data))
+	## check puzzle_data diff
+	#for i in range(puzzle_data.size()):
+		#for j in range(puzzle_data[0].size()):
+			#print(str(puzzle_data[i][j]) == str(puzzle_data2[i][j]), puzzle_data[i][j], " vs ", puzzle_data2[i][j])
+	
+	#print(puzzle2code(puzzle_data))
+	var solution_res = get_all_solutions(puzzle_data, false)
+	var solutions = solution_res[0]
+	var solution_logs = solution_res[1]
+	if solutions == [] or solution_logs == []:
+		return null
+	var puzzle_diffi_info = cal_puzzle_diffi(solution_logs)
 	
 	print("\n\nfinal puzzle")
+	print("gen_time: ", Time.get_ticks_msec() - gen_time_cond[0])
 	print("solutions count: ", solutions.size())
-	PuzzleUtils.print_puzzle(final_puzzle_data)
-	PuzzleUtils.print_puzzle(solutions[0])
-	print(puzzle2code(final_puzzle_data))
+	print(solution_logs)
+	print(puzzle_diffi_info)
+	PuzzleUtils.print_puzzle(puzzle_data)
+	#PuzzleUtils.print_puzzle(solutions[0])
+	print(puzzle2code(puzzle_data))
 	
-	return final_puzzle_data
+	return [puzzle_data, puzzle_diffi_info]
 	
 
 func generate_empty_puzzle_with_wall(size:Vector2i, symmetry_type:SymmetryType, wall_count_required:float, edge_list=[]):
@@ -228,7 +211,7 @@ func adjust_puzzle_wall(puzzle_data, symmetry_type:SymmetryType, wall_percent:fl
 	pass
 	
 
-func polish_puzzle(puzzle_data):
+func polish_puzzle(puzzle_data, gen_time_cond=null):
 	for row in puzzle_data:
 		for cell in row:
 			if cell.type == PuzzleCell.Type.NUM:
@@ -237,9 +220,15 @@ func polish_puzzle(puzzle_data):
 				cell.type = PuzzleCell.Type.BLACK
 				cell.num = -1
 				
-				if get_solution_count(puzzle_data) != 1:
+				if get_solution_count(puzzle_data, gen_time_cond) != 1:
 					cell.type = original_type
 					cell.num = original_num
+				if gen_time_cond != null:
+					var start_msec = gen_time_cond[0]
+					var threshold = gen_time_cond[1]
+					if Time.get_ticks_msec() - start_msec > threshold:
+						cell.type = original_type
+						cell.num = original_num
 
 
 func gen_init_solution_and_nums(puzzle_data):
@@ -291,7 +280,7 @@ func gen_init_lights(puzzle_data):
 		var candi_size = candidates.size()
 		var new_light = candidates.pop_at(randi_range(0,candi_size-1))
 		if new_light:
-			print("place light at ", new_light.cell_id)
+			print_verbose("place light at ", new_light.cell_id)
 			PuzzleUtils.place_light(puzzle_data, new_light.cell_id)
 		else:
 			break
@@ -309,16 +298,17 @@ func gen_init_nums(puzzle_data):
 				curr_cell.type = PuzzleCell.Type.NUM
 
 
-func get_solution_count(puzzle_data):
-	return get_all_solutions(puzzle_data)[0].size()
+func get_solution_count(puzzle_data, gen_time_cond=null):
+	return get_all_solutions(puzzle_data, false, gen_time_cond)[0].size()
 
 
-func get_all_solutions(puzzle_data, verbose=false):
+func get_all_solutions(puzzle_data, verbose=false, gen_time_cond=null):
 	var solutions = []
 	var solution_logs = []
-	PuzzleSolver.backtrack_solver2(PuzzleUtils.duplicate_obj_array(puzzle_data), solutions, solution_logs, verbose)
-	print("solutions count: ", solutions.size())
-	print(solution_logs)
+	PuzzleSolver.backtrack_solver2(PuzzleUtils.duplicate_obj_array(puzzle_data), solutions, solution_logs, verbose, gen_time_cond)
+	if verbose:
+		print("solutions count: ", solutions.size())
+		print(solution_logs)
 	return [solutions, solution_logs]
 	
 
@@ -457,3 +447,20 @@ static func reset_puzzle(puzzle_data):
 		for cell in row:
 			cell.reset()
 	
+
+static func cal_puzzle_diffi(solution_log):
+	var curr_diffi_info = {
+		"leaf_count": solution_log.size()
+	}
+	var branches = []
+	var depth_sum = 0
+	var depth_max = 0
+	for i in solution_log:
+		var d = i.split("->").size()-1
+		if d > depth_max:
+			depth_max = d
+		branches.append(d)
+		depth_sum += d
+	curr_diffi_info["max_depth"] = depth_max
+	curr_diffi_info["avg_depth"] = int(depth_sum / branches.size())
+	return curr_diffi_info

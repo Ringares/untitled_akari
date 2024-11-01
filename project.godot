@@ -28,11 +28,11 @@ BgMusic="*res://autoload/bg_music.tscn"
 EditorEvents="*res://autoload/editor_events.gd"
 GameEvents="*res://autoload/game_events.gd"
 SfxManager="*res://script/sfx_manager.gd"
+BgPuzzleGenerator="*res://autoload/bg_puzzle_generator.tscn"
 
 [debug]
 
 file_logging/enable_file_logging=true
-settings/stdout/verbose_stdout=true
 
 [display]
 

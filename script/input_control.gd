@@ -1,4 +1,5 @@
 extends Node2D
+class_name InputControl
 
 @export var init_focus_node:Node
 
@@ -65,7 +66,7 @@ func focus_next(action:String):
 				new_focus_node = focus_owner.get_node(focus_owner.focus_neighbor_right)
 	
 	if new_focus_node:
-		print(new_focus_node)
+		print("focus_next->", new_focus_node)
 		new_focus_node.focus_mode = Control.FocusMode.FOCUS_ALL
 		focus_owner.focus_mode = Control.FocusMode.FOCUS_NONE
 		new_focus_node.grab_focus()

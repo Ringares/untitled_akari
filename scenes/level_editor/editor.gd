@@ -466,18 +466,20 @@ func _on_check_solution_button_pressed() -> void:
 		puzzle_generator.reset_puzzle(puzzle_data)
 		var solution_res = puzzle_generator.get_all_solutions(puzzle_data, false)
 		curr_solutions = solution_res[0]
-		curr_diffi_info["leaf_count"] = solution_res[1].size()
-		var branches = []
-		var depth_sum = 0
-		var depth_max = 0
-		for i in solution_res[1]:
-			var d = i.split("->").size()-1
-			if d > depth_max:
-				depth_max = d
-			branches.append(d)
-			depth_sum += d
-		curr_diffi_info["max_depth"] = depth_max
-		curr_diffi_info["avg_depth"] = int(depth_sum / branches.size())
+		curr_diffi_info = puzzle_generator.cal_puzzle_diffi(solution_res[1])
+		#curr_diffi_info["leaf_count"] = solution_res[1].size()
+		#var branches = []
+		#var depth_sum = 0
+		#var depth_max = 0
+		#for i in solution_res[1]:
+			#var d = i.split("->").size()-1
+			#if d > depth_max:
+				#depth_max = d
+			#branches.append(d)
+			#depth_sum += d
+		#curr_diffi_info["max_depth"] = depth_max
+		#curr_diffi_info["avg_depth"] = int(depth_sum / branches.size())
+		
 		
 		print("curr_diffi_info", curr_diffi_info)
 		%LabelSolutionCount.text = str(curr_solutions.size())

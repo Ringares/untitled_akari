@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://dl6winqiew4rc"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://dl6winqiew4rc"]
 
 [ext_resource type="StyleBox" uid="uid://bhlrwula2kbno" path="res://themes/blue_style_box_texture.tres" id="1_pbygn"]
 [ext_resource type="FontFile" uid="uid://7m5x0p23vigy" path="res://assets/font/Anton-Regular.ttf" id="1_vlbn0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://trpfr7hesyac" path="res://assets/img/trans_nine_patch.png" id="2_qxvcj"]
 [ext_resource type="StyleBox" uid="uid://cmpm5odyryg8e" path="res://themes/yellow_style_box_texture.tres" id="3_vxue1"]
 [ext_resource type="Texture2D" uid="uid://dyk8ns4p321jh" path="res://assets/img/icon/icons8-blue-checkmark-48.png" id="7_w5uet"]
+[ext_resource type="StyleBox" uid="uid://cnlyf4l31c4tv" path="res://themes/yellow_hover_style_box_texture.tres" id="8_3pwin"]
 [ext_resource type="Texture2D" uid="uid://bad4hcpvuir88" path="res://assets/img/icon/icons8-tick-48.png" id="8_em2gg"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ot5xu"]
@@ -60,3 +61,10 @@ CheckButton/styles/normal = SubResource("StyleBoxEmpty_qkb75")
 CheckButton/styles/pressed = SubResource("StyleBoxEmpty_hxvq0")
 Label/font_sizes/font_size = 32
 OptionButton/constants/arrow_margin = 16
+PopupMenu/colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
+PopupMenu/colors/font_hover_color = Color(0.921569, 0.929412, 0.913725, 1)
+PopupMenu/constants/item_end_padding = 16
+PopupMenu/constants/item_start_padding = 16
+PopupMenu/font_sizes/font_size = 24
+PopupMenu/styles/hover = ExtResource("8_3pwin")
+PopupMenu/styles/panel = ExtResource("3_vxue1")

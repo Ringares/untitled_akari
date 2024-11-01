@@ -28,12 +28,12 @@ func _ready():
 	# set availabel buttons
 	if OS.has_feature("web"): exit_button.hide()
 	#if not game_scene_path: new_game_button.hide()
-	if not options_packed_scene:
-		option_button.hide()
-	else:
-		options_scene = options_packed_scene.instantiate()
-		%OptionVbox.call_deferred("add_child", options_scene)
-		%OptionVbox.call_deferred("move_child", options_scene, 1)
+	#if not options_packed_scene:
+		#option_button.hide()
+	#else:
+		#options_scene = options_packed_scene.instantiate()
+		#%OptionVbox.call_deferred("add_child", options_scene)
+		#%OptionVbox.call_deferred("move_child", options_scene, 1)
 	
 	_setup_options()
 	_setup_credits()

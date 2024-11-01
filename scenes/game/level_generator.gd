@@ -11,14 +11,20 @@ const LEVEL_BASE_SCENE = preload("res://scenes/game/level/level_base_scene.tscn"
 @onready var percent_option_button: OptionButton = %PercentOptionButton
 @onready var difficulty_option_button: OptionButton = %DifficultyOptionButton
 @onready var seed_edit: TextEdit = %SeedEdit
+
 @onready var puzzle_generator: PuzzleGenerator = %PuzzleGenerator
 @onready var ui_layer: CanvasLayer = %UILayer
-
 @onready var sub_viewport_container: SubViewportContainer = %SubViewportContainer
 @onready var level_container: SubViewport = %SubViewport
 
 var current_level:Node
 var curr_puzzle_code:String
+
+func _ready() -> void:
+	size_option_button.selected = GameLog.get_gen_size()
+	symetry_option_button.selected = GameLog.get_gen_symmetry()
+	percent_option_button.selected = GameLog.get_gen_fill()
+	difficulty_option_button.selected = GameLog.get_gen_diffi()
 
 func load_level():
 	_clear_current_level()
@@ -41,13 +47,19 @@ func _gen_puzzle():
 	var difficulty_option = difficulty_option_button.get_selected_id()
 	var seed_option = seed_edit.text
 	
-	var size_vect = Vector2i(int(size_option.split("x")[0]), int(size_option.split("x")[1]))
-	var puzzle_data = puzzle_generator.generate_new_puzzle(size_vect, symetry_option, wall_percent_option, [], seed_option)
-	var puzzle_code = puzzle_generator.puzzle2code(puzzle_data)
+	#var size_vect = Vector2i(int(size_option.split("x")[0]), int(size_option.split("x")[1]))
+	#var gen_res = puzzle_generator.generate_new_puzzle(size_vect, symetry_option, wall_percent_option, [], seed_option)
+	#var puzzle_data = gen_res[0]
+	#var puzzle_diffi_info = gen_res[1]
+	#var puzzle_code = puzzle_generator.puzzle2code(puzzle_data)
 	
-	print("_gen_puzzle")
-	PuzzleUtils.print_puzzle(puzzle_data)
-	print(puzzle_code)
+	#print("_gen_puzzle")
+	#PuzzleUtils.print_puzzle(puzzle_data)
+	#print(puzzle_code)
+	
+	var gen_key = "%s_%s_f3_%s" % [size_option.split("x")[0], ["2m", "2r", "4m", "4r"][symetry_option], ["d1","d2"][difficulty_option]]# 14_2m_f3_d1
+	var puzzle_code = GameLog.pop_available_puzzle_data_by_key(gen_key)
+	print("_gen_puzzle %s, %s" % [gen_key, puzzle_code])
 	return puzzle_code
 	
 
@@ -93,4 +105,9 @@ func advance_and_load_level():
 
 
 func _on_generate_button_pressed() -> void:
+	GameLog.set_gen_size(size_option_button.get_selected_id())
+	GameLog.set_gen_symmetry(symetry_option_button.get_selected_id())
+	GameLog.set_gen_fill(percent_option_button.get_selected_id())
+	GameLog.set_gen_diffi(difficulty_option_button.get_selected_id())
+	
 	load_level()

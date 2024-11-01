@@ -50,10 +50,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -269.5
-offset_top = -318.5
-offset_right = 269.5
-offset_bottom = 318.5
+offset_left = -230.5
+offset_top = -252.5
+offset_right = 230.5
+offset_bottom = 252.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4ymfg")
@@ -64,10 +64,10 @@ light_color = Color(0.898039, 0.898039, 0.898039, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 24
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/GeneratorContainer/MarginContainer"]
 layout_mode = 2
@@ -80,12 +80,13 @@ theme_override_constants/separation = 32
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Board Size"
+horizontal_alignment = 2
 script = ExtResource("5_m8311")
 
 [node name="SizeOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SizeSettingContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 selected = 0
 item_count = 2
 popup/item_0/text = "7x7"
@@ -101,12 +102,13 @@ theme_override_constants/separation = 32
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Symmetry Type"
+horizontal_alignment = 2
 script = ExtResource("5_m8311")
 
 [node name="SymetryOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SymetrySettingContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 selected = 0
 item_count = 4
 popup/item_0/text = "2-way mirror"
@@ -119,6 +121,7 @@ popup/item_3/id = 3
 script = ExtResource("6_0w81w")
 
 [node name="WallSettingContainer" type="HBoxContainer" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 32
 
@@ -126,12 +129,13 @@ theme_override_constants/separation = 32
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Fill Percent"
+horizontal_alignment = 2
 script = ExtResource("5_m8311")
 
 [node name="PercentOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/WallSettingContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 selected = 0
 item_count = 2
 popup/item_0/text = "20%"
@@ -147,12 +151,13 @@ theme_override_constants/separation = 32
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Difficulty"
+horizontal_alignment = 2
 script = ExtResource("5_m8311")
 
 [node name="DifficultyOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/DifficultySettingContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 selected = 0
 item_count = 2
 popup/item_0/text = "Easy"
@@ -169,6 +174,7 @@ theme_override_constants/separation = 32
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Seed"
+horizontal_alignment = 2
 script = ExtResource("5_m8311")
 
 [node name="SeedEdit" type="TextEdit" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SeedSettingContainer"]

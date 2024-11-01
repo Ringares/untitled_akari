@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://chy33me5uklsh"]
+
+[ext_resource type="Script" path="res://autoload/bg_puzzle_generator.gd" id="1_v02bi"]
+[ext_resource type="PackedScene" uid="uid://dyo2m2g4f3c3c" path="res://scenes/level_editor/puzzle_generator.tscn" id="2_2h6uc"]
+
+[node name="BgPuzzleGenerator" type="Node"]
+script = ExtResource("1_v02bi")
+
+[node name="PuzzleGenerator" parent="." instance=ExtResource("2_2h6uc")]

@@ -43,11 +43,14 @@ static func inst(cell_id, type:PuzzleCell.Type, num=-1):
 
 
 func reset():
+	is_implacable = true
 	if type == PuzzleCell.Type.BLANK:
 		is_implacable = false
 		has_light = false
 		is_lit = false
 		has_trivialed = false
+		light_reason = 0
+	
 
 func get_str():
 	match type:
@@ -78,3 +81,6 @@ func self_duplicate():
 	inst.has_trivialed = self.has_trivialed  # 是否初解过
 	
 	return inst
+
+func _to_string() -> String:
+	return '_'.join([cell_id, num, type, is_implacable, has_light, is_lit, linked_cell_id, has_trivialed, heuristic_value, light_reason])

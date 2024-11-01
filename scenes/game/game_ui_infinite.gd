@@ -12,7 +12,6 @@ const PAUSE_MENU = preload("res://scenes/menu/pause_menu.tscn")
 func _ready():
 	GameLog.game_started()
 
-
 func _on_level_loader_level_load_started():
 	pass # Replace with function body.
 
