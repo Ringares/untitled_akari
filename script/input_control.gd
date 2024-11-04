@@ -9,15 +9,19 @@ const INPUT_TIME_GAP = 160
 
 enum INPUT_SCHEMES { KEYBOARD_AND_MOUSE, GAMEPAD, TOUCH_SCREEN }
 static var INPUT_SCHEME: INPUT_SCHEMES = INPUT_SCHEMES.KEYBOARD_AND_MOUSE
-
+var enabled = true
 
 
 func _ready() -> void:
+	get_tree().create_timer(0.3).timeout.connect(func():GameInputControl.append_input_ctrl_nodes(self))
 	if GameInputControl.INPUT_SCHEME == GameInputControl.INPUT_SCHEMES.GAMEPAD:
 		focus_next("ui_down")
 	
 
 func _process(_delta: float) -> void:
+	if not enabled:
+		return
+	
 	if Input.is_action_pressed("ui_down"):
 		focus_next("ui_down")
 	if Input.is_action_pressed("ui_up"):
@@ -37,12 +41,14 @@ func _process(_delta: float) -> void:
 		
 		
 func focus_next(action:String):
+	
 	if init_focus_node == null:
 		return
 		
 	if Time.get_ticks_msec() - last_controller_input < INPUT_TIME_GAP:
 		return
-	
+		
+	print(get_parent())
 	var focus_owner = get_viewport().gui_get_focus_owner()
 	if focus_owner == null:
 		init_focus_node.focus_mode = Control.FocusMode.FOCUS_ALL
@@ -70,5 +76,25 @@ func focus_next(action:String):
 		new_focus_node.focus_mode = Control.FocusMode.FOCUS_ALL
 		focus_owner.focus_mode = Control.FocusMode.FOCUS_NONE
 		new_focus_node.grab_focus()
+		if focus_owner.has_method('check_focus'):
+			focus_owner.check_focus()
+		if new_focus_node.has_method('check_focus'):
+			new_focus_node.check_focus()
+		
 		
 		last_controller_input = Time.get_ticks_msec()
+
+
+func set_focus(node:Node):
+	var focus_owner = get_viewport().gui_get_focus_owner()
+	if focus_owner != null:
+		focus_owner.focus_mode = Control.FocusMode.FOCUS_NONE
+		focus_owner.release_focus()
+		
+	node.focus_mode = Control.FocusMode.FOCUS_ALL
+	node.grab_focus()
+	last_controller_input = Time.get_ticks_msec()
+
+
+func _exit_tree() -> void:
+	GameInputControl.pop_input_ctrl_nodes(self)

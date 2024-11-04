@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://i6igkf5whup"]
+[gd_scene load_steps=18 format=3 uid="uid://i6igkf5whup"]
 
 [ext_resource type="Script" path="res://scenes/game/level_selector.gd" id="1_dky57"]
 [ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="1_j6vg6"]
 [ext_resource type="Script" path="res://script/ui_sound.gd" id="2_k7qki"]
+[ext_resource type="Script" path="res://script/input_control.gd" id="3_cxlqd"]
 [ext_resource type="Texture2D" uid="uid://dpf1eiitr0qh7" path="res://assets/img/icon/icons8-left-96.png" id="4_uuubw"]
 [ext_resource type="Script" path="res://script/theme_button.gd" id="5_alce4"]
 [ext_resource type="Texture2D" uid="uid://dhfxd12fj37ic" path="res://assets/img/icon/icons8-right-96.png" id="6_iy5b6"]
@@ -65,6 +66,10 @@ infi_game_scene_path = "res://scenes/game/game_ui_infinite.tscn"
 unique_name_in_owner = true
 script = ExtResource("2_k7qki")
 root_path = NodePath("../CanvasLayer")
+
+[node name="InputControl" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_cxlqd")
 
 [node name="BGCanvasLayer" parent="." instance=ExtResource("1_j6vg6")]
 layer = 0
@@ -459,7 +464,7 @@ offset_right = 405.0
 offset_bottom = 39.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 256
-text = "W5"
+text = "W4"
 script = ExtResource("9_vtm0f")
 
 [node name="LastPage" type="Control" parent="CanvasLayer/PageContainer"]
@@ -552,6 +557,7 @@ size_flags_vertical = 0
 focus_mode = 0
 theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
 theme_override_font_sizes/font_size = 48
+theme_override_styles/focus = ExtResource("11_3mvyw")
 theme_override_styles/disabled = ExtResource("10_hn42r")
 theme_override_styles/hover = ExtResource("11_3mvyw")
 theme_override_styles/normal = ExtResource("11_p6qua")
@@ -561,6 +567,7 @@ icon = ExtResource("10_7eew1")
 icon_alignment = 2
 
 [node name="BackButton" type="Button" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4

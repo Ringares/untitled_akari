@@ -37,7 +37,7 @@ var status :STATUS = STATUS.LOCKED:
 func _on_focus_entered() -> void:
 	if status != STATUS.LOCKED: 
 		$AnimationPlayer.play("hover")
-		self.modulate = Color(1.15,1.15, 1.15)
+		self.modulate = Color(1.3,1.3, 1.3)
 		SfxManager.play_hover()
 
 
@@ -49,7 +49,7 @@ func _on_focus_exited() -> void:
 func _on_mouse_entered() -> void:
 	if status != STATUS.LOCKED: 
 		$AnimationPlayer.play("hover")
-		self.modulate = Color(1.15,1.15, 1.15)
+		self.modulate = Color(1.3,1.3, 1.3)
 		SfxManager.play_hover()
 
 
@@ -61,3 +61,14 @@ func _on_mouse_exited() -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if status != STATUS.LOCKED and event.is_action_pressed("left_clk"):
 		GameEvents.signal_level_jump_to.emit(int(text.split("-")[1]))
+		
+	if status != STATUS.LOCKED and event.is_action_pressed("ui_accept"):
+		GameEvents.signal_level_jump_to.emit(int(text.split("-")[1]))
+
+
+func check_focus():
+	if has_focus():
+		self.modulate = Color(1.3,1.3, 1.3)
+	else:
+		self.modulate = Color.WHITE
+	

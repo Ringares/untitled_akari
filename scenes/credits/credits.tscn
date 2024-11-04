@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://t2dui8ppm3a4"]
+[gd_scene load_steps=6 format=3 uid="uid://t2dui8ppm3a4"]
 
+[ext_resource type="Script" path="res://script/input_control.gd" id="2_kxitu"]
 [ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="2_p5ely"]
 [ext_resource type="Script" path="res://script/theme_rich_text_label.gd" id="3_d46f0"]
 [ext_resource type="Script" path="res://scenes/credits/credits.gd" id="4"]
+[ext_resource type="Script" path="res://script/theme_button.gd" id="4_2mx37"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -16,6 +18,10 @@ h1_font_size = 64
 h2_font_size = 48
 h3_font_size = 32
 h4_font_size = 24
+
+[node name="InputControl" type="Node2D" parent="." node_paths=PackedStringArray("init_focus_node")]
+script = ExtResource("2_kxitu")
+init_focus_node = NodePath("../BackButton")
 
 [node name="BGCanvasLayer" parent="." instance=ExtResource("2_p5ely")]
 
@@ -84,7 +90,23 @@ layout_mode = 2
 wait_time = 0.5
 one_shot = true
 
+[node name="BackButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(384, 96)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 896.0
+offset_right = 448.0
+offset_bottom = 1009.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Back"
+script = ExtResource("4_2mx37")
+
 [connection signal="scroll_ended" from="ScrollContainer" to="." method="_on_ScrollContainer_scroll_ended"]
 [connection signal="gui_input" from="ScrollContainer/VBoxContainer/CreditsLabel" to="." method="_on_CreditsLabel_gui_input"]
 [connection signal="meta_clicked" from="ScrollContainer/VBoxContainer/CreditsLabel" to="." method="_on_CreditsLabel_meta_clicked"]
 [connection signal="timeout" from="ScrollResetTimer" to="." method="_on_ScrollResetTimer_timeout"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

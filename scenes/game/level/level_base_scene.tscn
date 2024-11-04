@@ -371,6 +371,7 @@ script = ExtResource("4_ttych")
 
 [node name="HiddenPuzzleCodeButton" type="Button" parent="UILayer/LeftButtonContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 5

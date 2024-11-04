@@ -13,24 +13,26 @@ script = ExtResource("1_ip65o")
 options_packed_scene = ExtResource("2_4ply4")
 main_menu_scene = "res://scenes/menu/main_menu.tscn"
 
+[node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("4_ljdfd")]
+init_focus_node = NodePath("../CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/ResumeButton")
+
 [node name="BGCanvasLayer" parent="." instance=ExtResource("3_3xtad")]
 layer = 0
-
-[node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("4_ljdfd")]
-init_focus_node = NodePath("../MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/LevelSelector")
 
 [node name="UISound" type="Node" parent="."]
 script = ExtResource("3_yxqtb")
 root_path = NodePath("..")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MenuContainer" type="MarginContainer" parent="MarginContainer"]
+[node name="MenuContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/margin_left = 64
@@ -38,130 +40,96 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/MenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MenuContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer"]
+[node name="TitleLabel" type="Label" parent="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 128
 text = "Pause"
 script = ExtResource("5_tis0t")
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MenuContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 
-[node name="ResumeButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../MainMenuButton")
+focus_neighbor_bottom = NodePath("../LevelSelector")
+focus_mode = 0
 theme_override_font_sizes/font_size = 48
 text = "Resume"
 script = ExtResource("6_7euhi")
 
-[node name="RestartButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(384, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 48
-text = "Reset"
-script = ExtResource("6_7euhi")
-
-[node name="LevelSelector" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(384, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 48
-text = "Level Select"
-script = ExtResource("6_7euhi")
-
-[node name="OptionButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(384, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 48
-text = "Options"
-script = ExtResource("6_7euhi")
-
-[node name="MainMenuButton" type="Button" parent="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(384, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 48
-text = "Main Menu"
-script = ExtResource("6_7euhi")
-
-[node name="OptionContainer" type="MarginContainer" parent="MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 64
-theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 64
-
-[node name="OptionVBox" type="VBoxContainer" parent="MarginContainer/OptionContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/OptionContainer/OptionVBox"]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
-
-[node name="TitleLabel" type="Label" parent="MarginContainer/OptionContainer/OptionVBox/MarginContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 128
-text = "Options"
-script = ExtResource("5_tis0t")
-
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/OptionContainer/OptionVBox"]
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="BackButton" type="Button" parent="MarginContainer/OptionContainer/OptionVBox/MarginContainer2"]
 custom_minimum_size = Vector2(384, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 0
 theme_override_font_sizes/font_size = 48
-text = "Back"
+text = "Reset"
 script = ExtResource("6_7euhi")
 
-[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/LevelSelector" to="." method="_on_level_selector_pressed"]
-[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
-[connection signal="pressed" from="MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="MarginContainer/OptionContainer/OptionVBox/MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]
+[node name="LevelSelector" type="Button" parent="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(384, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_bottom = NodePath("../OptionButton")
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Level Select"
+script = ExtResource("6_7euhi")
+
+[node name="OptionButton" type="Button" parent="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(384, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../LevelSelector")
+focus_neighbor_bottom = NodePath("../MainMenuButton")
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Options"
+script = ExtResource("6_7euhi")
+
+[node name="MainMenuButton" type="Button" parent="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(384, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../OptionButton")
+focus_neighbor_bottom = NodePath("../ResumeButton")
+focus_mode = 0
+theme_override_font_sizes/font_size = 48
+text = "Main Menu"
+script = ExtResource("6_7euhi")
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/LevelSelector" to="." method="_on_level_selector_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

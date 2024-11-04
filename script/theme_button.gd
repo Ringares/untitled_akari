@@ -29,3 +29,12 @@ func _on_signal_daynight_mode_changed():
 	match GameLog.get_daynight_mode():
 		0:set_light_theme()
 		1:set_dark_theme()
+
+
+func _on_pressed() -> void:
+	var new_mode = DisplayMode.switch_mode()
+	
+	if new_mode == DisplayMode.DaynightMode.DAY:
+		%LightModeButton.icon = load("res://assets/img/icon/icons8-sun-96.png")
+	else:
+		%LightModeButton.icon = load("res://assets/img/icon/icons8-moon-96.png")

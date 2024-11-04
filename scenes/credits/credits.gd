@@ -70,6 +70,9 @@ func _ready():
 func _end_reached():
 	scroll_active = false
 	emit_signal("end_reached")
+	#queue_free()
+	SceneLoader.load_scene("res://scenes/menu/main_menu.tscn")
+	
 
 func _check_end_reached(previous_scroll):
 	if previous_scroll != $ScrollContainer.scroll_vertical:
@@ -106,3 +109,7 @@ func _start_scroll_timer():
 func _on_CreditsLabel_meta_clicked(meta:String):
 	if meta.begins_with("https://"):
 		var _err = OS.shell_open(meta)
+
+
+func _on_back_button_pressed() -> void:
+	SceneLoader.load_scene("res://scenes/menu/main_menu.tscn")

@@ -1,9 +1,10 @@
-extends MarginContainer
+extends CanvasLayer
 
 #@export var audio_control_scene : PackedScene
 @onready var mute_control = %MuteControl
 @onready var full_screen_control = %FullScreenControl
 
+var is_from_main_menu:bool = true
 
 func _ready():
 	# add_audio_bus_controls
@@ -13,7 +14,6 @@ func _ready():
 		print(bus_name, linear)
 		if bus_name != 'UI':
 			_add_audio_control(bus_name, linear)
-	
 
 
 func _add_audio_control(bus_name, bus_value):
@@ -29,7 +29,8 @@ func _add_audio_control(bus_name, bus_value):
 		#audio_control.key = bus_name
 		#audio_control.connect("setting_changed", _on_bus_changed.bind(bus_name))
 		pass
-		
+	
+	
 
 func _on_bus_changed(bus_value : float, bus_name : String):
 	print(bus_name, bus_value)
@@ -54,3 +55,14 @@ func _on_sfx_option_control_setting_changed(value: Variant) -> void:
 
 func _on_music_option_control_setting_changed(value: Variant) -> void:
 	AppSettings.set_bus_volume_from_linear('Music', value)
+
+
+func _on_visibility_changed() -> void:
+	GameInputControl.check_visibility()
+
+
+func _on_back_button_pressed() -> void:
+	if is_from_main_menu:
+		SceneLoader.load_scene("res://scenes/menu/main_menu.tscn")
+	else:
+		queue_free()

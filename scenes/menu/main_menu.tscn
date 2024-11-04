@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://script/theme_label.gd" id="5_cxdd7"]
 [ext_resource type="Texture2D" uid="uid://xs7qrvvf27b8" path="res://assets/img/title3.png" id="5_tjsu4"]
 [ext_resource type="Script" path="res://script/theme_button.gd" id="6_tsq01"]
-[ext_resource type="Texture2D" uid="uid://bcq0hgbdpgdfb" path="res://assets/img/icon/icons8-sun-96.png" id="9_evyek"]
+[ext_resource type="PackedScene" uid="uid://c2siqq1gytxq6" path="res://scenes/light_mode_button.tscn" id="10_ibdmy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i85jh"]
 
@@ -24,6 +24,8 @@ script = ExtResource("1_du782")
 game_scene_path = "res://scenes/game/game_ui.tscn"
 options_packed_scene = ExtResource("2_wyugc")
 credits_packed_scene = ExtResource("3_k8a0f")
+options_packed_scene_path = "res://scenes/menu/option_menu/simple_option_menu.tscn"
+credits_packed_scene_path = "res://scenes/credits/credits.tscn"
 
 [node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("4_t70qh")]
 init_focus_node = NodePath("../MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/PlayButton")
@@ -210,52 +212,14 @@ size_flags_horizontal = 4
 text = "v unkonw"
 script = ExtResource("5_cxdd7")
 
-[node name="LightModeButton" type="Button" parent="." groups=["input_control_focusable"]]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(96, 96)
+[node name="LightModeButton" parent="." instance=ExtResource("10_ibdmy")]
 layout_mode = 0
 offset_left = 1792.0
 offset_top = 32.0
 offset_right = 1888.0
 offset_bottom = 128.0
-size_flags_horizontal = 5
-size_flags_vertical = 5
-focus_neighbor_top = NodePath("../MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/ExitButton")
-focus_neighbor_bottom = NodePath("../MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/PlayButton")
-focus_mode = 0
-icon = ExtResource("9_evyek")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("6_tsq01")
-
-[node name="MarginContainer2" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 96
-theme_override_constants/margin_top = 96
-theme_override_constants/margin_right = 96
-theme_override_constants/margin_bottom = 96
-
-[node name="BackButton" type="Button" parent="MarginContainer2"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(384, 96)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-focus_mode = 0
-theme_override_font_sizes/font_size = 48
-text = "Back"
-script = ExtResource("6_tsq01")
 
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/OptionsButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="LightModeButton" to="." method="_on_light_mode_button_pressed"]
-[connection signal="pressed" from="MarginContainer2/BackButton" to="." method="_on_back_button_pressed"]

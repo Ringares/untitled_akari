@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2siqq1gytxq6"]
+
+[ext_resource type="Texture2D" uid="uid://bcq0hgbdpgdfb" path="res://assets/img/icon/icons8-sun-96.png" id="1_j6w6l"]
+[ext_resource type="Script" path="res://script/theme_button.gd" id="2_amit7"]
+
+[node name="LightModeButton" type="Button" groups=["input_control_focusable"]]
+custom_minimum_size = Vector2(96, 96)
+offset_right = 96.0
+offset_bottom = 96.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+focus_neighbor_top = NodePath("../MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/ExitButton")
+focus_neighbor_bottom = NodePath("../MenuContainer/VBoxContainer/MenuMargin/VBoxContainer/PlayButton")
+focus_mode = 0
+icon = ExtResource("1_j6w6l")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_amit7")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

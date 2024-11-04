@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bswbe4vdvxtqn"]
+[gd_scene load_steps=16 format=3 uid="uid://bswbe4vdvxtqn"]
 
 [ext_resource type="Script" path="res://scenes/game/game_ui_infinite.gd" id="1_l3i3a"]
+[ext_resource type="Script" path="res://script/input_control.gd" id="2_h0muv"]
 [ext_resource type="PackedScene" uid="uid://bmd3n7oiftiss" path="res://scenes/game/game_ui/pause_controler.tscn" id="2_yviqn"]
 [ext_resource type="PackedScene" uid="uid://cew1lc4b8f86w" path="res://scenes/menu/pause_menu.tscn" id="3_476jn"]
 [ext_resource type="Script" path="res://script/theme_panel_container.gd" id="4_y15r2"]
@@ -29,6 +30,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l3i3a")
 
+[node name="InputControl" type="Node2D" parent="." node_paths=PackedStringArray("init_focus_node")]
+unique_name_in_owner = true
+script = ExtResource("2_h0muv")
+init_focus_node = NodePath("../UILayer/GeneratorContainer/MarginContainer/VBoxContainer/GenerateButton")
+
 [node name="PauseController" parent="." instance=ExtResource("2_yviqn")]
 pause_menu_packed = ExtResource("3_476jn")
 
@@ -51,9 +57,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -230.5
-offset_top = -252.5
+offset_top = -156.5
 offset_right = 230.5
-offset_bottom = 252.5
+offset_bottom = 348.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4ymfg")
@@ -86,6 +92,11 @@ script = ExtResource("5_m8311")
 [node name="SizeOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SizeSettingContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../../../LeftButtonContainer/MainButton")
+focus_neighbor_top = NodePath("../../GenerateButton")
+focus_neighbor_right = NodePath("../../../../../LeftButtonContainer/MainButton")
+focus_neighbor_bottom = NodePath("../../SymetrySettingContainer/SymetryOptionButton")
+focus_mode = 0
 theme_override_font_sizes/font_size = 24
 selected = 0
 item_count = 2
@@ -108,6 +119,11 @@ script = ExtResource("5_m8311")
 [node name="SymetryOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/SymetrySettingContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../../../LeftButtonContainer/MainButton")
+focus_neighbor_top = NodePath("../../SizeSettingContainer/SizeOptionButton")
+focus_neighbor_right = NodePath("../../../../../LeftButtonContainer/MainButton")
+focus_neighbor_bottom = NodePath("../../DifficultySettingContainer/DifficultyOptionButton")
+focus_mode = 0
 theme_override_font_sizes/font_size = 24
 selected = 0
 item_count = 4
@@ -135,6 +151,7 @@ script = ExtResource("5_m8311")
 [node name="PercentOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/WallSettingContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 24
 selected = 0
 item_count = 2
@@ -157,6 +174,11 @@ script = ExtResource("5_m8311")
 [node name="DifficultyOptionButton" type="OptionButton" parent="UILayer/GeneratorContainer/MarginContainer/VBoxContainer/DifficultySettingContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../../../LeftButtonContainer/MainButton")
+focus_neighbor_top = NodePath("../../SymetrySettingContainer/SymetryOptionButton")
+focus_neighbor_right = NodePath("../../../../../LeftButtonContainer/MainButton")
+focus_neighbor_bottom = NodePath("../../GenerateButton")
+focus_mode = 0
 theme_override_font_sizes/font_size = 24
 selected = 0
 item_count = 2
@@ -195,6 +217,10 @@ custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../../../../LeftButtonContainer/LightModeButton")
+focus_neighbor_top = NodePath("../DifficultySettingContainer/DifficultyOptionButton")
+focus_neighbor_right = NodePath("../../../../LeftButtonContainer/LightModeButton")
+focus_neighbor_bottom = NodePath("../SizeSettingContainer/SizeOptionButton")
 focus_mode = 0
 theme_override_font_sizes/font_size = 48
 text = "Generate"
@@ -215,8 +241,9 @@ custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
-focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_neighbor_left = NodePath("../../GeneratorContainer/MarginContainer/VBoxContainer/GenerateButton")
+focus_neighbor_top = NodePath("../LightModeButton")
+focus_neighbor_right = NodePath("../../GeneratorContainer/MarginContainer/VBoxContainer/GenerateButton")
 focus_neighbor_bottom = NodePath("../MenuButton")
 focus_mode = 0
 icon = ExtResource("7_qsxvc")
@@ -230,9 +257,10 @@ custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
+focus_neighbor_left = NodePath("../../GeneratorContainer/MarginContainer/VBoxContainer/GenerateButton")
 focus_neighbor_top = NodePath("../MainButton")
-focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_neighbor_right = NodePath("../../GeneratorContainer/MarginContainer/VBoxContainer/GenerateButton")
+focus_neighbor_bottom = NodePath("../LightModeButton")
 focus_mode = 0
 icon = ExtResource("8_5btnk")
 icon_alignment = 1
@@ -245,8 +273,10 @@ custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-focus_neighbor_left = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/NextButton")
-focus_neighbor_right = NodePath("../../CenterContainer/VBoxContainer/HBoxContainer3/ResetButton")
+focus_neighbor_left = NodePath("../../GeneratorContainer/MarginContainer/VBoxContainer/GenerateButton")
+focus_neighbor_top = NodePath("../MenuButton")
+focus_neighbor_right = NodePath("../../GeneratorContainer/MarginContainer/VBoxContainer/GenerateButton")
+focus_neighbor_bottom = NodePath("../MainButton")
 focus_mode = 0
 icon = ExtResource("10_g5bwt")
 icon_alignment = 1

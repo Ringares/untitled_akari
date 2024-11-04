@@ -28,7 +28,11 @@ func _ready() -> void:
 
 func load_level():
 	_clear_current_level()
-	curr_puzzle_code = _gen_puzzle()
+	var code = _gen_puzzle()
+	if code == null:
+		SceneLoader.load_scene("res://scenes/game/game_ui_infinite.tscn")
+		return
+	curr_puzzle_code = code
 	current_level = _attach_level(curr_puzzle_code)
 	ui_layer.hide()
 	emit_signal("level_loaded")

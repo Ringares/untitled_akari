@@ -18,6 +18,7 @@ const PAUSE_MENU = preload("res://scenes/menu/pause_menu.tscn")
 
 var level_instants = {}
 var passed_level_ids = []
+var curr_page = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -64,7 +65,57 @@ func _ready() -> void:
 			inst.status = LevelSelector.STATUS.UNLOCKED
 		if level_id == 0:
 			inst.status = LevelSelector.STATUS.UNLOCKED
+	
+	for i in level_instants.size():
+		print(i, i % 24, i % 6)
+		if i % 24 > 5:
+			level_instants[i].focus_neighbor_top = level_instants[i-6].get_path()
+		else:
+			level_instants[i].focus_neighbor_top = %InfiniteModeButton.get_path()
+		
+		if i % 24 < 18:
+			level_instants[i].focus_neighbor_bottom = level_instants[i+6].get_path()
+		else:
+			level_instants[i].focus_neighbor_bottom = %BackButton.get_path()
 			
+		if i % 6 != 0:
+			level_instants[i].focus_neighbor_left = level_instants[i-1].get_path()
+		else:
+			if int(i/24) == 1:
+				level_instants[i].focus_neighbor_left = $CanvasLayer/PageContainer/Page2/HBoxContainer/PreviousButton.get_path()
+				$CanvasLayer/PageContainer/Page2/HBoxContainer/PreviousButton.focus_neighbor_right = level_instants[i].get_path()
+			if int(i/24) == 2:
+				level_instants[i].focus_neighbor_left = $CanvasLayer/PageContainer/Page3/HBoxContainer/PreviousButton.get_path()
+				$CanvasLayer/PageContainer/Page3/HBoxContainer/PreviousButton.focus_neighbor_right = level_instants[i].get_path()
+			if int(i/24) == 3:
+				level_instants[i].focus_neighbor_left = $CanvasLayer/PageContainer/Page4/HBoxContainer/PreviousButton.get_path()
+				$CanvasLayer/PageContainer/Page4/HBoxContainer/PreviousButton.focus_neighbor_right = level_instants[i].get_path()
+			if int(i/24) == 4:
+				level_instants[i].focus_neighbor_left = $CanvasLayer/PageContainer/Page5/HBoxContainer/PreviousButton.get_path()
+				$CanvasLayer/PageContainer/Page5/HBoxContainer/PreviousButton.focus_neighbor_right = level_instants[i].get_path()
+			if int(i/24) == 5:
+				level_instants[i].focus_neighbor_left = $CanvasLayer/PageContainer/LastPage/HBoxContainer/PreviousButton.get_path()
+				$CanvasLayer/PageContainer/LastPage/HBoxContainer/PreviousButton.focus_neighbor_right = level_instants[i].get_path()
+			
+		if i % 6 != 5:
+			level_instants[i].focus_neighbor_right = level_instants[i+1].get_path()
+		else:
+			if int(i/24) == 0:
+				level_instants[i].focus_neighbor_right = $CanvasLayer/PageContainer/FirstPage/HBoxContainer/VBoxContainer/Page1NextButton.get_path()
+				$CanvasLayer/PageContainer/FirstPage/HBoxContainer/VBoxContainer/Page1NextButton.focus_neighbor_left = level_instants[i].get_path()
+			if int(i/24) == 1:
+				level_instants[i].focus_neighbor_right = $CanvasLayer/PageContainer/Page2/HBoxContainer/NextButton.get_path()
+				$CanvasLayer/PageContainer/Page2/HBoxContainer/NextButton.focus_neighbor_left = level_instants[i].get_path()
+			if int(i/24) == 2:
+				level_instants[i].focus_neighbor_right = $CanvasLayer/PageContainer/Page3/HBoxContainer/NextButton.get_path()
+				$CanvasLayer/PageContainer/Page3/HBoxContainer/NextButton.focus_neighbor_left = level_instants[i].get_path()
+			if int(i/24) == 3:
+				level_instants[i].focus_neighbor_right = $CanvasLayer/PageContainer/Page4/HBoxContainer/NextButton.get_path()
+				$CanvasLayer/PageContainer/Page4/HBoxContainer/NextButton.focus_neighbor_left = level_instants[i].get_path()
+			if int(i/24) == 4:
+				level_instants[i].focus_neighbor_right = $CanvasLayer/PageContainer/Page5/HBoxContainer/NextButton.get_path()
+				$CanvasLayer/PageContainer/Page5/HBoxContainer/NextButton.focus_neighbor_left = level_instants[i].get_path()
+	set_current_page_focus()
 	
 	for level_id in passed_level_ids:
 		level_instants[level_id].status = LevelSelector.STATUS.PASSED
@@ -75,6 +126,10 @@ func _ready() -> void:
 	var curr_level_id_str = LevelRes.get_levels()[level_code]
 	var curr_world = int(curr_level_id_str.split('-')[0])
 	page_container.position -= Vector2(1920,0) * curr_world
+	
+	#
+	curr_page = curr_world
+	%InputControl.init_focus_node = level_instants[curr_level_id]
 	
 	# process infinite mode button
 	var is_infinite_mode_unlocked = GameLevelLog.get_infinite_mode_unlocked()
@@ -97,13 +152,17 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_next_button_pressed() -> void:
+	curr_page += 1
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(page_container, "position", page_container.position + Vector2(-1920,0), 0.2)
+	tween.tween_property(page_container, "position", page_container.position + Vector2(-1920,0), 0.15)
+	set_current_page_focus()
 
 
 func _on_previous_button_pressed() -> void:
+	curr_page -= 1
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(page_container, "position", page_container.position + Vector2(1920,0), 0.2)
+	tween.tween_property(page_container, "position", page_container.position + Vector2(1920,0), 0.15)
+	set_current_page_focus()
 
 
 func _on_back_button_pressed() -> void:
@@ -112,3 +171,9 @@ func _on_back_button_pressed() -> void:
 
 func _on_infinite_mode_button_pressed() -> void:
 	SceneLoader.load_scene(infi_game_scene_path)
+
+
+func set_current_page_focus():
+	%InfiniteModeButton.focus_neighbor_bottom = level_instants[curr_page*24].get_path()
+	%BackButton.focus_neighbor_top = level_instants[curr_page*24 + 18].get_path()
+	%InputControl.set_focus(level_instants[curr_page*24])
