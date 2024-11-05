@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name SteamUtils
 
 const STEAM_APP_ID = "3257340"

@@ -28,6 +28,8 @@ func _process(delta: float) -> void:
 func init_save_slot():
 	assert(save_name)
 	var level_passed_size = GameLevelLog.get_passed_levels(save_name).size()
+	
+	
 	print(level_passed_size, LevelRes.get_level_size(), int(level_passed_size * 100 / LevelRes.get_level_size()))
 	%SlotFinishedLabel.text = str(int(level_passed_size * 100 / LevelRes.get_levels().size() )) + " %"
 	
@@ -35,14 +37,12 @@ func init_save_slot():
 	%ProgressBar.value = 0
 	%ProgressBar.hide()
 	
-	if level_passed_size > 0:
-		#%RestButton.show()
-		%Timer.timeout.connect(
-			func():
-				print("Timer.timeout")
-				GameLevelLog.reset_save_slot(save_name)
-				init_save_slot()
-		)
+	%Timer.timeout.connect(
+		func():
+			print("Timer.timeout")
+			GameLevelLog.reset_save_slot(save_name)
+			init_save_slot()
+	)
 	
 	var is_infinite_mode_unlocked = GameLevelLog.get_infinite_mode_unlocked(save_name)
 	if is_infinite_mode_unlocked:
@@ -51,6 +51,12 @@ func init_save_slot():
 	else:
 		%InfiniteButton.hide()
 		%Placehold.show()
+		
+	var is_finished = GameLevelLog.get_is_levels_finished(save_name)
+	if is_finished:
+		%FinishSprite.show()
+	else:
+		%FinishSprite.hide()
 		
 	
 

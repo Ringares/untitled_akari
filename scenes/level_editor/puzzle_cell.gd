@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name PuzzleCell
 
 enum Type{
@@ -52,7 +52,7 @@ func reset():
 		light_reason = 0
 	
 
-func get_str():
+func get_strcode():
 	match type:
 		Type.BLACK: return 'B'
 		Type.NUM: return str(num)

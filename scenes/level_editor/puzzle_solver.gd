@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name PuzzleSolver
 
 #static func backtrack_solver(puzzle_data, solutions):

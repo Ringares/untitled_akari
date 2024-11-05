@@ -62,4 +62,19 @@ static func reset_save_slot(save_name):
 	Config.set_config(GAME_LOG_SECTION, LEVEL_PASSED + "_" + save_name, [])
 	Config.set_config(GAME_LOG_SECTION, CURRENT_LEVEL + "_" + save_name, 0)
 	Config.set_config(GAME_LOG_SECTION, MAX_LEVEL_REACHED + "_" + save_name, 0)
-	Config.set_config(GAME_LOG_SECTION, INFINITE_UNLOCKED + "_" + get_curr_save(), false)
+	Config.set_config(GAME_LOG_SECTION, INFINITE_UNLOCKED + "_" + save_name, false)
+	Config.set_config(GAME_LOG_SECTION, LEVELS_FINISHED + "_" + save_name, false)
+
+
+const LEVELS_FINISHED = "LevelsFinished"
+
+static func set_is_levels_finished(is_finished:bool, save_name=null):
+	if save_name == null:
+		save_name = get_curr_save()
+	Config.set_config(GAME_LOG_SECTION, LEVELS_FINISHED + "_" + save_name, is_finished)
+
+
+static func get_is_levels_finished(save_name=null):
+	if save_name == null:
+		save_name = get_curr_save()
+	return Config.get_config(GAME_LOG_SECTION, LEVELS_FINISHED + "_" + save_name, false) 

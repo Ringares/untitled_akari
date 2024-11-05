@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name ReflectUtils
 
 enum DEGREE_SET{

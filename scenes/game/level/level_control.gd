@@ -66,6 +66,9 @@ func _ready() -> void:
 	else:
 		%HintContainer.hide()
 		%HintContainer.reparent(self)
+	
+	%JoystickCursor.global_position = GameLog.get_cursor_position()
+	
 	init()
 
 
@@ -252,6 +255,8 @@ func _on_reset_button_pressed() -> void:
 
 
 func _on_next_button_pressed() -> void:
+	
+	GameLog.set_cursor_position(%JoystickCursor.global_position)
 	GameEvents.signal_level_advance.emit()
 
 

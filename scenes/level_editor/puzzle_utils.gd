@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name PuzzleUtils
 
 static func duplicate_obj_array(obj_array):
@@ -35,14 +35,14 @@ static func is_valid_cell(puzzle_data, tar_cell:Vector2i):
 static func print_puzzle(level_data, comment_line = ""):
 	print(comment_line)
 	for row in level_data:
-		var printable_str = row.map(func(i): return i.get_str())
+		var printable_str = row.map(func(i): return i.get_strcode())
 		print(" ".join(printable_str))
 
 
 static func puzzle2str(puzzle_data):
 	var res = ""
 	for row in puzzle_data:
-		res += "".join(row.map(func(i): return i.get_str()))
+		res += "".join(row.map(func(i): return i.get_strcode()))
 	return res
 	
 

@@ -592,7 +592,7 @@ script = ExtResource("2_xvg54")
 
 [node name="JoystickCursor" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(96, 96)
+position = Vector2(512, 512)
 scale = Vector2(2, 2)
 
 [node name="Area2D" type="Area2D" parent="JoystickCursor"]

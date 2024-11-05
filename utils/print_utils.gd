@@ -1,4 +1,4 @@
-extends Node
+extends RefCounted
 class_name PrintUtils
 
 #static func print(verbose, args:Array):

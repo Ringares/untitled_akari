@@ -3,14 +3,14 @@ extends Node
 
 signal level_load_started
 signal level_loaded
-signal levels_finished
+#signal levels_finished
 
 const LEVEL_BASE_SCENE = preload("res://scenes/game/level/level_base_scene.tscn")
-@onready var size_option_button: OptionButton = %SizeOptionButton
-@onready var symetry_option_button: OptionButton = %SymetryOptionButton
-@onready var percent_option_button: OptionButton = %PercentOptionButton
-@onready var difficulty_option_button: OptionButton = %DifficultyOptionButton
-@onready var seed_edit: TextEdit = %SeedEdit
+#@onready var size_option_button: OptionButton = %SizeOptionButton
+#@onready var symetry_option_button: OptionButton = %SymetryOptionButton
+#@onready var percent_option_button: OptionButton = %PercentOptionButton
+#@onready var difficulty_option_button: OptionButton = %DifficultyOptionButton
+#@onready var seed_edit: TextEdit = %SeedEdit
 
 @onready var puzzle_generator: PuzzleGenerator = %PuzzleGenerator
 @onready var ui_layer: CanvasLayer = %UILayer
@@ -20,11 +20,59 @@ const LEVEL_BASE_SCENE = preload("res://scenes/game/level/level_base_scene.tscn"
 var current_level:Node
 var curr_puzzle_code:String
 
+func _on_CheckButtonSize_toggled(node):
+	for i in [%CheckButtonSize7, %CheckButtonSize10]:
+		if i != node:
+			i.button_pressed=false
+		else:
+			i.button_pressed=true
+
+
+func _on_CheckButtonSymmetry_toggled(node):
+	for i in [%CheckButton2m, %CheckButton2r, %CheckButton4m, %CheckButton4r]:
+		if i != node:
+			i.button_pressed=false
+		else:
+			i.button_pressed=true
+
+
+func _on_CheckButtonDiffi_toggled(node):
+	for i in [%CheckButtonEasy, %CheckButtonTricky]:
+		if i != node:
+			i.button_pressed=false
+		else:
+			i.button_pressed=true
+
+
 func _ready() -> void:
-	size_option_button.selected = GameLog.get_gen_size()
-	symetry_option_button.selected = GameLog.get_gen_symmetry()
-	percent_option_button.selected = GameLog.get_gen_fill()
-	difficulty_option_button.selected = GameLog.get_gen_diffi()
+	#size_option_button.selected = GameLog.get_gen_size()
+	#symetry_option_button.selected = GameLog.get_gen_symmetry()
+	#percent_option_button.selected = GameLog.get_gen_fill()
+	#difficulty_option_button.selected = GameLog.get_gen_diffi()
+	%CheckButtonSize7.pressed.connect(_on_CheckButtonSize_toggled.bind(%CheckButtonSize7))
+	%CheckButtonSize10.pressed.connect(_on_CheckButtonSize_toggled.bind(%CheckButtonSize10))
+	
+	%CheckButton2m.pressed.connect(_on_CheckButtonSymmetry_toggled.bind(%CheckButton2m))
+	%CheckButton2r.pressed.connect(_on_CheckButtonSymmetry_toggled.bind(%CheckButton2r))
+	%CheckButton4m.pressed.connect(_on_CheckButtonSymmetry_toggled.bind(%CheckButton4m))
+	%CheckButton4r.pressed.connect(_on_CheckButtonSymmetry_toggled.bind(%CheckButton4r))
+	
+	%CheckButtonEasy.pressed.connect(_on_CheckButtonDiffi_toggled.bind(%CheckButtonEasy))
+	%CheckButtonTricky.pressed.connect(_on_CheckButtonDiffi_toggled.bind(%CheckButtonTricky))
+	
+	match GameLog.get_gen_size():
+		0: _on_CheckButtonSize_toggled(%CheckButtonSize7)
+		1:_on_CheckButtonSize_toggled(%CheckButtonSize10)
+	
+	match GameLog.get_gen_symmetry():
+		0: _on_CheckButtonSymmetry_toggled(%CheckButton2m)
+		1: _on_CheckButtonSymmetry_toggled(%CheckButton2r)
+		2: _on_CheckButtonSymmetry_toggled(%CheckButton4m)
+		3: _on_CheckButtonSymmetry_toggled(%CheckButton4r)
+	
+	match GameLog.get_gen_diffi():
+		0: _on_CheckButtonDiffi_toggled(%CheckButtonEasy)
+		1: _on_CheckButtonDiffi_toggled(%CheckButtonTricky)
 
 func load_level():
 	_clear_current_level()
@@ -45,11 +93,32 @@ func reset_level():
 	
 
 func _gen_puzzle():
-	var size_option = ["7x7", "10x10"][size_option_button.get_selected_id()]
-	var symetry_option = symetry_option_button.get_selected_id()
-	var wall_percent_option = [0.2,0.3][percent_option_button.get_selected_id()]
-	var difficulty_option = difficulty_option_button.get_selected_id()
-	var seed_option = seed_edit.text
+	var size_option
+	if %CheckButtonSize7.button_pressed:
+		size_option = "7x7"
+	elif %CheckButtonSize10.button_pressed:
+		size_option = "10x10"
+	
+	var symetry_option
+	if %CheckButton2m.button_pressed:
+		symetry_option = 0
+	elif %CheckButton2r.button_pressed:
+		symetry_option = 1
+	elif %CheckButton4m.button_pressed:
+		symetry_option = 2
+	elif %CheckButton4r.button_pressed:
+		symetry_option = 3
+		
+		
+	#var wall_percent_option = 0.3 # = [0.2,0.3][percent_option_button.get_selected_id()]
+	var difficulty_option
+	if %CheckButtonEasy.button_pressed:
+		difficulty_option = 0
+	elif %CheckButtonTricky.button_pressed:
+		difficulty_option = 1
+	
+	
+	#var seed_option = ""
 	
 	#var size_vect = Vector2i(int(size_option.split("x")[0]), int(size_option.split("x")[1]))
 	#var gen_res = puzzle_generator.generate_new_puzzle(size_vect, symetry_option, wall_percent_option, [], seed_option)
@@ -109,9 +178,25 @@ func advance_and_load_level():
 
 
 func _on_generate_button_pressed() -> void:
-	GameLog.set_gen_size(size_option_button.get_selected_id())
-	GameLog.set_gen_symmetry(symetry_option_button.get_selected_id())
-	GameLog.set_gen_fill(percent_option_button.get_selected_id())
-	GameLog.set_gen_diffi(difficulty_option_button.get_selected_id())
+	if %CheckButtonSize7.button_pressed:
+		GameLog.set_gen_size(0)
+	else:
+		GameLog.set_gen_size(1)
+		
+	if %CheckButton2m.button_pressed:
+		GameLog.set_gen_symmetry(0)
+	elif	 %CheckButton2r.button_pressed:
+		GameLog.set_gen_symmetry(1)
+	elif	 %CheckButton4m.button_pressed:
+		GameLog.set_gen_symmetry(2)
+	elif	 %CheckButton4r.button_pressed:
+		GameLog.set_gen_symmetry(3)
+	
+	#GameLog.set_gen_fill(percent_option_button.get_selected_id())
+	if %CheckButtonEasy.button_pressed:
+		GameLog.set_gen_diffi(0)
+	else:
+		GameLog.set_gen_diffi(1)
+	
 	
 	load_level()

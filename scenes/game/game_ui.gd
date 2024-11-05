@@ -25,6 +25,8 @@ func _on_level_loader_level_loaded():
 		GameEvents.signal_level_advance.connect(_on_level_advance, CONNECT_ONE_SHOT)
 	if not GameEvents.signal_level_reset.is_connected(_on_level_reset):
 		GameEvents.signal_level_reset.connect(_on_level_reset, CONNECT_ONE_SHOT)
+	if not GameEvents.signal_levels_finished.is_connected(_on_level_finished):
+		GameEvents.signal_levels_finished.connect(_on_level_finished, CONNECT_ONE_SHOT)
 
 
 func _signal_level_jump_to(id:int):
@@ -51,3 +53,5 @@ func _on_level_reset():
 	print('game_ui _on_level_reset')
 	level_loader.load_level()
 	
+func _on_level_finished():
+	SceneLoader.load_scene("res://scenes/game/game_ui/play_save_slots.tscn")

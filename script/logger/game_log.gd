@@ -29,6 +29,15 @@ static func get_locale():
 	return Config.get_config(GAME_LOG_SECTION, LOCALE, "")
 
 
+const CURSOR_LOC = "CursorLoc"
+static func set_cursor_position(loc_info):
+	Config.set_config(GAME_LOG_SECTION, CURSOR_LOC, loc_info)
+
+
+static func get_cursor_position():
+	return Config.get_config(GAME_LOG_SECTION, CURSOR_LOC, Vector2(0,0))
+	
+
 const GENERATE_SIZE = "GenSize"
 const GENERATE_SYMMETRY = "GenSymmetry"
 const GENERATE_FILL = "GenFill"

@@ -4,6 +4,7 @@ var thread: Thread
 var terminated: bool = false
 const puzzle_store_count = 10
 @onready var puzzle_generator: PuzzleGenerator = $PuzzleGenerator
+@onready var timer: Timer = %Timer
 
 """
 key_count = 2*4*2*2 = 32
@@ -22,14 +23,14 @@ var all_keys = [
 	"7_4m_f3_d1",
 	"7_4m_f3_d2",
 	
-	"14_2r_f3_d1",
-	"14_2r_f3_d2",
-	"14_2m_f3_d1",
-	"14_2m_f3_d2",
-	"14_4r_f3_d1",
-	"14_4r_f3_d2",
-	"14_4m_f3_d1",
-	"14_4m_f3_d2",
+	"10_2r_f3_d1",
+	"10_2r_f3_d2",
+	"10_2m_f3_d1",
+	"10_2m_f3_d2",
+	"10_4r_f3_d1",
+	"10_4r_f3_d2",
+	"10_4m_f3_d1",
+	"10_4m_f3_d2",
 ]
 
 
@@ -59,7 +60,10 @@ func prepare_puzzles():
 				print('start generating for ', key)
 				generate_puzzle_for_key(key)
 		print('start waiting')
-		await get_tree().create_timer(5).timeout
+		#timer.start()
+		#await timer.timeout
+		OS.delay_msec(5000)
+		#await get_tree().create_timer(5).timeout
 		
 
 func generate_puzzle_for_key(key:String):
@@ -91,3 +95,4 @@ func _exit_tree() -> void:
 	stop()
 	if thread:
 		thread.wait_to_finish()
+	print_orphan_nodes()

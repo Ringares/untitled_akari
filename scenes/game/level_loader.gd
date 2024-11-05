@@ -70,14 +70,13 @@ func advance_level() -> bool:
 	var level_id_str = LevelRes.get_levels()[level_code]
 	var level_world = int(level_id_str.split('-')[0])
 	var level_in_world = int(level_id_str.split('-')[1])
-	if level_in_world == 23:
-		match level_world:
-			0: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W0_COMPLETE)
-			1: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W1_COMPLETE)
-			2: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W2_COMPLETE)
-			3: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W3_COMPLETE)
-			4: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W4_COMPLETE)
-			5: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W5_COMPLETE)
+	match level_in_world:
+		23: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W0_COMPLETE)
+		47: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W1_COMPLETE)
+		71: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W2_COMPLETE)
+		95: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W3_COMPLETE)
+		119: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W4_COMPLETE)
+		143: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W5_COMPLETE)
 	
 	print("level passed ", level_id_str)
 	GameLevelLog.append_passed_level(level_id_str)
@@ -89,6 +88,8 @@ func advance_level() -> bool:
 	level_id += 1
 	if level_id >= LevelRes.get_levels().size():
 		emit_signal("levels_finished")
+		GameLevelLog.set_is_levels_finished(true)
+		GameEvents.signal_levels_finished.emit()
 		level_id = LevelRes.get_levels().size() - 1
 		return false
 	GameLevelLog.level_reached(level_id)

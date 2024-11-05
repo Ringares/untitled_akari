@@ -19,6 +19,7 @@ const PAUSE_MENU = preload("res://scenes/menu/pause_menu.tscn")
 var level_instants = {}
 var passed_level_ids = []
 var curr_page = 0
+var is_page_scrolling = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -115,7 +116,6 @@ func _ready() -> void:
 			if int(i/24) == 4:
 				level_instants[i].focus_neighbor_right = $CanvasLayer/PageContainer/Page5/HBoxContainer/NextButton.get_path()
 				$CanvasLayer/PageContainer/Page5/HBoxContainer/NextButton.focus_neighbor_left = level_instants[i].get_path()
-	set_current_page_focus()
 	
 	for level_id in passed_level_ids:
 		level_instants[level_id].status = LevelSelector.STATUS.PASSED
@@ -129,7 +129,8 @@ func _ready() -> void:
 	
 	#
 	curr_page = curr_world
-	%InputControl.init_focus_node = level_instants[curr_level_id]
+	set_current_page_focus()
+	%InputControl.set_focus(level_instants[curr_level_id], GameInputControl.is_controller())
 	
 	# process infinite mode button
 	var is_infinite_mode_unlocked = GameLevelLog.get_infinite_mode_unlocked()
@@ -152,17 +153,23 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_next_button_pressed() -> void:
-	curr_page += 1
-	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(page_container, "position", page_container.position + Vector2(-1920,0), 0.15)
-	set_current_page_focus()
+	if not is_page_scrolling:
+		curr_page += 1
+		is_page_scrolling = true
+		var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(page_container, "position", page_container.position + Vector2(-1920,0), 0.15)
+		tween.tween_callback(func(): is_page_scrolling = false)
+		set_current_page_focus()
 
 
 func _on_previous_button_pressed() -> void:
-	curr_page -= 1
-	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(page_container, "position", page_container.position + Vector2(1920,0), 0.15)
-	set_current_page_focus()
+	if not is_page_scrolling:
+		curr_page -= 1
+		is_page_scrolling = true
+		var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(page_container, "position", page_container.position + Vector2(1920,0), 0.15)
+		tween.tween_callback(func(): is_page_scrolling = false)
+		set_current_page_focus()
 
 
 func _on_back_button_pressed() -> void:
@@ -174,6 +181,7 @@ func _on_infinite_mode_button_pressed() -> void:
 
 
 func set_current_page_focus():
+	%InputControl.init_focus_node = level_instants[curr_page*24]
 	%InfiniteModeButton.focus_neighbor_bottom = level_instants[curr_page*24].get_path()
 	%BackButton.focus_neighbor_top = level_instants[curr_page*24 + 18].get_path()
-	%InputControl.set_focus(level_instants[curr_page*24])
+	%InputControl.set_focus(level_instants[curr_page*24], GameInputControl.is_controller())

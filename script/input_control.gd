@@ -4,7 +4,7 @@ class_name InputControl
 @export var init_focus_node:Node
 
 var last_controller_input = 0
-const INPUT_TIME_GAP = 160
+const INPUT_TIME_GAP = 200
 
 
 enum INPUT_SCHEMES { KEYBOARD_AND_MOUSE, GAMEPAD, TOUCH_SCREEN }
@@ -85,7 +85,7 @@ func focus_next(action:String):
 		last_controller_input = Time.get_ticks_msec()
 
 
-func set_focus(node:Node):
+func set_focus(node:Node, need_grab=true):
 	var focus_owner = get_viewport().gui_get_focus_owner()
 	if focus_owner != null:
 		focus_owner.focus_mode = Control.FocusMode.FOCUS_NONE

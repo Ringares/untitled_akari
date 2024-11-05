@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://drrtjspoy4dbo"]
+[gd_scene load_steps=7 format=3 uid="uid://drrtjspoy4dbo"]
 
 [ext_resource type="Script" path="res://scenes/game/game_ui/save_slot.gd" id="1_eqc1c"]
 [ext_resource type="Script" path="res://script/theme_button.gd" id="2_xdbvq"]
 [ext_resource type="Script" path="res://script/theme_label.gd" id="3_pv60t"]
+[ext_resource type="Texture2D" uid="uid://c7u4wrnfqvm7o" path="res://assets/img/icon/icons8-crown-48.png" id="4_sov0v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pii84"]
 bg_color = Color(0.996078, 0.631373, 0.0117647, 0.313726)
@@ -15,7 +16,7 @@ offset_right = 128.0
 offset_bottom = 169.0
 script = ExtResource("1_eqc1c")
 game_scene_path = "res://scenes/game/game_ui.tscn"
-infi_game_scene_path = "res://scenes/game/game_ui_infinite.tscn"
+infi_game_scene_path = "res://scenes/game/game_ui_infinite2.tscn"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -96,6 +97,12 @@ script = ExtResource("2_xdbvq")
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="FinishSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(96, 119)
+texture = ExtResource("4_sov0v")
 
 [connection signal="pressed" from="VBoxContainer/InfiniteButton" to="." method="_on_infinite_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Container/SlotButton" to="." method="_on_slot_button_pressed"]

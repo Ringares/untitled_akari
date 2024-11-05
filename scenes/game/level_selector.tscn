@@ -60,7 +60,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dky57")
-infi_game_scene_path = "res://scenes/game/game_ui_infinite.tscn"
+infi_game_scene_path = "res://scenes/game/game_ui_infinite2.tscn"
 
 [node name="UISound" type="Node" parent="."]
 unique_name_in_owner = true
@@ -78,8 +78,9 @@ layer = 0
 
 [node name="PageContainer" type="HBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_right = 5768.0
+offset_right = 11520.0
 offset_bottom = 1080.0
+theme_override_constants/separation = 0
 
 [node name="FirstPage" type="Control" parent="CanvasLayer/PageContainer"]
 custom_minimum_size = Vector2(1920, 1080)
@@ -107,12 +108,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -328.0
+offset_left = -320.0
 offset_top = -128.0
-offset_right = 328.0
+offset_right = 320.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="ReferenceRect" type="ReferenceRect" parent="CanvasLayer/PageContainer/FirstPage/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
@@ -186,12 +188,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -328.0
+offset_left = -320.0
 offset_top = -128.0
-offset_right = 328.0
+offset_right = 320.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/Page2/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
@@ -259,12 +262,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -328.0
+offset_left = -320.0
 offset_top = -128.0
-offset_right = 328.0
+offset_right = 320.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/Page3/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
@@ -332,12 +336,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -328.0
+offset_left = -320.0
 offset_top = -128.0
-offset_right = 328.0
+offset_right = 320.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/Page4/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
@@ -405,12 +410,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -328.0
+offset_left = -320.0
 offset_top = -128.0
-offset_right = 328.0
+offset_right = 320.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/Page5/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
@@ -478,12 +484,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -328.0
+offset_left = -320.0
 offset_top = -128.0
-offset_right = 328.0
+offset_right = 320.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="PreviousButton" type="Button" parent="CanvasLayer/PageContainer/LastPage/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
@@ -539,8 +546,8 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -192.0
-offset_right = 192.0
+offset_left = -227.5
+offset_right = 227.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
