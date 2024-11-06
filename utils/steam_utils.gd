@@ -24,20 +24,34 @@ const ACHIEVEMENTS = {
 	
 }
 
+static func init():
+	OS.set_environment("SteamAppId", STEAM_APP_ID)
+	OS.set_environment("SteamGameId", STEAM_APP_ID)
+	
+
+static func check_steam_status():
+	var initialize_response = Steam.steamInitEx()
+	print("Did steam initialize?: %s" % initialize_response)
+	print("Steam.loggedOn", Steam.loggedOn())
+	print("Steam.isSubscribed", Steam.isSubscribed())
+	print("Steam.getSteamID", Steam.getSteamID())
+	print("Steam.getPersonaName", Steam.getPersonaName())
+	
+
 static func set_achievement(ach_enum:ACHIEVEMENT_ENUM):
 	var steam_achi_id = ACHIEVEMENTS.get(ach_enum, "")
 	var status = Steam.getAchievement(steam_achi_id)
 
 	if not status.has('achieved'):
-		print('Achievement status invalid')
+		print("steam", 'Achievement status invalid ', ach_enum)
 		return
 
 	if status['achieved']:
-		print('Already achieved')
+		print("steam", 'Already achieved', ach_enum)
 		return
 	
 	#Steam.setAchievement(ACHIEVEMENTS.get(ach_enum, ""))
-	print(ACHIEVEMENTS.get(ach_enum, ""), 'Achieved')
+	print("steam", ACHIEVEMENTS.get(ach_enum, ""), 'Achieved', status)
 		
 	
 	
