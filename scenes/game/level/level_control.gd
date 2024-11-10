@@ -67,7 +67,8 @@ func _ready() -> void:
 		%HintContainer.hide()
 		%HintContainer.reparent(self)
 	
-	%JoystickCursor.global_position = GameLog.get_cursor_position()
+	if GameInputControl.is_controller():
+		%JoystickCursor.global_position = GameLog.get_cursor_position()
 	
 	init()
 

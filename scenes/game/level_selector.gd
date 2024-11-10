@@ -1,6 +1,10 @@
 extends Control
 
 
+const YELLOW_STYLE_BOX = preload("res://themes/yellow_style_box_texture.tres")
+const YELLOW_HOVER_STYLE_BOX = preload("res://themes/yellow_hover_style_box_texture.tres")
+const BLACK_STYLE_BOX = preload("res://themes/black_style_box_texture.tres")
+const BLACK_HOVER_STYLE_BOX = preload("res://themes/black_hover_style_box_texture.tres")
 const LEVEL_SELECTOR_BUTTON = preload("res://scenes/game/game_ui/level_selector_button.tscn")
 const PAUSE_MENU = preload("res://scenes/menu/pause_menu.tscn")
 @export_file("*.tscn") var infi_game_scene_path : String
@@ -68,7 +72,7 @@ func _ready() -> void:
 			inst.status = LevelSelector.STATUS.UNLOCKED
 	
 	for i in level_instants.size():
-		print(i, i % 24, i % 6)
+		#print(i, i % 24, i % 6)
 		if i % 24 > 5:
 			level_instants[i].focus_neighbor_top = level_instants[i-6].get_path()
 		else:
@@ -135,12 +139,16 @@ func _ready() -> void:
 	# process infinite mode button
 	var is_infinite_mode_unlocked = GameLevelLog.get_infinite_mode_unlocked()
 	if is_infinite_mode_unlocked:
-		%InfiniteModeButton.disabled = false
+		#%InfiniteModeButton.disabled = false
 		%InfiniteModeButton.text = tr("Infinite Mode")
 		%InfiniteModeButton.icon = null
+		%InfiniteModeButton.add_theme_stylebox_override("normal", YELLOW_STYLE_BOX)
+		%InfiniteModeButton.add_theme_stylebox_override("focus", YELLOW_HOVER_STYLE_BOX)
 	else:
-		%InfiniteModeButton.disabled = true
+		#%InfiniteModeButton.disabled = true
 		%InfiniteModeButton.text = tr("Infinite Mode") + "  %d/48" % [GameLevelLog.get_passed_levels().size()]
+		%InfiniteModeButton.add_theme_stylebox_override("normal", BLACK_STYLE_BOX)
+		%InfiniteModeButton.add_theme_stylebox_override("focus", BLACK_HOVER_STYLE_BOX)
 	
 	
 	ui_sound.install_sounds(get_parent())
@@ -177,7 +185,8 @@ func _on_back_button_pressed() -> void:
 
 
 func _on_infinite_mode_button_pressed() -> void:
-	SceneLoader.load_scene(infi_game_scene_path)
+	if GameLevelLog.get_infinite_mode_unlocked():
+		SceneLoader.load_scene(infi_game_scene_path)
 
 
 func set_current_page_focus():

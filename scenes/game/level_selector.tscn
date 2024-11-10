@@ -568,7 +568,6 @@ theme_override_styles/focus = ExtResource("11_3mvyw")
 theme_override_styles/disabled = ExtResource("10_hn42r")
 theme_override_styles/hover = ExtResource("11_3mvyw")
 theme_override_styles/normal = ExtResource("11_p6qua")
-disabled = true
 text = "Infinite Mode  x/48"
 icon = ExtResource("10_7eew1")
 icon_alignment = 2

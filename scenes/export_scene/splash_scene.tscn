@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0ce0tgkk2co3"]
+
+[ext_resource type="PackedScene" uid="uid://cv1jmy5vty2xe" path="res://scenes/bg_canvas_layer.tscn" id="1_g7onm"]
+[ext_resource type="Texture2D" uid="uid://xs7qrvvf27b8" path="res://assets/img/title3.png" id="2_eymja"]
+
+[node name="SplashScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGCanvasLayer" parent="." instance=ExtResource("1_g7onm")]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -588.0
+offset_top = -175.0
+offset_right = 588.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_eymja")
+expand_mode = 1
+stretch_mode = 5

@@ -51,6 +51,10 @@ func _ready():
 	#AppLog.version_opened(version_name)
 	version_label.text = 'v ' + version_name
 	
+	
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("clear_achi"):
+		SteamUtils.clear_achievements()
 
 	
 #func _open_sub_menu(menu : Control):

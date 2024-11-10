@@ -45,14 +45,14 @@ texture_margin_right = 1.0
 region_rect = Rect2(0, 0, 3, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q0yag"]
-radius = 4.0
+radius = 2.0
 
 [node name="LevelBaseScene" type="Node2D"]
 script = ExtResource("1_0oed0")
 level_code = "10x10:1dBBbBb1c1BcBBBcBa1b2l1BbBBb21l2b1aBcBB1cB1c1bBbB1dB"
 
 [node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("2_vq8lp")]
-init_focus_node = NodePath("../UILayer/LeftButtonContainer/HelpButton")
+init_focus_node = NodePath("../UILayer/LeftButtonContainer/LevelSelectButton")
 
 [node name="UISound" type="Node" parent="."]
 script = ExtResource("2_73tug")
@@ -592,7 +592,7 @@ script = ExtResource("2_xvg54")
 
 [node name="JoystickCursor" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(512, 512)
+position = Vector2(960, 540)
 scale = Vector2(2, 2)
 
 [node name="Area2D" type="Area2D" parent="JoystickCursor"]

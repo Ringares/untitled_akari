@@ -15,7 +15,7 @@ enum ACHIEVEMENT_ENUM {
 }
 const ACHIEVEMENTS = {
 	ACHIEVEMENT_ENUM.W0_COMPLETE:"NEW_ACHIEVEMENT_W0",
-	ACHIEVEMENT_ENUM.W1_COMPLETE:"NEW_ACHIEVEMENT_W2",
+	ACHIEVEMENT_ENUM.W1_COMPLETE:"NEW_ACHIEVEMENT_W1",
 	ACHIEVEMENT_ENUM.W2_COMPLETE:"NEW_ACHIEVEMENT_W2",
 	ACHIEVEMENT_ENUM.W3_COMPLETE:"NEW_ACHIEVEMENT_W3",
 	ACHIEVEMENT_ENUM.W4_COMPLETE:"NEW_ACHIEVEMENT_W4",
@@ -50,9 +50,15 @@ static func set_achievement(ach_enum:ACHIEVEMENT_ENUM):
 		print("steam", 'Already achieved', ach_enum)
 		return
 	
-	#Steam.setAchievement(ACHIEVEMENTS.get(ach_enum, ""))
+	Steam.setAchievement(ACHIEVEMENTS.get(ach_enum, ""))
+	Steam.storeStats()
 	print("steam", ACHIEVEMENTS.get(ach_enum, ""), 'Achieved', status)
-		
+
+
+static func clear_achievements():
+	for k in ACHIEVEMENTS.keys():
+		Steam.clearAchievement(ACHIEVEMENTS[k])
+		Steam.storeStats()
 	
 	
 static func add_wishlist():

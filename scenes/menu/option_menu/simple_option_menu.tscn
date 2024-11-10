@@ -78,6 +78,7 @@ text = "Master    "
 focus_neighbor_top = NodePath("../../../../LightModeButton")
 focus_neighbor_bottom = NodePath("../../SFXOptionControl/HSlider")
 focus_mode = 0
+value = 1.0
 
 [node name="SFXOptionControl" parent="VBoxContainer/ControlContainer" instance=ExtResource("2_kveum")]
 layout_mode = 2
@@ -138,7 +139,7 @@ unique_name_in_owner = true
 layout_mode = 2
 option_name = "Fullscreen"
 option_section = 3
-key = "Fullscreen"
+key = "FullscreenEnabled"
 section = "VideoSettings"
 
 [node name="OptionLabel" parent="VBoxContainer/ControlContainer/FullScreenControl" index="0"]

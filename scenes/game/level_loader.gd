@@ -70,19 +70,33 @@ func advance_level() -> bool:
 	var level_id_str = LevelRes.get_levels()[level_code]
 	var level_world = int(level_id_str.split('-')[0])
 	var level_in_world = int(level_id_str.split('-')[1])
-	match level_in_world:
-		23: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W0_COMPLETE)
-		47: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W1_COMPLETE)
-		71: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W2_COMPLETE)
-		95: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W3_COMPLETE)
-		119: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W4_COMPLETE)
-		143: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W5_COMPLETE)
-	
+	#match level_in_world:
+		#23: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W0_COMPLETE)
+		#47: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W1_COMPLETE)
+		#71: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W2_COMPLETE)
+		#95: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W3_COMPLETE)
+		#119: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W4_COMPLETE)
+		#143: SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W5_COMPLETE)
+	#
 	print("level passed ", level_id_str)
 	GameLevelLog.append_passed_level(level_id_str)
+	if check_world_cleared(0):
+		SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W0_COMPLETE)
+	if check_world_cleared(1):
+		SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W1_COMPLETE)
+	if check_world_cleared(2):
+		SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W2_COMPLETE)
+	if check_world_cleared(3):
+		SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W3_COMPLETE)
+	if check_world_cleared(4):
+		SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W4_COMPLETE)
+	if check_world_cleared(5):
+		SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.W5_COMPLETE)
 	
-	if GameLevelLog.get_passed_levels().size() == 48:
+	
+	if GameLevelLog.get_passed_levels().size() >= 48:
 		GameLevelLog.set_infinite_mode_unlocked()
+		SteamUtils.set_achievement(SteamUtils.ACHIEVEMENT_ENUM.INFINITE_UNLOCK)
 		
 	
 	level_id += 1
@@ -98,3 +112,13 @@ func advance_level() -> bool:
 func advance_and_load_level():
 	if advance_level():
 		load_level()
+
+
+func check_world_cleared(world_id:int):
+	var passed = GameLevelLog.get_passed_levels()
+	for i in range(24*world_id, 24*(world_id+1)):
+		#print('check pass ', "%d-%d" % [world_id, i])
+		if "%d-%d" % [world_id, i] not in passed:
+			return false
+	return true
+		
