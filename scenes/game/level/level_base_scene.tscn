@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://blavwvk1shsb4"]
+[gd_scene load_steps=35 format=3 uid="uid://blavwvk1shsb4"]
 
 [ext_resource type="Script" path="res://scenes/game/level/level_control.gd" id="1_0oed0"]
 [ext_resource type="Script" path="res://script/ui_sound.gd" id="2_73tug"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://script/theme_panel_container.gd" id="18_onwif"]
 [ext_resource type="Texture2D" uid="uid://bpgnpqwbpxwmt" path="res://assets/img/icon/mouse_right.png" id="19_w4jug"]
 [ext_resource type="Texture2D" uid="uid://ofjy4klx5jli" path="res://assets/img/icon/icons8-options-96-2.png" id="21_n8530"]
+[ext_resource type="Texture2D" uid="uid://dx3qi1tp7chhf" path="res://assets/img/cursor_light_x2.png" id="30_x2y6u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eiu6l"]
 
@@ -45,11 +46,10 @@ texture_margin_right = 1.0
 region_rect = Rect2(0, 0, 3, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q0yag"]
-radius = 2.0
+radius = 4.0
 
 [node name="LevelBaseScene" type="Node2D"]
 script = ExtResource("1_0oed0")
-level_code = "10x10:1dBBbBb1c1BcBBBcBa1b2l1BbBBb21l2b1aBcBB1cB1c1bBbB1dB"
 
 [node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("2_vq8lp")]
 init_focus_node = NodePath("../UILayer/LeftButtonContainer/LevelSelectButton")
@@ -593,7 +593,11 @@ script = ExtResource("2_xvg54")
 [node name="JoystickCursor" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(960, 540)
+
+[node name="JoystickSprite" type="Sprite2D" parent="JoystickCursor"]
+unique_name_in_owner = true
 scale = Vector2(2, 2)
+texture = ExtResource("30_x2y6u")
 
 [node name="Area2D" type="Area2D" parent="JoystickCursor"]
 collision_layer = 256

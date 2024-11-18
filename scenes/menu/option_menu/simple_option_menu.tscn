@@ -27,7 +27,7 @@ script = ExtResource("1_glyp7")
 
 [node name="BGCanvasLayer" parent="." instance=ExtResource("2_hcqhe")]
 unique_name_in_owner = true
-layer = 2
+layer = 3
 
 [node name="InputControl" parent="." node_paths=PackedStringArray("init_focus_node") instance=ExtResource("2_qtu7y")]
 init_focus_node = NodePath("../VBoxContainer/ControlContainer/MasterOptionControl/HSlider")

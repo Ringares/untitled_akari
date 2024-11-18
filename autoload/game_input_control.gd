@@ -9,12 +9,17 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and INPUT_SCHEME != INPUT_SCHEMES.KEYBOARD_AND_MOUSE:
 		INPUT_SCHEME = INPUT_SCHEMES.KEYBOARD_AND_MOUSE
 		print("INPUT_SCHEME switch to ", INPUT_SCHEME)
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		GameEvents.signal_input_scheme_changed.emit()
 		
 	elif (event is InputEventJoypadMotion or event is InputEventJoypadButton) and INPUT_SCHEME != INPUT_SCHEMES.GAMEPAD:
 		INPUT_SCHEME = INPUT_SCHEMES.GAMEPAD
 		print("INPUT_SCHEME switch to ", INPUT_SCHEME)
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		GameEvents.signal_input_scheme_changed.emit()
+	
+	if (event is InputEventJoypadMotion or event is InputEventJoypadButton):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
 func is_mouse():

@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://script/theme_button.gd" id="6_7euhi"]
 
 [node name="PauseMenu" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_ip65o")
 options_packed_scene = ExtResource("2_4ply4")
 main_menu_scene = "res://scenes/menu/main_menu.tscn"
@@ -17,13 +18,14 @@ main_menu_scene = "res://scenes/menu/main_menu.tscn"
 init_focus_node = NodePath("../CanvasLayer/MarginContainer/MenuContainer/VBoxContainer/MarginContainer2/VBoxContainer/ResumeButton")
 
 [node name="BGCanvasLayer" parent="." instance=ExtResource("3_3xtad")]
-layer = 0
+layer = 2
 
 [node name="UISound" type="Node" parent="."]
 script = ExtResource("3_yxqtb")
 root_path = NodePath("..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15

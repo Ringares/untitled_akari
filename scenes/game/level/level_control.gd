@@ -5,7 +5,7 @@ const LEVEL_ROOT = preload("res://scenes/game/level/level_root.tscn")
 const GROUND = preload("res://scenes/game/components/ground.tscn")
 const OBSTACLE_NUM = preload("res://scenes/game/components/obstacle_num.tscn")
 const OBSTACLE_EDGE = preload("res://scenes/game/components/obstacle_edge.tscn")
-
+const CURSOR_DARK = preload("res://assets/img/cursor_dark.png")
 
 var ALPHABET = {
 	"a":1,"b":2,"c":3,"d":4,"e":5,"f":6,"g":7,"h":8,"i":9,"j":10,"k":11,
@@ -67,8 +67,9 @@ func _ready() -> void:
 		%HintContainer.hide()
 		%HintContainer.reparent(self)
 	
-	if GameInputControl.is_controller():
-		%JoystickCursor.global_position = GameLog.get_cursor_position()
+	#if GameInputControl.is_controller():
+		#print("ready ", GameLog.get_cursor_position())
+		#%JoystickCursor.global_position = GameLog.get_cursor_position()
 	
 	init()
 
@@ -171,7 +172,11 @@ func _process(delta: float) -> void:
 		
 	var movement = mouse_sens * direction * delta
 	if(movement):
+		%JoystickSprite.show()
 		simu_mouse_move(movement)
+	
+	if GameInputControl.is_mouse():
+		%JoystickSprite.hide()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -188,6 +193,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func simu_mouse_move(movement):
 	#%JoystickCursor.show()
+	print("simu_mouse_move ", %JoystickCursor.visible, movement)
 	if %JoystickCursor:
 		%JoystickCursor.global_position = Vector2(
 			clamp(%JoystickCursor.global_position.x + movement.x, 0., get_viewport_rect().size.x),

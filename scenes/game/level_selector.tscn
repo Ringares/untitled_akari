@@ -72,9 +72,10 @@ unique_name_in_owner = true
 script = ExtResource("3_cxlqd")
 
 [node name="BGCanvasLayer" parent="." instance=ExtResource("1_j6vg6")]
-layer = 0
+layer = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="PageContainer" type="HBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true

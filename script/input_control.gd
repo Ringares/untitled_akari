@@ -16,13 +16,17 @@ var last_focused = null
 func _ready() -> void:
 	get_tree().create_timer(0.3).timeout.connect(func():GameInputControl.append_input_ctrl_nodes(self))
 	if GameInputControl.INPUT_SCHEME == GameInputControl.INPUT_SCHEMES.GAMEPAD:
-		focus_next("ui_down")
+		if init_focus_node:
+			set_focus(init_focus_node, true)
+		else:
+			focus_next("ui_down")
 	
 
 func _process(_delta: float) -> void:
 	if not enabled:
 		if last_focused:
 			last_focused.focus_mode = Control.FocusMode.FOCUS_NONE
+			last_focused = null
 		return
 	
 	if Input.is_action_pressed("ui_down"):
@@ -53,7 +57,7 @@ func focus_next(action:String):
 	print(get_parent())
 	var focus_owner = get_viewport().gui_get_focus_owner()
 	if focus_owner == null:
-		if last_focused:
+		if last_focused != null:
 			last_focused.focus_mode = Control.FocusMode.FOCUS_NONE
 		init_focus_node.focus_mode = Control.FocusMode.FOCUS_ALL
 		init_focus_node.grab_focus()
